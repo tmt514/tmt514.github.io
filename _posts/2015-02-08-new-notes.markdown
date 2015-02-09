@@ -1,0 +1,10 @@
+---
+layout: post
+title: "New Website!"
+---
+
+# This is Tmt's new blog!
+
+We can try to use mathjax!
+
+$$f(x) = x^2+y^2$$
