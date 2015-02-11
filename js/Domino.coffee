@@ -5,10 +5,44 @@
 
 obj_id = 0
 tile_store = new Array()
+concerning = undefined
 
 class Tile
   constructor: (@domino, @r, @c, @dir) ->
     @obj = undefined
+
+  canmove: ->
+    if @dir == 'x'
+      if @c < @domino.@col and @domino.@grid[@r][@c+1] != undefined
+        return true
+    else
+      if @r < @domino.@row and @domino.@grid[@r+1][@c] != undefined
+        return true
+    return false
+
+  neighborTile: ->
+    if @dir == 'x'
+      return @domino.grid[@r][@c+1]
+    if @dir == 'y'
+      return @domino.grid[@r+1][@c]
+
+  setconcern: ->
+    @obj.attr('fill', 'rgb(150,150,255)')
+    @obj.style({'cursor':'pointer'})
+
+  setunconcern: ->
+    @obj.attr('fill', 'rgb(255,150,150)')
+    @obj.style({'cursor':'pointer'})
+
+  getconcern: ->
+    if @canmove()
+      @setconcern()
+      @neighborTile().setconcern()
+
+  unconcern: ->
+    if @canmove()
+      @setunconcern()
+      @neighborTile().setunconcern()
 
   draw: ->
     if @obj == undefined
@@ -20,13 +54,16 @@ class Tile
       @obj.on('mouseenter', ->
           id = d3.select(this).attr('id')
           obj = tile_store[id].obj
-          obj.attr('fill', 'rgb(150,150,255)')
-          obj.style({'cursor':'pointer'})
+          if concerning != undefined
+            concerning.unconcern()
+          concerning = tile_store[id]
+          concerning.getconcern()
         ).on('mouseout', ->
           id = d3.select(this).attr('id')
           obj = tile_store[id].obj
-          obj.attr('fill', 'rgb(255,150,150)')
-          obj.style({'cursor': 'default'})
+          if concerning == tile_store[id]
+            concerning = undefined
+            concerning.unconcern()
         )
     @obj.attr('x', @r * @domino.cellsize + @domino.cellpadding)
     @obj.attr('y', @c * @domino.cellsize + @domino.cellpadding)
@@ -69,13 +106,13 @@ class Domino
         for j in [0...@col/2]
           t = new Tile(this, i, j*2, 'y')
           @tiles.push(t)
-          @grid[i][j*2] = @grid[i][j*2+1] = t
+          @grid[i][j*2] = t
     else if @row % 2 == 0
       for i in [0...@row/2]
         for j in [0...@col]
           t = new Tile(this, i*2, j, 'x')
           @tiles.push(t)
-          @grid[i*2][j] = @grid[i*2+1][j] = t
+          @grid[i*2][j] = t
     else
       console.log('neither case!')
 
