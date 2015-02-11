@@ -6,6 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
   這邊將會記錄各種大大小小程式/數學解題的各種心得。
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://tmt514.github.io" # the base hostname & protocol for your site
+jsdir: "/js/"
 twitter_username: tmt514
 github_username:  tmt514
 

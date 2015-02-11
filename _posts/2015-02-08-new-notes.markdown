@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "New Website!"
+customjs:
+  - Domino.js
 ---
 
 # This is Tmt's new blog!
@@ -8,3 +10,5 @@ title: "New Website!"
 We can try to use mathjax!
 
 $$f(x) = x^2+y^2$$
+
+<div id='domino' data-row='8' data-col='6' style='height:100px'></div>
