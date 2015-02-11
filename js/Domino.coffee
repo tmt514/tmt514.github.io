@@ -13,10 +13,10 @@ class Tile
 
   canmove: ->
     if @dir == 'x'
-      if @c < @domino.@col and @domino.@grid[@r][@c+1] != undefined
+      if @c < @domino.col and @domino.grid[@r][@c+1] != undefined and @domino.grid[@r][@c+1].dir == 'x'
         return true
     else
-      if @r < @domino.@row and @domino.@grid[@r+1][@c] != undefined
+      if @r < @domino.row and @domino.grid[@r+1][@c] != undefined and @domino.grid[@r+1][@c].dir == 'y'
         return true
     return false
 
@@ -32,19 +32,26 @@ class Tile
 
   setunconcern: ->
     @obj.attr('fill', 'rgb(255,150,150)')
-    @obj.style({'cursor':'pointer'})
+    @obj.style({'cursor':'default'})
 
   getconcern: ->
+    if concerning == this
+      return
+    if concerning != undefined
+      concerning.unconcern()
+      concerning = undefined
     if @canmove()
       @setconcern()
       @neighborTile().setconcern()
+      concerning = this
 
   unconcern: ->
-    if @canmove()
+    if concerning == this and @canmove()
       @setunconcern()
       @neighborTile().setunconcern()
+      concerning = undefined
 
-  draw: ->
+  draw: (color = 'rgb(255,150,150)') ->
     if @obj == undefined
       @obj = @domino.canvas.append('rect')
       obj_id = obj_id + 1
@@ -53,17 +60,10 @@ class Tile
       tile_store[name] = this
       @obj.on('mouseenter', ->
           id = d3.select(this).attr('id')
-          obj = tile_store[id].obj
-          if concerning != undefined
-            concerning.unconcern()
-          concerning = tile_store[id]
-          concerning.getconcern()
+          tile_store[id].getconcern()
         ).on('mouseout', ->
           id = d3.select(this).attr('id')
-          obj = tile_store[id].obj
-          if concerning == tile_store[id]
-            concerning = undefined
-            concerning.unconcern()
+          tile_store[id].unconcern()
         )
     @obj.attr('x', @r * @domino.cellsize + @domino.cellpadding)
     @obj.attr('y', @c * @domino.cellsize + @domino.cellpadding)
@@ -75,8 +75,25 @@ class Tile
       @obj.attr('height', @domino.cellsize * 2 - 2*@domino.cellpadding)
     @obj.attr('stroke', 'black')
     @obj.attr('stroke-width', 3)
-    @obj.attr('fill', 'rgb(255,150,150)')
-  
+    @obj.attr('fill', color)
+
+  flipdir: (center_r, center_c) ->
+    [@r, @c] = [center_r + (@c - center_c), center_c + (@r - center_r)]
+    if @dir == 'x'
+      @dir = 'y'
+    else
+      @dir = 'x'
+    @draw('rgb(150,150,255)')
+
+  rotate: ->
+    @neighborTile().flipdir(@r, @c)
+    @flipdir(@r, @c)
+    tmp = @domino.grid[@r][@c+1]
+    @domino.grid[@r][@c+1] = @domino.grid[@r+1][@c]
+    @domino.grid[@r+1][@c] = tmp
+    
+    console.log('haha')
+
 
 class Domino
   constructor: (options) ->
@@ -95,6 +112,11 @@ class Domino
     @cellsize = 25
     @cellpadding = 2
     @drawTiles()
+    @canvas.on('click', ->
+      if concerning == undefined
+        return
+      concerning.rotate()
+    )
 
   drawTiles: ->
     for tile in @tiles

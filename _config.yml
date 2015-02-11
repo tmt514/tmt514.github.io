@@ -12,3 +12,8 @@ github_username:  tmt514
 
 # Build settings
 markdown: kramdown
+
+# Plugins
+tag_page_layout: tag_page
+tag_page_dir: tag
+tag_permalink_style: pretty
