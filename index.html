@@ -17,6 +17,12 @@ layout: default
       </li>
     {% endfor %}
   </ul>
+  <h1 class="page-heading">Tags</h1>
+  <div> 
+    {% for tag in site.tags %}
+    <a href="/tag/{{ tag | first }}/">{{tag | first}}</a>
+    {% endfor %}
+  </div>
 
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
