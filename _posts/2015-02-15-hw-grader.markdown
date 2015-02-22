@@ -9,7 +9,7 @@ customjs:
 <button class='hw-clearall'>Clear All</button>
 {% assign idx = '' %}
 {% for prob in site.data.homeworkGraderTemplate.eecs376win15.ps2 %}
-  <div name='hw-probs' id='hw-prob-{{ prob.name }}' data-prob-name='{{ prob.name }}' data-prob-score='{{ prob.score }}'>
+  <div class='hw-probs' id='hw-prob-{{ prob.name }}' data-prob-name='{{ prob.name }}' data-prob-score='{{ prob.score }}'>
   <div>Problem {{ prob.name }}. ({{ prob.score }} pts)
     {% for remark in site.data.homeworkGraderTemplate.remarks %}<span data-prob-name='{{ prob.name }}' class='hw-remark' data-remark='{{ remark }}'>{{ remark }}</span>{% endfor %}
 <span class='hw-add' data-prob-name='{{ prob.name }}'>[+]</span>
@@ -21,6 +21,7 @@ customjs:
   <input class='hw-rubics-checkbox' type='checkbox' name='prob-{{ prob.name }}' id='rule-{{ prob.name }}-{{ idx }}' data-score='{{ rubic.score }}'>
   <label class='hw-rubics-label' for='rule-{{ prob.name }}-{{ idx }}'>(-{{ rubic.score }}pts) {{ rubic.reason }}</label></div>
 {% endfor %}
+</div>
   <div class='hw-comments'>
   <input class='hw-comments-input' data-prob-name='{{prob.name}}'></div>
   </div>

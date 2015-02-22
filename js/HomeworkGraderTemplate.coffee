@@ -6,7 +6,7 @@ update = ->
   str = ''
   sumscore = 0
   console.log('update')
-  $('div[name=hw-probs]').each( (idx, obj) ->
+  $('div.hw-probs').each( (idx, obj) ->
     probname = $(obj).data('prob-name')
     totalscore = $(obj).data('prob-score')
     finalscore = totalscore
@@ -48,6 +48,7 @@ $('.hw-remark').click( ->
 )
 $('.hw-clearall').click( ->
   $("input:checked").attr('checked', false)
+  $("input.hw-comments-input").val('')
   $("span.hw-remark-active").removeClass('hw-remark-active')
   update()
 )
@@ -62,7 +63,9 @@ $('.hw-add').click( ->
   return if isNaN(score)
   comment = v[1]
   t = "<div class='hw-rubics hw-rubics-unsaved'><input class='hw-rubics-checkbox' type='checkbox' name='prob-#{probname}' id='rule-#{probname}-#{myidx}' data-score='#{score}' checked><label class='hw-rubics-label' for='rule-#{probname}-#{myidx}'>(-#{score}pts) #{comment}</label></div>"
-  $("div.hw-rubics-group[data-prob-name='#{probname}']").find('input.hw-comments-input').before(t)
+  $(t).appendTo($("div.hw-rubics-group[data-prob-name='#{probname}']")).click( ->
+    update()
+  )
   myidx += 1
   commentbox.val('')
   update()
