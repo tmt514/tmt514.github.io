@@ -1,11 +1,16 @@
 //theorem stuff
-.definition, def {
+em {
+  color: blue;
+  font-style: normal;
+  font-weight: 600;
+}
+.definition, def, thm, lemma, example {
   display: block;
   border: 1px solid #CCC;
   padding: 5px;
   padding-left: 0px;
-  background-color: #EEE;
-  margin-top: 31px;
+  margin-top: 40px;
+  margin-bottom: 20px;
   p {
     margin: 0;
     margin-top: -20px;
@@ -14,7 +19,6 @@
     margin-bottom: -20px;
   }
   &:before {
-    content: "定義 (" attr(name) ")";
     font-weight: 800;
     font-size: 120%;
     margin-left: -1px;
@@ -28,10 +32,60 @@
     padding-right: 10px;
     padding-top: 3px;
     padding-bottom: 3px;
-    background-color: #EEE;
+    color: #111;
   }
 }
 
+.definition, def {
+  background-color: #EEE;
+  &:before {
+    content: "定義 " attr(name);
+    background-color: #DDD;
+  }
+}
+
+thm {
+  background-color: #FDD;
+  &:before {
+    content: "定理 " attr(name);
+    background-color: #ECC;
+  }
+}
+
+lemma {
+  background-color: #DDF;
+  &:before {
+    content: "引理 " attr(name);
+    background-color: #CCE;
+  }
+}
+
+example {
+  background-color: #F6F6DD;
+  &:before {
+    content: "例題 " attr(name);
+    background-color: #E3E3CC;
+  }
+}
+
+exercise {
+  background-color: #DFD;
+  &:before {
+    content: "習題 " attr(name);
+    background-color: #CEC;
+  }
+}
+
+EOP, eop {
+  float: right;
+  display: inline;
+  min-width: 12px;
+  min-height: 12px;
+  border: 1px solid black;
+  &:before {
+    content: " ";
+  }
+}
 
 //homework stuff
 .hw-base .hw-output {
