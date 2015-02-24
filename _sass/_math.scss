@@ -4,7 +4,7 @@ em {
   font-style: normal;
   font-weight: 600;
 }
-.definition, def, thm, lemma, example {
+.definition, def, thm, lemma, example, exercise {
   display: block;
   border: 1px solid #CCC;
   padding: 5px;
@@ -69,10 +69,10 @@ example {
 }
 
 exercise {
-  background-color: #DFD;
+  background-color: #D5E8D5;
   &:before {
     content: "習題 " attr(name);
-    background-color: #CEC;
+    background-color: #BDB;
   }
 }
 
