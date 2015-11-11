@@ -13,6 +13,8 @@ customjs:
 </button>
 
 
+<button id="updateSVG" class="btn btn-primary">updateSVG</button>
+
 <canvas id="canvas" style="display:none;"></canvas>
 
 <script>
