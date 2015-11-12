@@ -10,6 +10,10 @@ guid = ( ->
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4()
 )
 
+Configs = {
+  arrayDisplayStyle: 'minBox'
+}
+
 Colors = {
   TRANSPARENT: 'rgba(0, 0, 0, 0)',
   BLUE: 'rgb(222, 222, 255)',
@@ -44,6 +48,19 @@ SvgHelper = {
     #oo.me = oo
     return oo
   align1DArray: (arr, x=20, y=20, w=50, h=50) ->
+    if Configs.arrayDisplayStyle == 'equalSizeBox'
+      maxwidth = w
+      maxheight = h
+      for box in arr
+        if box.width != undefined
+          maxwidth = Math.max(maxwidth, box.width)
+          maxheight = Math.max(maxheight, box.height)
+      for box in arr
+        box.width = maxwidth
+        box.height = maxheight
+      Configs.currentMaxWidth = maxwidth
+      Configs.currentMaxHeight = maxheight
+
     for i in [0..arr.length-1]
       arr[i].x = x
       arr[i].y = y
@@ -62,8 +79,14 @@ SvgTextHelper = {
     w = obj.width()
     h = obj.height()
     foreignObj = $(obj).parents(".tmtobj")[0]
-    d.width = Math.max(50, w + 20)
-    d.height = Math.max(50, h + 20)
+    
+    curWidth = 50
+    curHeight = 50
+    if Configs.arrayDisplayStyle == 'equalSizeBox'
+      curWidth = Configs.currentMaxWidth
+      curHeight = Configs.currentMaxHeight
+    d.width = Math.max(curWidth, w + 20)
+    d.height = Math.max(curHeight, h + 20)
     d3.select(foreignObj).attr('x', d.width/2 - w/2)
                          .attr('y', d.height/2 - h/2)
 
@@ -179,8 +202,11 @@ class Array1DVisualizer extends Visualizer
 window.Visualizer = Visualizer
 
 $(document).ready( ->
-  data = new DataArray([1, 2, 15, "x\\oplus y", "8x+7"])
+  data = new DataArray(["4x^2", "\\sqrt{nk+1}", "\\prod_{i=1}^n f_i!", "x\\oplus y", "e^{i\\pi}"])
   v = new Array1DVisualizer(data, null)
   v.initialize()
   $('#updateSVG').click(((v) -> v.updateSVG()).bind(null, v))
+
+  # settings onclick
+  $('input[name="arrayDisplayStyle"]').click(() -> Configs.arrayDisplayStyle = this.value)
 )
