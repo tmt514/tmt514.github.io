@@ -45,7 +45,6 @@ SvgHelper = {
       bgcolor: 'rgba(0, 0, 0, 0)',
       text: elem.data
     }
-    #oo.me = oo
     return oo
   align1DArray: (arr, x=20, y=20, w=50, h=50) ->
     if Configs.arrayDisplayStyle == 'equalSizeBox'
@@ -99,7 +98,10 @@ SvgTextHelper = {
 
   dblclicked: (d) ->
     meow = d
-    d.text = window.prompt(d.text, d.text)
+    result = window.prompt(d.text, d.text)
+    if result != null
+      d.text = result
+      d.textChanged = true
     d3.select(this).html(SvgTextHelper.giveMeMathjax(d))
     SvgTextHelper.updateMathJax(meow)
 }
@@ -172,11 +174,10 @@ class DataArray
       ).bind(this, d)()
       d3.select(this).select('foreignObject')
          .classed('tmtobj', true)
-         .html(SvgTextHelper.giveMeMathjax(d))
          .on('dblclick', SvgTextHelper.dblclicked)
+         .html(SvgTextHelper.giveMeMathjax(d))
          .call(((d) ->
             ret = MathJax.Hub.Typeset(d.id, SvgTextHelper.updateMathJaxDone.bind(null, d))
-
             # This must be the first time when page is loaded
             if !ret
               MathJax.Hub.Queue(((d) -> SvgTextHelper.updateMathJaxDone(d)).bind(null, d))
