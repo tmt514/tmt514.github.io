@@ -2,32 +2,21 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 const Header = ({ siteTitle }) => (
-  <div
-    style={{
-      background: 'rebeccapurple',
-      marginBottom: '1.45rem',
-    }}
-  >
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '1.45rem 1.0875rem',
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </div>
+  <section className="hero is-info is-bold">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">
+                {siteTitle}
+              </h1>
+            </div>
+            <div>
+              <p className="is-pulled-right">
+              <Link to="/">Resume</Link> || 
+              Work Experiences || Projects || CP Problems
+              </p>
+            </div>
+          </div>
+        </section>
 )
 
 export default Header
