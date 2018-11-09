@@ -82,3 +82,49 @@ exports.createPagesStatefully = ({ graphql, actions }) => {
 
     console.log("HI---");
 }
+
+
+
+
+
+/* copied from https://medium.freecodecamp.org/how-to-build-a-react-and-gatsby-powered-blog-in-about-10-minutes-625c35c06481 */
+exports.createPages = ({ boundActionCreators, graphql }) => {
+    const { createPage } = boundActionCreators;
+  const blogPostTemplate = path.resolve(`src/components/blog-post.js`);
+  return graphql(`{
+      allMarkdownRemark(
+        # sort: { order: DESC, fields: [frontmatter___date] }
+        limit: 1000
+      ) {
+        edges {
+          node {
+            excerpt(pruneLength: 250)
+            html
+            id
+            frontmatter {
+              date
+              path
+              title
+            }
+          }
+        }
+      }
+    }`)
+      .then(result => {
+        if (result.errors) {
+          return Promise.reject(result.errors);
+        }
+        console.log(">>>>>>>>>>>>>>>>>>>>>>HERE");
+        console.log(result.data);
+  result.data.allMarkdownRemark.edges
+          .forEach(({ node }) => {
+              
+            
+            createPage({
+              path: node.frontmatter.path,
+              component: blogPostTemplate,
+              context: {} // additional data can be passed via context
+            });
+          });
+      });
+  }

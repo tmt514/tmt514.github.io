@@ -31,14 +31,15 @@ module.exports = {
         path: `${__dirname}/src/data/`,
       },
     },
-    /*{
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `pages`,
         path: `${__dirname}/src/pages/`,
       },
-    },*/
+    },
     'gatsby-plugin-offline',
     'gatsby-plugin-sass',
+    'gatsby-transformer-remark'
   ],
 }
