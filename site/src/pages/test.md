@@ -1,4 +1,5 @@
 ---
+category: "algo"
 path: "/hello-world"
 date: "2018-11-09"
 title: "測試文章"
