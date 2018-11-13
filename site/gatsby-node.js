@@ -80,10 +80,7 @@ exports.createPagesStatefully = ({ graphql, actions }) => {
         })
     })
 
-    console.log("HI---");
 }
-
-
 
 
 
@@ -99,7 +96,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         edges {
           node {
             excerpt(pruneLength: 250)
-            html
+            htmlAst
             id
             frontmatter {
               date
@@ -118,8 +115,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         console.log(result.data);
   result.data.allMarkdownRemark.edges
           .forEach(({ node }) => {
-              
-            
             createPage({
               path: node.frontmatter.path,
               component: blogPostTemplate,
