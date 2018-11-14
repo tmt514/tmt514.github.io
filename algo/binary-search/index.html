@@ -1,0 +1,40 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/component---src-components-blog-post-js.3e038ea98ebca836c886.css">code[class*=language-],pre[class*=language-]{color:#ccc;background:none;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.prism--token.prism--block-comment,.prism--token.prism--cdata,.prism--token.prism--comment,.prism--token.prism--doctype,.prism--token.prism--prolog{color:#999}.prism--token.prism--punctuation{color:#ccc}.prism--token.prism--attr-name,.prism--token.prism--deleted,.prism--token.prism--namespace,.prism--token.prism--tag{color:#e2777a}.prism--token.prism--function-name{color:#6196cc}.prism--token.prism--boolean,.prism--token.prism--function,.prism--token.prism--number{color:#f08d49}.prism--token.prism--class-name,.prism--token.prism--constant,.prism--token.prism--property,.prism--token.prism--symbol{color:#f8c555}.prism--token.prism--atrule,.prism--token.prism--builtin,.prism--token.prism--important,.prism--token.prism--keyword,.prism--token.prism--selector{color:#cc99cd}.prism--token.prism--attr-value,.prism--token.prism--char,.prism--token.prism--regex,.prism--token.prism--string,.prism--token.prism--variable{color:#7ec699}.prism--token.prism--entity,.prism--token.prism--operator,.prism--token.prism--url{color:#67cdcc}.prism--token.prism--bold,.prism--token.prism--important{font-weight:700}.prism--token.prism--italic{font-style:italic}.prism--token.prism--entity{cursor:help}.prism--token.prism--inserted{color:green}</style><meta name="generator" content="Gatsby 2.0.21"/><title data-react-helmet="true">CodeStack - 二分搜尋法的實作基礎</title><link rel="shortcut icon" href="/icons/icon-48x48.png"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#663399"/><link as="script" rel="preload" href="/component---src-components-blog-post-js-9212de8b887a55c28dc0.js"/><link as="script" rel="preload" href="/app-45f9ca3f61d09d57cfe3.js"/><link as="script" rel="preload" href="/11-16ea87689f41b63a981b.js"/><link as="script" rel="preload" href="/0-236ec731d3701658116b.js"/><link as="script" rel="preload" href="/webpack-runtime-974f0b13d8c8916949ce.js"/><link rel="preload" href="/static/d/800/path---algo-binary-search-e-37-5c0-JaQOst9vtT00B2S8vWFPZ9vfA7E.json" as="fetch" crossOrigin="use-credentials"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group"><div><section class="hero is-dark"><div class="hero-body"><div class="container"><span class="is-pulled-right"><a href="/blog"><span class="icon has-text-warning"><i class="fas fa-lg fa-home"></i></span> 返回</a></span><a aria-current="page" class="" href="/algo/binary-search"><h1 class="title">二分搜尋法的實作基礎</h1><h2 class="subtitle">November 13, 2018</h2></a></div></div></section><section class="section"><div class="container"><div class="content"><div><p>前幾天有位朋友跟我反應，二分搜尋法好難寫啊。有的時候寫下去，甚至無法確定這樣寫會不會對，只能祈禱線上提交的時候會順利拿到 <span style="color:green"><b>Accepted</b></span>。這樣的想法是很危險的！你不應該仰賴評測系統給你的反饋，才能知道自己是不是對的。至少在上傳之前，思考一下正確性，讓自己更安心。</p>
+<h1 class="title is-4">先說結論</h1>
+<p>在繼續介紹各種二分搜的方法與證明之前，我想要先下個結論：每個人都應該要有一套屬於自己的二分搜尋法。而且 <strong>只用</strong> 這套屬於自己的二分搜尋法。</p>
+<h1 class="title is-4">二分搜的概念</h1>
+<p>假想你有一個只有 0 和 1 兩種數字的陣列，然後所有的 0 都排在 1 的前面。</p>
+<p><div class="has-text-centered"><canvas width="301" height="31"></canvas></div></p>
+<p>要如何找出第一個 1 的位置呢？想法很單純，我們戳一個中間的格子，如果這個格子是 0，代表「所有這個格子之前（包含這個格子）都不是答案」。如果這個格子是 1，則代表「所有這個格子之後（<strong>不</strong>包含這個格子）也不是答案」。於是我們得到一個演算法：</p>
+<pre><code>1. 戳一個中間的格子 X
+2. 如果 X = 1，那麼把這個格子右邊的所有格子丟掉
+3. 如果 X = 0，那麼把這個格子本身與其左邊所有格子丟掉
+4. 重複以上操作
+</code></pre>
+<p>這個演算法什麼時候會停？它不會停，因為從上面的演算法描述，我們並沒有叫他停下來。那什麼時候應該要停下來？顯然每一次操作的過程中，左邊丟掉的格子們都是 0、右邊丟掉的格子們都是 1。我們可以把這個觀察寫成重要的<a href="https://en.wikipedia.org/wiki/Loop_invariant">迴圈不變量</a>。在迴圈結束後，如果只剩下一個格子，而這個格子是 1，那麼根據演算法來說我們永遠不會把這個格子丟掉。而根據迴圈不變量，我們就保證了這格就是我們要的第一個 1。反之，如果這個格子裡面的數字是 0，那麼根據演算法，下一步這格就會被丟掉，而我們也可以推斷出「這陣列不存在 1」。</p>
+<h1 class="title is-4">二分搜的實作</h1>
+<p>但是實際寫成程式碼就很怪了啊。到底我們要怎麼表示目前的邊界（或是紀錄被丟掉的格子）呢？因為剩餘的格子們是連續的一段，我們可以利用兩個變數 $\ell$ 和 $r$ 來表示這個區間 $[\ell, r]$。有些人喜歡半開半閉區間 $[\ell, r)$，也就是說當我們存入兩個變數 $\ell$ 和 $r$ 的時候，實際有效的陣列範圍是 $[\ell, r-1]$。那樣寫沒什麼壞處，而且也巧妙地利用了當 $l+r$ 是奇數時 $(l+r)/2$ 向下取整的特性，讓中間值 $m$ 可以留在 $[\ell, r-1]$ 這個區間裡面。不過我自己的習慣是使用閉區間。</p>
+<h1 class="title is-4">我自己的習慣</h1>
+<p>我的寫法是閉區間的寫法，而且總是維護當前找到的<strong>答案候選</strong>。引入一個變數 <code>ans</code>，一開始把它標記為「不存在」，如果我找到一個滿足條件的格子（比方說，這個格子必須是 1）那麼在找到的當下，我會更新 <code>ans</code> 的值。讓變數 $\ell, r$ 永遠只用來表達邊界，不要賦予他們過多的意義。</p>
+<pre><code class="language-cpp">int lower_bound(int array[], auto predicate_fn) {
+    int l, r, ans = -1;
+    while(l &lt;= r) {
+        int m = (l + r) / 2;
+        if (predicate_fn(array[m]) == true) {
+            // 如果滿足條件，就把右邊丟掉，並且把當前資料加入可能的答案裡。
+            ans = m;
+            r = m - 1;
+        } else {
+            // 如果不滿足條件，就把左邊丟掉。
+            l = m + 1;
+        }
+    }
+    return ans;
+}
+</code></pre></div></div></div></section><footer class="footer"><div class="content"><p class="is-flex is-vcentered"><img style="height:32px" src="/static/cc-by-nc-sa-982c531432c4ad7e8dbf3cf52a1dc6d0.png"/> <!-- --> <!-- --> 本文由<b>卡恩</b>撰寫。網站原始碼為 MIT 授權。網站內容為創用CC-BY-NC-SA 4.0 授權。</p></div></footer></div></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.page={"componentChunkName":"component---src-components-blog-post-js","jsonName":"algo-binary-search-e37","path":"/algo/binary-search"};window.dataPath="800/path---algo-binary-search-e-37-5c0-JaQOst9vtT00B2S8vWFPZ9vfA7E";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-45f9ca3f61d09d57cfe3.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-ef5f94b551fcdf8b031c.js"],"component---src-components-blog-post-js":["/component---src-components-blog-post-js.3e038ea98ebca836c886.css","/component---src-components-blog-post-js-9212de8b887a55c28dc0.js"],"component---src-pages-404-js":["/component---src-pages-404-js.a82bc48cfa31deea5b5f.css","/component---src-pages-404-js-b2140bd66ef6774dca02.js"],"component---src-pages-blog-js":["/component---src-pages-blog-js.a82bc48cfa31deea5b5f.css","/component---src-pages-blog-js-6e5a12a90101250cc97a.js"],"component---src-pages-index-js":["/component---src-pages-index-js.a82bc48cfa31deea5b5f.css","/component---src-pages-index-js-c3fb43ec42d207564539.js"],"component---src-pages-page-2-js":["/component---src-pages-page-2-js.a82bc48cfa31deea5b5f.css","/component---src-pages-page-2-js-96f19ce64ebdce2bf651.js"]};/*]]>*/</script><script src="/webpack-runtime-974f0b13d8c8916949ce.js" async=""></script><script src="/0-236ec731d3701658116b.js" async=""></script><script src="/11-16ea87689f41b63a981b.js" async=""></script><script src="/app-45f9ca3f61d09d57cfe3.js" async=""></script><script src="/component---src-components-blog-post-js-9212de8b887a55c28dc0.js" async=""></script><script type="text/javascript">
+            window.MathJax = {
+              tex2jax: {
+                inlineMath: [ ['$','$'], ["\(","\)"] ],
+                processEscapes: true
+              }
+            };
+            </script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_SVG"></script></body></html>
