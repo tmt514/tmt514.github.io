@@ -11,6 +11,7 @@
     "citation-js": "^0.4.0-9",
     "gatsby": "^2.0.21",
     "gatsby-plugin-babel": "^1.0.0",
+    "gatsby-plugin-google-analytics": "^2.0.7",
     "gatsby-plugin-manifest": "^2.0.2",
     "gatsby-plugin-offline": "^2.0.5",
     "gatsby-plugin-react-helmet": "^3.0.1",
@@ -32,10 +33,11 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "gatsby build --prefix-path",
+    "develop": "gatsby develop -p 9191",
     "format": "prettier --write '**/*.js'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d public -b master"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -43,6 +45,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "gh-pages": "^2.0.1",
     "prettier": "^1.14.2"
   },
   "repository": {
