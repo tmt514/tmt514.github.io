@@ -25,7 +25,8 @@ const Blog = ({ data }) => (
     query={graphql`
     query blogquery{
         algoBlog: allMarkdownRemark(filter:
-            {frontmatter: { category: { eq: "algo"}}}){
+            {frontmatter: { category: { eq: "algo"}}},
+            sort: {fields: [frontmatter___date ], order:DESC}){
           edges {
             node {
                 frontmatter {
@@ -39,7 +40,8 @@ const Blog = ({ data }) => (
         }
         
         myProblemBlog: allMarkdownRemark(filter:
-            {frontmatter: { category: { eq: "my-problem"}}}){
+            {frontmatter: { category: { eq: "my-problem"}}},
+            sort: {fields: [frontmatter___date ], order:DESC}){
           edges {
             node {
                 frontmatter {

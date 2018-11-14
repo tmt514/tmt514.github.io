@@ -123,3 +123,19 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
           });
       });
   }
+
+
+  exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+    if (stage === "build-html") {
+      actions.setWebpackConfig({
+        module: {
+          rules: [
+            {
+              test: /citation-js/,
+              use: loaders.null(),
+            },
+          ],
+        },
+      })
+    }
+  }
