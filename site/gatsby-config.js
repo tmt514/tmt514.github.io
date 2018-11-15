@@ -36,12 +36,15 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-mathjax`,
+          {
+            resolve: `gatsby-remark-component`,
+            options: { components: ["showvariable"] }
+          },
         ],
       },
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-sass',
-    'gatsby-transformer-remark',
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

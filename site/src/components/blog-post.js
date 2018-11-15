@@ -9,6 +9,9 @@ import 'prismjs/components/prism-c.js';
 import 'prismjs/components/prism-cpp.js';
 import './prism-tomorrow.css';
 
+
+import "bulma/css/bulma.css"
+
 import CCBYNCSA from '../images/cc-by-nc-sa.png';
 import DisplayArray from './display-array.js';
 
@@ -23,21 +26,44 @@ const MyH3 = ({ children }) => (
 )
 
 const MyCode = ({ className, children }) => {
-  console.log(className, children[0]);
-  return (<code className={className}>{children[0]}</code>)
-
+  return (<code className={className}>{children}</code>)
 }
 
-const renderAst = new rehypeReact({
-  createElement: React.createElement,
-  components: {
-    h1: MyH1,
-    h2: MyH2,
-    h3: MyH3,
-    code: MyCode,
-    displayarray: DisplayArray,
+const ShowVariable = ({ frontmatter, varname }) => {
+  //return (<div>YUMMY</div>)
+  return (<div>{frontmatter[varname]}</div>);
+}
+
+/*
+class ShowVariable extends Component {
+  render() {
+    const frontmatter = this.frontmatter;
+    const varname = this.props.varname;
+    return (<div>{frontmatter[varname]}</div>)
   }
-}).Compiler
+}*/
+
+const statefulRenderAst = (frontmatter) => {
+  const pseudoCreateElement = (type, props, children) => {
+    if (type.name === "ShowVariable") {
+      props = props || {}
+      props.frontmatter = frontmatter
+    }
+    return React.createElement(type, props, ...children)
+  }
+  return new rehypeReact({
+    createElement: pseudoCreateElement,
+    components: {
+      h1: MyH1,
+      h2: MyH2,
+      h3: MyH3,
+      code: MyCode,
+      displayarray: DisplayArray,
+      showvariable: ShowVariable,
+    }
+  }).Compiler;
+}
+
 
 
 class Template extends Component {
@@ -77,15 +103,20 @@ class Template extends Component {
           <section className="section">
           <div className="container">
           <div className="content">
-          { renderAst(post.htmlAst) }
+          { statefulRenderAst(post.frontmatter)(post.htmlAst) }
           </div>
           </div>
           </section>
           <footer className="footer">
-          <div class="content">
-          <p class="is-flex is-vcentered">
-          <img style={{height:"32px"}} src={ CCBYNCSA } /> {" "} 本文由<b>卡恩</b>撰寫。網站原始碼為 MIT 授權。網站內容為創用CC-BY-NC-SA 4.0 授權。
+          <div className="content">
+          <div className="is-flex is-vcentered is-centered">
+          <img style={{height:"32px", margin:"10px"}} src={ CCBYNCSA } /> 
+          <p style={{maxWidth:"500px"}}>
+          本文由<b>卡恩</b>撰寫。
+          網站原始碼為 MIT 授權。
+          網站內容如果沒有特別說明，皆為創用 CC-BY-NC-SA 4.0 授權。
           </p>
+          </div>
           </div>
           </footer>
       </div>
@@ -102,6 +133,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         path
         title
+        description
       }
     }
   }
