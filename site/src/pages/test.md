@@ -13,14 +13,14 @@ $f(x) = x^2$
 
 這樣就可以一邊寫文章一邊寫數學式子了！
 
-$$ ax+by=\frac{z^2}{y} $$
+$$ax+by=\frac{z^2}{y} what$$
 
 程式碼
 
 `test`
 
 ```
-test123
+test123 
 ```
 
 ```cpp

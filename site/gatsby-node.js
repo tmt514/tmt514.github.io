@@ -24,8 +24,6 @@ function updatePublications(createNode, path) {
                     .digest(`hex`),
             }  
         })
-        console.log(`err = ${err}`)
-        console.log(`content = ${contents}`)
     }
     fs.readFile(path, 'utf8', callback)
 }
@@ -71,8 +69,6 @@ exports.createPagesStatefully = ({ graphql, actions }) => {
             const plist = result.data.allFile.edges;
             for (var item of plist) {
                 const path = item.node.absolutePath;
-                console.log(path);
-
                 updatePublications(createNode, path)
             }
         //console.log(JSON.stringify(result, null, 4));
@@ -111,15 +107,15 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         if (result.errors) {
           return Promise.reject(result.errors);
         }
-        console.log(">>>>>>>>>>>>>>>>>>>>>>HERE");
-        console.log(result.data);
   result.data.allMarkdownRemark.edges
           .forEach(({ node }) => {
-            createPage({
-              path: node.frontmatter.path,
-              component: blogPostTemplate,
-              context: {} // additional data can be passed via context
-            });
+            if (node.frontmatter.path) {
+              createPage({
+                path: node.frontmatter.path,
+                component: blogPostTemplate,
+                context: {} // additional data can be passed via context
+              });
+            }
           });
       });
   }
