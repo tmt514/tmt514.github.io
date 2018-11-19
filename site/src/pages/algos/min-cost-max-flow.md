@@ -32,8 +32,9 @@ $$
 \end{align*}\\
 $$
 
-如果我們試圖找出他的對偶問題，那麼
+如果我們試圖找出他的對偶問題，那麼每一個條件會變成對偶問題的變數、而每一個變數也會對應到對偶問題的一個條件：
 
+<display array data='["A", 2, "aXYZD", "dfasd   21", "Caldjfl", "Something Overflow"]'></display>
 
 
 ## 參考資料

@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
 
 class DisplayArray extends Component {
+    
     componentDidUpdate() {
         this._update();
     }
     componentDidMount() {
         this._update();
+    }
+    
+    _getTextWidth(s) {
+        var canvas = this.hiddenCanvas || (this.hiddenCanvas = document.createElement("canvas"))
+        var ctx = canvas.getContext("2d");
+        ctx.font = "16px Roboto";
+        return ctx.measureText(`${s}`).width;
     }
     _update() {
         var c = this.canvas;
@@ -20,16 +28,30 @@ class DisplayArray extends Component {
 
         const n = data.length;
         var i;
+        var text_width = 0;
+        var w;
         for (i = 0; i < n; i++) {
-            console.log(data[i])
-            ctx.rect(i*30, 0, 28, 28);
-            ctx.fillText(`${data[i]}`, i*30+14, 14);
+            w = this._getTextWidth(data[i]);
+            w = Math.max(w + 6, 30);
+            ctx.rect(text_width, 0, w, 28);
+            ctx.fillText(`${data[i]}`, text_width + w/2 - 1, 14);
+            text_width += w;
         }
         ctx.stroke();
     }
     _computeDimension() {
         const data = JSON.parse(this.props.data);
-        return [30*data.length+1, 30+1];
+        const n = data.length;
+        var i;
+        var text_width = 0;
+        var w;
+        for (i = 0; i < n; i++) {
+            w = this._getTextWidth(data[i]);
+            w = Math.max(w + 6, 30);
+            text_width += w;
+        }
+        
+        return [text_width+1, 30+1];
     }
     render() {
         const dimension = this._computeDimension();

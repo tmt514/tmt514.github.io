@@ -13,7 +13,7 @@ import './prism-tomorrow.css';
 import "bulma/css/bulma.css"
 
 import CCBYNCSA from '../images/cc-by-nc-sa.png';
-import DisplayArray from './display-array.js';
+import Display from './display';
 
 const MyH1 = ({ children }) => (
   <h1 className="title is-3">{children}</h1>
@@ -58,7 +58,7 @@ const statefulRenderAst = (frontmatter) => {
       h2: MyH2,
       h3: MyH3,
       code: MyCode,
-      displayarray: DisplayArray,
+      display: Display,
       showvariable: ShowVariable,
     }
   }).Compiler;
@@ -80,6 +80,7 @@ class Template extends Component {
   render() {
     const data = this.props.data;
     const post = data.markdownRemark;
+    console.log(post.htmlAst);
     return (
       <div>
           <Helmet title={`CodeStack - ${post.frontmatter.title}`} />
