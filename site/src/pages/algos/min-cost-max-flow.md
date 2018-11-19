@@ -26,16 +26,21 @@ title: "最小費用流 Min-Cost Max-Flow"
 $$
 \begin{align*}
 \text{minimize}\ \ & \sum f(u, v) \cdot cost(u, v)\\
-\text{subject to}\ \ & \forall (u, v),\ \ f(u, v) \le cap(u, v) & \text{ (容量限制)}\\
-& \forall v\in V, \ \ \sum_u f(u, v) - \sum_u f(v, u) = 0 & \text{ (流量守恆)}\\
+\text{subject to}\ \ & {\color{green}{\forall (u, v),\ \ f(u, v) \le cap(u, v)}} & {\color{green}{\text{ (容量限制)}}}\\
+& {\color{brown}{\forall v\in V, \ \ \sum_u f(u, v) - \sum_u f(v, u) = 0}} & {\color{brown}{\text{ (流量守恆)}}}\\
 \text{variables}\ \ & f(u, v) \ge 0
 \end{align*}\\
 $$
 
-如果我們試圖找出他的對偶問題，那麼每一個條件會變成對偶問題的變數、而每一個變數也會對應到對偶問題的一個條件：
+如果我們試圖找出他的對偶問題，那麼每一個條件會變成對偶問題的變數、而每一個變數也會對應到對偶問題的一個條件：對於每一個容量限制，我們用 $y(u, v)$ 作為容量限制條件的對應變數、令 $d(v)$ 作為流量守恆條件的對應變數。
 
-<display array data='["A", 2, "aXYZD", "dfasd   21", "Caldjfl", "Something Overflow"]'></display>
-
+$$
+\begin{align*}
+\text{maximize}\ \ & \sum {\color{green}{y(u, v)}} \cdot cap(u, v)\\
+\text{subject to}\ \ & \forall (u, v), \ \ {\color{green}{y(u, v)}} - {\color{brown}{d(u)}} + {\color{brown}{d(v)}} \le cost(u, v)\\
+\text{variables}\ \ & {\color{green}{y(u, v)}} \le 0
+\end{align*}\\
+$$
 
 ## 參考資料
 
