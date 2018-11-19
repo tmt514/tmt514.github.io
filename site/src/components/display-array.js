@@ -10,7 +10,10 @@ class DisplayArray extends Component {
     }
     
     _getTextWidth(s) {
-        var canvas = this.hiddenCanvas || (this.hiddenCanvas = document.createElement("canvas"))
+        if (typeof window === `undefined`) {
+            return `${s}`.length*7;
+        }
+        var canvas = this.hiddenCanvas || (this.hiddenCanvas = window.document.createElement("canvas"))
         var ctx = canvas.getContext("2d");
         ctx.font = "16px Roboto";
         return ctx.measureText(`${s}`).width;
