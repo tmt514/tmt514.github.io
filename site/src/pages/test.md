@@ -34,3 +34,6 @@ int main(void) {
     return 0;
 }
 ```
+
+<display array
+    data='[1, 2, "test123"]'></display>

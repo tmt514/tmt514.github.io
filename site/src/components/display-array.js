@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 
 class DisplayArray extends Component {
     
+    constructor(props) {
+        super(props)
+        console.log(props);
+    }
+    
     componentDidUpdate() {
         this._update();
     }
