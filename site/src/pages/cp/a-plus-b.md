@@ -10,7 +10,7 @@ link: "https://oj.icpc.tw/problem/1"
 
 ## 題目敘述
 
-<ShowVariable varname='description'></ShowVariable>
+<showvariable varname='description'></showvariable>
  
 ## OJ連結
 

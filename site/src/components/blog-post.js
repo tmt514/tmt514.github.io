@@ -30,43 +30,14 @@ const MyCode = ({ className, children }) => {
   return (<code className={className}>{children}</code>)
 }
 
-const ShowVariable = ({ frontmatter, varname }) => {
-  //return (<div>YUMMY</div>)
-  return (<div>{frontmatter[varname]}</div>);
-}
-
-/*
 class ShowVariable extends Component {
   render() {
-    const frontmatter = this.frontmatter;
+    const frontmatter = this.frontmatter || {};
     const varname = this.props.varname;
-    return (<div>{frontmatter[varname]}</div>)
+    const val = frontmatter[varname]
+    return (<div>{val}</div>);
   }
-}*/
-
-const statefulRenderAst = (frontmatter) => {
-  const pseudoCreateElement = (type, props, children) => {
-    if (type.name === "ShowVariable") {
-      props = props || {}
-      props.frontmatter = frontmatter
-    }
-    return React.createElement(type, props, children)
-  }
-  return new rehypeReact({
-    createElement: pseudoCreateElement,
-    components: {
-      h1: MyH1,
-      h2: MyH2,
-      h3: MyH3,
-      code: MyCode,
-      display: Display,
-      showvariable: ShowVariable,
-      theorem: Theorem,
-    }
-  }).Compiler;
-}
-
-
+};
 
 class Template extends Component {
   componentDidMount() {
@@ -82,7 +53,31 @@ class Template extends Component {
   render() {
     const data = this.props.data;
     const post = data.markdownRemark;
-    console.log(post.htmlAst);
+
+    console.log(post);
+
+    const statefulRenderAst = (frontmatter) => {
+      class ShowVariable2 extends ShowVariable {
+        constructor() {
+          super()
+          this.frontmatter = frontmatter;
+        }
+      }
+      
+      return new rehypeReact({
+        createElement: React.createElement,
+        components: {
+          h1: MyH1,
+          h2: MyH2,
+          h3: MyH3,
+          code: MyCode,
+          display: Display,
+          showvariable: ShowVariable2,
+          theorem: Theorem,
+        }
+      }).Compiler;
+    }
+
     return (
       <div>
           <Helmet title={`CodeStack - ${post.frontmatter.title}`} />
