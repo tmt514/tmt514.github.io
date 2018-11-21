@@ -40,7 +40,8 @@ module.exports = {
             options: {
               components: [
               "display",
-              "showvariable"
+              "showvariable",
+              "theorem",
               ],
             },
           },

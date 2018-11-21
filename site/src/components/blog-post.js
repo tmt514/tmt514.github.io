@@ -14,6 +14,7 @@ import "bulma/css/bulma.css"
 
 import CCBYNCSA from '../images/cc-by-nc-sa.png';
 import Display from './display';
+import Theorem from './theorem';
 
 const MyH1 = ({ children }) => (
   <h1 className="title is-3">{children}</h1>
@@ -60,6 +61,7 @@ const statefulRenderAst = (frontmatter) => {
       code: MyCode,
       display: Display,
       showvariable: ShowVariable,
+      theorem: Theorem,
     }
   }).Compiler;
 }

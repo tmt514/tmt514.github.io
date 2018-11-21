@@ -11,13 +11,9 @@ title: "最小費用流的消圈演算法"
 
 最小費用流在剩餘網路上會長什麼樣子呢？很幸運地，Klein 在 1967 年為我們證明了以下定理：
 
-<div class="message is-warning">
-<div class="message-header">
-負圈定理
-</div>
-<div class="message-body">
+<theorem title='負圈定理'>
 $f$ 是最佳解若且唯若 $G_f$ 上面定義 cost 為權重時，不存在一個負圈。
-</div></div>
+</theorem>
 
 ### 證明
 
