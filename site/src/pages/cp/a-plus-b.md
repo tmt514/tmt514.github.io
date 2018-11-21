@@ -11,7 +11,7 @@ link: "https://oj.icpc.tw/problem/1"
 ## 題目敘述
 
 <showvariable varname='description'></showvariable>
- 
+
 ## OJ連結
 
 * [競程日記 Problem 1. A+B Problem](https://oj.icpc.tw/problem/1)

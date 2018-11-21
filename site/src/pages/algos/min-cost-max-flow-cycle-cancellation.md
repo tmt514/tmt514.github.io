@@ -46,9 +46,16 @@ while 剩餘網路 G_f 上面存在負圈:
 
 ## 更快的消圈算法
 
+從計算最大網路流的演算法當中，當我們每次找出剩餘網路圖上最寬的增廣路徑時，這條增廣路徑至少可以推進 ${\mathbf{MaxFlow}}(G_f)/m$ 的流量。這麼一來，在所有容量限制都是整數的情況下，增廣的次數上界可以從原本 Ford-Fulkerson 演算法的 ${\mathbf{MaxFlow}}(G)$ 降低至 $O(m\log_2 {\mathbf{MaxFlow}}(G))$。這個值以輸入的資料量而言，就是多項式了。
 
+### 最負圈 Most Negative Cycle
+
+消圈算法是否也有同樣的特性呢？答案是有的，我們可以用一模一樣的方式證明，如果每一次我們找出那個「最負的負圈」，那麼總 cost 會向目標邁進至少 $O(1/m)$ 的比例。採用了這個方法的話，我們就可以讓消圈次數限制在 $O(m\log_2|{\mathbf{MaxCost}}(G)|)$，是為多項式。
+
+但是，找出「最負的負圈」對於輸入是任意圖的情形下，是 NP-Hard 的。目前我們仍不知道有沒有有效率的多項式演算法來找出它。於是 Goldberg 跟 Tarjan 於 1989 年發現，每一次不見得要找「最負的負圈」，只要「足夠負」就可以有一樣的效果！他們利用了 Karp 在 1978 年提出的「最小均值圈」演算法，每一次找出「平均花費最負的圈」進行增廣，就可以達到一樣的效果啦。
 
 ## 最小均值圈
+
 
 ## 結論
 
@@ -73,3 +80,5 @@ while 剩餘網路 G_f 上面存在負圈:
     [Duke University COMPSCI532 Fall 2015 Scribe Notes](https://www2.cs.duke.edu/courses/fall15/cps232/scribe_notes/lec05.pdf)
 [^3]:
     [Shigeno, Iwata and McCormick, _Relaxed Most Negative Cycle and Most Positive Cut Canceling Algorithms for Minimum Cost Flow_, Mathematics of Operations Research 2000](https://www.jstor.org/stable/3690424?seq=1)
+4. [Colorado State University 最小均值圈講義](http://www.cs.colostate.edu/~rmm/minCycleMean.pdf)
+5. [Columbia University 最小均值圈投影片](http://www.columbia.edu/~cs2035/courses/ieor6614.S16/mmc.pdf)
