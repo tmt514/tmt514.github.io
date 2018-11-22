@@ -27,7 +27,10 @@
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-helmet": "^5.2.0",
-    "rehype-react": "^3.0.3"
+    "rehype-react": "^3.0.3",
+    "remark": "^10.0.1",
+    "remark-html": "^9.0.0",
+    "remark-react": "^4.0.3"
   },
   "keywords": [
     "gatsby"

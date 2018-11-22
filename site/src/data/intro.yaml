@@ -1,3 +1,5 @@
-- intro: >
-    I am currently a Ph.D student in University of Michigan.
-    $f(x) = x^2+y^2$
+- intro: |
+    I am currently a Ph.D student in
+    [CSE division](https://cse.umich.edu)
+    at [University of Michigan](https://umich.edu)
+    advised by [Seth Pettie](http://web.eecs.umich.edu/~pettie/).

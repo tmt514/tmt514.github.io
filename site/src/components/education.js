@@ -7,9 +7,9 @@ class Education extends Component {
         const schoolList = this.props.schoolList.edges
         const schools = schoolList.map((e) => e.node).map((school, idx) => (
         <div className="level" style={{marginBottom: '5px'}} key={idx}>
-            <p className="level-left">
+            <div className="level-left">
             {school.degree}, {school.department}, {school.name}, {school.place}
-            </p>
+            </div>
             <span className="level-right">
             {school.year}
             </span>

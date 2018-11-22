@@ -72,7 +72,7 @@ const Blog = ({ data }) => (
     render={data=>(
         <div>
             <Helmet title="漫談演算法" />
-            <Header siteTitle="卡恩的部落格" colorClass="is-dark" />
+            <Header siteTitle="卡恩的部落格" colorClass="is-dark" navbarLink="/blog" />
             <section 
                 className="section"
             >
