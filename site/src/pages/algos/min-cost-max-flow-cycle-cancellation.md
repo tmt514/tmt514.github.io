@@ -50,12 +50,54 @@ while 剩餘網路 G_f 上面存在負圈:
 
 ### 最負圈 Most Negative Cycle
 
-消圈算法是否也有同樣的特性呢？答案是有的，我們可以用一模一樣的方式證明，如果每一次我們找出那個「最負的負圈」，那麼總 cost 會向目標邁進至少 $O(1/m)$ 的比例。採用了這個方法的話，我們就可以讓消圈次數限制在 $O(m\log_2|{\mathbf{MaxCost}}(G)|)$，是為多項式。
+消圈算法是否也有同樣的特性呢？答案是有的，我們可以用一模一樣的方式證明，如果每一次我們找出那個「最負的負圈」，那麼總 cost 會向目標邁進至少 $O(1/m)$ 的比例。採用了這個方法的話，我們就可以讓消圈次數限制在 $O(m\log_2|{\mathbf{MinCost}}(G)|)$，是為多項式。
 
 但是，找出「最負的負圈」對於輸入是任意圖的情形下，是 NP-Hard 的。目前我們仍不知道有沒有有效率的多項式演算法來找出它。於是 Goldberg 跟 Tarjan 於 1989 年發現，每一次不見得要找「最負的負圈」，只要「足夠負」就可以有一樣的效果！他們利用了 Karp 在 1978 年提出的「最小均值圈」演算法，每一次找出「平均花費最負的圈」進行增廣，就可以達到一樣的效果啦。
 
+
+
 ## 最小均值圈
 
+<theorem title='最小均值圈 [Karp 1978]'>
+設 $G$ 為有向有權圖。定義 $\hat{G}$ 為 $G$ 外加上一點 $s$ 並從 $s$ 到每一點分別加上一條權重為 0 的邊。令 $d_k(v)$ 為從 $s$ 出發經過恰好 $k$ 條邊抵達點 $v$ 的最小總權重和。則最小均值圈的平均值 $\lambda^*$ 滿足
+$$
+\lambda^* = \min_v \max_{1\le k \le n-1} \frac{d_n(v) - d_k(v)}{n-k}
+$$
+</theorem>
+
+### Karp 的證明
+
+首先我們先證明，如果 $\lambda^*=0$，那麼上面這個式子右半邊的值恰好會是 $0$：
+
+如果 $\lambda^*=0$，那麼這個圖一定不存在負圈。既然不存在負圈，我們就可以定義最短路徑（可以參考 Edmonds-Karp）。定義 $\mathrm{dist}(s, v)$ 為 $s$ 到 $v$ 的最短路徑長度。顯然對於所有點 $v$ 和正整數 $k$，$d_n(v) \ge d_k(v)$。此外必定存在某個 $k$ 使得 $d_k(v) = \mathrm{dist}(s, v)$。因此，對所有 $v$ 來說，$\max_{1\le k \le n-1} \frac{d_n(v) - d_k(v)}{n-k} \ge 0$。
+
+得知右半邊的式子永遠非負以後，剩下的任務就是要證明真的存在一組 $v, k$ 使得 $d_n(v) = d_k(v)$。令 $C$ 為總和是 $0$ 的圈，由於 $\lambda^*=0$，在這個圈上任何兩點之間的最短路徑，必定等於這個圈上從一點走到另一點的距離（如果更短的話就有負圈啦）。考慮 $s$ 到這個 $C$ 上面任一點 $x$ 的最短路徑，這條路徑必定用掉不超過 $n-1$ 條邊。然後我們從 $x$ 開始沿著這個圈 $C$ 走，直到補足 $n$ 條邊為止。假設最後停在 $y$ 這個點。那麼，我們要說的是 $d_n(y) = \mathrm{dist}(s, y)$，因為：
+
+$$
+\begin{align*}
+\mathrm{dist}(s, y) & \le d_n(y) \\
+& \le \mathrm{dist}(s, x) + \mathrm{dist}(x, y) \\
+& \le \mathrm{dist}(s, y) + \mathrm{dist}(y, x) + \mathrm{dist}(x, y) \\
+& \le \mathrm{dist}(s, y) + 0
+\end{align*}
+$$
+
+所以，$y$ 這個點達到了最小值 $0$。於是當 $\lambda^*=0$ 時等式成立。
+要怎利用這個證明推導出對所有的 $\lambda^*$ 都正確呢？注意到我們可以同時對所有的邊「平移」（同時加上一個常數 $c$）而這件事情會使得所有圈的平均值都一起「平移」$c$，同時也讓式子右邊「平移」了 $c$。因此對於任意 $\lambda^*$ 我們只要平移它到 $0$，再運用上述的證明，再平移回來，就行啦！證明完畢。
+
+### 關於演算法
+
+最直接的方法就是直接用 $O(mn)$ 動態規劃計算出所有 $d_k(v)$ 的值，其他演算法我們可以改天聊。
+
+### 應用到消圈算法
+
+<theorem title='最小均值消圈定理 [Goldberg-Tarjan 1989]'>
+如果每次從剩餘網路中增廣最小均值圈，那麼保證消圈的迭代次數不超過 $O(\min\{mn\log(nC), m^2n\log n\})$ 次。
+</theorem>
+
+證明可以在這份 Note [^6] 找到。
+
+------
 
 ## 結論
 
@@ -80,5 +122,9 @@ while 剩餘網路 G_f 上面存在負圈:
     [Duke University COMPSCI532 Fall 2015 Scribe Notes](https://www2.cs.duke.edu/courses/fall15/cps232/scribe_notes/lec05.pdf)
 [^3]:
     [Shigeno, Iwata and McCormick, _Relaxed Most Negative Cycle and Most Positive Cut Canceling Algorithms for Minimum Cost Flow_, Mathematics of Operations Research 2000](https://www.jstor.org/stable/3690424?seq=1)
-4. [Colorado State University 最小均值圈講義](http://www.cs.colostate.edu/~rmm/minCycleMean.pdf)
-5. [Columbia University 最小均值圈投影片](http://www.columbia.edu/~cs2035/courses/ieor6614.S16/mmc.pdf)
+[^4]:
+    [Colorado State University 最小均值圈講義](http://www.cs.colostate.edu/~rmm/minCycleMean.pdf)
+[^5]:
+    [Columbia University 最小均值圈投影片](http://www.columbia.edu/~cs2035/courses/ieor6614.S16/mmc.pdf)
+[^6]:
+    [MIT開放課程講義：Goldberg-Tarjan 演算法分析](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-854j-advanced-algorithms-fall-2008/lecture-notes/lec4.pdf)
