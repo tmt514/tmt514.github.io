@@ -1,0 +1,54 @@
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Seth Pettie:  
+    Introduction to Algorithms. (EECS 477)
+  year: "2018 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Kevin Compton:  
+    Introduction to Cryptography. (EECS 475)
+  year: "2018 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Seth Pettie:  
+      Introduction to Algorithms. (EECS 477)
+  year: "2017 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Grant Schoenebeck and Prof. Kevin Compton:  
+    Foundations of Computer Science. (EECS 376)
+  year: "2017 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Yaoyun Shi:  
+    Introduction to Algorithms. (EECS 477)
+  year: "2016 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Seth Pettie:  
+    Introduction to Algorithms. (EECS 586)
+  year: "2016 Winter"
+- type: "teaching"
+  content: |
+    **_Teaching Assistant_**
+    to Prof. Pang-Feng Liu:  
+    Advanced Computer Programming.
+  year: "2011 Spring"
+- type: "teaching"
+  content: |
+    **_Teaching Assistant_**
+    to Prof. Pu-Jen Cheng:  
+    Programming Techniques.
+  year: "2010 Fall"
+- type: "teaching"
+  content: |
+    **_Teaching Assistant_**
+    to Prof. Pu-Jen Cheng:  
+    Programming Techniques.
+  year: "2009 Fall"

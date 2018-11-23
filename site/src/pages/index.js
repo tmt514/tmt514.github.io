@@ -6,7 +6,6 @@ import Education from '../components/education'
 import Publication from '../components/publication'
 
 import remark from 'remark'
-import html from 'remark-html'
 import reactRenderer from 'remark-react'
 
 const markdown = remark()
@@ -18,13 +17,29 @@ const markdown = remark()
     })
 
 
-const IndexPage = ({ data }) => {
-  console.log(markdown.processSync(
-    data.allIntroYaml.edges[0].node.intro
-  ))
+const Teaching = ({ contents }) => {
+  const teachingList = contents.edges;
+  var tlist = [];
+  const teaching = teachingList.map((e) => e.node).map((e, idx) => {
+    tlist.push((<div key={idx+"0"} className="column is-four-fifths">
+    {markdown.processSync(e.content).contents}
+    </div>))
+    tlist.push((<div key={idx+"1"} className="column">
+    <span className="is-pulled-right">{e.year}</span>
+    </div>))
+  })
   return (
+    <section className="section">
+    <h2 className="title is-size-4">Teaching Experiences</h2>
+    <div className="columns is-multiline is-gapless">
+    {tlist}
+    </div>
+    </section>
+  )
+}
 
-  
+const IndexPage = ({ data }) => {
+  return (
   <Layout>
     
     <section className="section">
@@ -55,14 +70,13 @@ const IndexPage = ({ data }) => {
     </div>
     <Education schoolList={data.allEducationYaml} />
     <Publication contents={data.publications.contents} />
-    
+    <Teaching contents={data.allExperiencesYaml} />
     
     </section>
   </Layout>
   )
 }
 
-/*<Publication schoolList={data.allEducationYaml} />*/
 export default IndexPage
 
 export const query = graphql`
@@ -74,6 +88,14 @@ export const query = graphql`
         edges {
           node {
             intro
+          }
+        }
+      }
+      allExperiencesYaml {
+        edges {
+          node {
+            content
+            year
           }
         }
       }

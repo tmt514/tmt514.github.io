@@ -25,7 +25,7 @@ export default class HTML extends React.Component {
           <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
             window.MathJax = {
               tex2jax: {
-                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                inlineMath: [ ['$','$'], ['$$','$$'] ],
                 processEscapes: true
               }
             };

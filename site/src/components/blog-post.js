@@ -16,6 +16,18 @@ import CCBYNCSA from '../images/cc-by-nc-sa.png';
 import Display from './display';
 import Theorem from './theorem';
 
+import remark from 'remark'
+import reactRenderer from 'remark-react'
+
+const markdown = remark()
+  .use(reactRenderer,
+    {
+      createElement: React.createElement,
+      remarkReactComponents: {
+      },
+    })
+
+
 const MyH1 = ({ children }) => (
   <h1 className="title is-3">{children}</h1>
 )
@@ -35,7 +47,7 @@ class ShowVariable extends Component {
     const frontmatter = this.frontmatter || {};
     const varname = this.props.varname;
     const val = frontmatter[varname]
-    return (<div>{val}</div>);
+    return (<div>{markdown.processSync(val).contents}</div>);
   }
 };
 
