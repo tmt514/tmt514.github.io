@@ -95,7 +95,34 @@ $$
 如果每次從剩餘網路中增廣最小均值圈，那麼保證消圈的迭代次數不超過 $O(\min\{mn\log(nC), m^2n\log n\})$ 次。
 </theorem>
 
-證明可以在這份 Note [^6] 找到。
+證明的步驟簡述如下。完整的證明可以在這份 Note [^7] 找到。
+
+**概念1**: 如果 $G_f$ 上面有負圈，那麼對於 $G_f$ 上面的最小均值圈，其平均也是負的。
+
+**概念2**: 我們定義 $\mu(f)$ 表示為將 $G_f$ 的最小均值圈變成非負的最小平移常數。（也就是說，最小均值圈的平均值為 $-\mu(f)$）
+
+**概念3**: 對於任何勢能函數（或距離函數）$d$，我們定義等效邊權 $cost^d(u, v) = cost(u, v) + d(u) - d(v)$。不難發現，對於任何一個圖上的圈來說，其邊權的和總是等於等效邊權的和。也就是說，這樣的轉換並不會影響最小均值圈的數值。但可以藉此調整一些邊的權重。
+
+**概念4**: 我們定義 $-\epsilon(f)$ 表示對於任意函數 $d$ 定義出的等效邊權中，最小權重最大者。
+
+**概念5**: 注意到，如果這個圖的最小均值圈是 $-\mu(f)$ 的話，無論我們怎麼調整函數 $d$，調整後最小的那條邊一定小於平均。因此有 $-\epsilon(f) \le -\mu(f)$。
+
+**概念6**: 相反地，若考慮平移後的圖 $G_f+\mu(f)$，我們可以在上面定義一個距離函數 $d$，使得對所有 $(u, v)\in G_f$ 我們都有 $d(u) + cost(u, v) \ge d(v)$。也就是等效邊權 $cost^d(u, v)\ge 0$。
+
+**概念7**: 把上面這個做出來的 $d$ 再減去 $\mu(f)$，得到一個勢能函數（或距離函數），其等效邊權 $cost^{d-\mu(f)}(u, v) \ge -\mu(f)$。於是我們有 $-\epsilon(f) \ge -\mu(f)$。
+
+**概念8**: 綜合概念 5 與 7 我們可以得到 $\mu(f)=\epsilon(f)$。
+
+**概念9**: 現在固定一個 $f$，以及一個可以得出最佳等效距離的函數 $d$。假設在 $G_f$ 上面消完一個最小均值圈以後，得到的新的流是 $f'$。我們想要說兩件事情：
+1. $\epsilon(f') \le \epsilon(f)$。
+2. 如果消的圈上存在一條正的等效邊，那麼 $\epsilon(f') \le \left(1-\frac{1}{n}\right)\epsilon(f)$。
+3. 假設我們增廣後仍暫時使用同樣的 $d$ 函數。那麼連續 $m$ 次增廣之內，一定會消到一個圈使得某條以 $d$ 為基準的等效邊是非負的，於是 2. 成立。
+
+**概念10**: 因此，一開始 $\epsilon(f_{始})\le C$，經過 $mn\ln {nC}$ 次增廣以後 $\epsilon(f_{終}) < \left(1-\frac{1}{n}\right)^{n\ln {nC}} C \le \frac{1}{n}$。
+
+**概念11**: 如果所有容量和花費都是整數，那麼當最小均值圈 $ > -\frac{1}{n}$ 的時候，就代表它 $\ge 0$。此時消圈算法就會停止。
+
+除了 **概念9** 的 1. 和 2. 需要額外證明以外，上面的論述基本上就是全部的證明了。耶！搞定！
 
 ------
 
@@ -127,4 +154,6 @@ $$
 [^5]:
     [Columbia University 最小均值圈投影片](http://www.columbia.edu/~cs2035/courses/ieor6614.S16/mmc.pdf)
 [^6]:
+    [Cornell University 的 Goldberg-Tarjan 演算法講義](https://people.orie.cornell.edu/dpw/orie633/LectureNotes/lecture12.pdf)
+[^7]:
     [MIT開放課程講義：Goldberg-Tarjan 演算法分析](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-854j-advanced-algorithms-fall-2008/lecture-notes/lec4.pdf)
