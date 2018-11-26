@@ -87,7 +87,7 @@ $$
 
 ### 關於演算法
 
-最直接的方法就是直接用 $O(mn)$ 動態規劃計算出所有 $d_k(v)$ 的值，其他演算法我們可以改天聊。
+最直接的方法就是直接用 $O(mn)$ 動態規劃計算出所有 $d_k(v)$ 的值，其他演算法我們可以改天聊。至於要找出實際的圈，我們可以先從上面的計算找出得到最佳值的 $v, k$，然後找出從 $s$ 到 $v$ 走恰好 $n$ 步的最小路徑，這個路徑上的任何一個 cycle 都是最小均值圈[^4]。
 
 ### 應用到消圈算法
 
@@ -140,6 +140,8 @@ $$
 | <nobr>Sokkalingam, Ahuja and Orlin [1997]</nobr><br/>每次找剩餘流量足夠大的負圈 | $O(m \log C)$ | $O(m+n\log n)$ | $O(m^2\log C$ $+$ $nm\log C\log n)$ | $O(m^3\log n$ $+$ $nm^2\log^2 n)$ |
 
 <small>資料來源： Sokkalingam, Ahuja, Orlin, _New Polynomial-Time Cycle-Cancelling Algorithms for Minimum Cost Flows_, 1997. [^1]</small>
+
+
 
 ## 參考資料
 

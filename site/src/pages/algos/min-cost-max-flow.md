@@ -90,6 +90,3 @@ $$
 
 1. 我們用加了一條邊（$cap=\infty, cost=-big$）的方法把「Min-Cost Max-Flow」轉化成「Min-Cost Circulation」。如果我們今天不要求「最大流」，只要找一個流，讓總花費最小，應該要如何進行轉化呢？
 
-## 參考資料
-
-1. [最小均值圈與最小費用流 Columbia講義](http://www.columbia.edu/~cs2035/courses/ieor6614.S12/mcf-sp.pdf)
