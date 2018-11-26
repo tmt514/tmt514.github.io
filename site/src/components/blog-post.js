@@ -15,6 +15,7 @@ import "bulma/css/bulma.css"
 import CCBYNCSA from '../images/cc-by-nc-sa.png';
 import Display from './display';
 import Theorem from './theorem';
+import Algorithm from './algorithm';
 
 import remark from 'remark'
 import reactRenderer from 'remark-react'
@@ -86,6 +87,7 @@ class Template extends Component {
           display: Display,
           showvariable: ShowVariable2,
           theorem: Theorem,
+          algorithm: Algorithm,
         }
       }).Compiler;
     }

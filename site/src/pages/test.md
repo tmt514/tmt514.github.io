@@ -38,3 +38,27 @@ int main(void) {
 
 <display array
     data='[1, 2, "tdest123"]'></display>
+
+
+<algorithm>
+    <generator><pre>
+        function*(input) {
+            var n = input.n;
+            var i;
+            var s = [];
+            for (i = 0; i < n; i++) {
+                s.push(i);
+                yield {arr: s};
+            }
+            return {arr: s};
+        }
+        </pre>
+    </generator>
+    <inputdata
+        data='{"n": 10}'
+    />
+    <indirectdisplay
+        array
+        highlightdiff
+        varname='arr' />
+</algorithm>
