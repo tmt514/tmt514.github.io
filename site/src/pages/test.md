@@ -56,9 +56,11 @@ int main(void) {
     </generator>
     <inputdata
         data='{"n": 10}'
-    />
+    ></inputdata>
     <indirectdisplay
         array
+        n='10'
         highlightdiff
-        varname='arr' />
+        varname='arr'
+    ></indirectdisplay>
 </algorithm>

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { filter } from 'minimatch';
+import Display from './display';
+
+const clone = (dictionary) => {
+    return JSON.parse(JSON.stringify(dictionary))
+}
 
 class Algorithm extends Component {
     constructor(props) {
@@ -27,10 +31,10 @@ class Algorithm extends Component {
         // Parse input.
         const input = JSON.parse(inputdata.props.data);
 
-        // Handle Display.
-
+        // Create Generator and history storing all intermediate steps for the
+        // algorithm.
         var gen = solver(input);
-        var history = [gen.next()];
+        var history = [clone(gen.next())];
 
         // Set States.
         this.state = {
@@ -43,15 +47,38 @@ class Algorithm extends Component {
         }
         
     }
+
+    changeStepBy(numMove) {
+        const newState = Object.assign({}, this.state);
+        newState.stepId += numMove;
+        while (newState.history.length <= newState.stepId
+            && newState.history[newState.history.length-1].done === false) {
+            const nextIter = newState.generator.next();
+            newState.history.push(clone(nextIter));
+        }
+        newState.stepId = Math.max(0, newState.stepId);
+        newState.stepId = Math.min(newState.history.length-1, newState.stepId);
+        this.setState(newState);
+    }
+
     render() {
+        const stepId = this.state.stepId;
+        const snapshot = this.state.history[stepId];
+        const displays = this.state.displays.map((e, idx) => (
+            <Display
+                key={idx}
+                {...e.props}
+                data={JSON.stringify(snapshot.value[e.props.varname])}
+            />
+        ))
         return (
             <div>
-
                 <div className="has-text-centered">
-                <button>Prev</button>
-                <span> Step: 0 </span>
-                <button>Next</button>
+                <button onClick={this.changeStepBy.bind(this, -1)}>Prev</button>
+                <span> Step: {this.state.stepId} </span>
+                <button onClick={this.changeStepBy.bind(this, 1)}>Next</button>
                 </div>
+                {displays}
             </div>
         )
     }

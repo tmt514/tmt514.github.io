@@ -11,7 +11,9 @@ attachments:
 
 對我來說，演算法設計的世界裡面，解題的過程也可以大致分類成以下四種思考方式。而這些思考方式構建了大家在演算法教科書中提及的各種解題方法（又稱為 [Algorithmic Paradigm](https://en.wikipedia.org/wiki/Algorithmic_paradigm)），比方說動態規劃或是分而治之等。大致可以表示成以下的圖片：
 
-![](images/algthinking.png)
+<div class="has-text-centered">
+<img src="images/algthinking.png" style="max-width:700px" />
+</div>
 
 ## 枚舉 Enumeration
 

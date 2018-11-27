@@ -1,37 +1,45 @@
 import React, {Component} from 'react';
+import Display from './display';
+import { runInThisContext } from 'vm';
 
 class DisplayArray extends Component {
     
     constructor(props) {
         super(props)
-
-        const data = JSON.parse(props.data);
         this.state = {}
-        this.state.data = data || []
-        this.state.n = (props.n && parseInt(props.n)) || data.length
-        
-        this.state.ui = {}
-        this.state.canvasWidth = 1;
-        this.state.canvasHeight = 31;
-
-        while (this.state.data.length < this.state.n) {
-            this.state.data.push("")
-        }
-
-        var i;
-        var w;
-        for (i = 0; i < this.state.n; i++) {
-            w = this._getTextWidth(this.state.data[i]);
-            w = Math.max(30, w + 10);
-
-            this.state.ui[i] = {
-                width: w,
-                offsetW: this.state.canvasWidth,
-            }
-            this.state.canvasWidth += this.state.ui[i].width + 1;
-        }
     }
-    
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const newState = Object.assign({}, prevState);
+        if (prevState.dataString !== nextProps.data) {
+            const data = JSON.parse(nextProps.data);
+            newState.data = data || []
+            newState.n = (nextProps.n && parseInt(nextProps.n)) || data.length
+
+            newState.ui = {}
+            newState.canvasWidth = 1;
+            newState.canvasHeight = 31;
+
+            while (newState.data.length < newState.n) {
+                newState.data.push("")
+            }
+
+            var i;
+            var w;
+            for (i = 0; i < newState.n; i++) {
+                w = DisplayArray.getTextWidth(newState.data[i]);
+                w = Math.max(30, w + 10);
+
+                newState.ui[i] = {
+                    width: w,
+                    offsetW: newState.canvasWidth,
+                }
+                newState.canvasWidth += newState.ui[i].width + 1;
+            }
+        }
+        return newState;
+    }
+
     componentDidUpdate() {
         this._update();
     }
@@ -39,11 +47,11 @@ class DisplayArray extends Component {
         this._update();
     }
     
-    _getTextWidth(s) {
+    static getTextWidth(s) {
         if (typeof window === `undefined`) {
             return `${s}`.length*7;
         }
-        var canvas = this.hiddenCanvas || (this.hiddenCanvas = window.document.createElement("canvas"))
+        var canvas = DisplayArray.hiddenCanvas || (DisplayArray.hiddenCanvas = window.document.createElement("canvas"))
         var ctx = canvas.getContext("2d");
         ctx.font = "16px Roboto";
         return ctx.measureText(`${s}`).width;

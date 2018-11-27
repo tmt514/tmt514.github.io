@@ -4,7 +4,6 @@ import DisplayArray from './display-array';
 class Display extends Component {
     render() {
         if (this.props.array !== undefined) {
-            console.log(this.props);
             return (<DisplayArray {...this.props}></DisplayArray>);
         }
         
