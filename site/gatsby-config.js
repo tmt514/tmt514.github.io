@@ -42,10 +42,18 @@ module.exports = {
               "display",
               "showvariable",
               "theorem",
+              "algorithm",
               ],
             },
           },
           `gatsby-remark-mathjax`,
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+            options: {
+              ignoreFileExtensions: [],
+            }
+          },
+          // `gatsby-remark-images`
         ],
       },
     },
