@@ -1,4 +1,4 @@
-
+import React from 'react';
 
 export class Rectangle {
 
@@ -17,6 +17,7 @@ export class Rectangle {
         this.textProps = textProps;
         this.textWidth = Math.max(this.textLines.map((t) => Rectangle.getTextWidth(t, textProps)));
         this.textHeight = this.textLines.length * (textProps.lineHeight || 16);
+        console.log("height=", this.textHeight);
         this.textPadding = textProps.padding || 8;
     }
 
@@ -37,6 +38,7 @@ export class Rectangle {
         const cy = y;
         var boxWidth = this.textWidth/2 + this.textPadding;
         var boxHeight = this.textHeight/2 + this.textPadding;
+        console.log("box=", cx, cy, boxWidth, boxHeight);
         return (<polyline
             points={`${cx-boxWidth} ${cy-boxHeight}
                     ${cx+boxWidth} ${cy-boxHeight}
@@ -51,9 +53,18 @@ export class Rectangle {
         const cy = y;
         var boxWidth = this.textWidth/2 + this.textPadding;
         var boxHeight = this.textHeight/2 + this.textPadding;
-        viewbox.lx = Math.min(viewbox.lx, cx-boxWidth);
-        viewbox.ly = Math.min(viewbox.ly, cy-boxHeight);
-        viewbox.rx = Math.max(viewbox.rx, cx+boxWidth);
-        viewbox.ry = Math.max(viewbox.ry, cy+boxHeight);
+        var lx = cx-boxWidth;
+        var ly = cy-boxHeight;
+        var rx = cx+boxWidth;
+        var ry = cy+boxHeight;
+        lx = Math.floor(lx);
+        ly = Math.floor(ly);
+        rx = Math.ceil(rx);
+        ry = Math.ceil(ry);
+        
+        viewbox.lx = Math.min(viewbox.lx, lx);
+        viewbox.ly = Math.min(viewbox.ly, ly);
+        viewbox.rx = Math.max(viewbox.rx, rx);
+        viewbox.ry = Math.max(viewbox.ry, ry);
     }
 };

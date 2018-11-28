@@ -18,7 +18,7 @@ const defaultNodeProps = {
     strokeLinejoin: "miter",
     strokeLineCap: undefined,
     strokeDasharray: undefined,
-    fill: undefined,
+    fill: "none",
 
     // Handles position.
     cx: undefined, // X-coordinate for the center.
@@ -42,7 +42,7 @@ function anchorToOffset(info, node, center) {
     var cx = center.x;
     var cy = center.y;
     if (info.at === "boundary") {
-        offset = node.getPeripheralOffsetByAngle(angle);
+        const offset = node.getPeripheralOffsetByAngle(angle);
         cx += offset.x;
         cy += offset.y;
     }
@@ -54,9 +54,10 @@ function anchorToOffset(info, node, center) {
 
 export class GraphNode {
     constructor(props) {
-        this.props = Object.assign(defaultNodeProps, props);
+        this.props = Object.assign({}, defaultNodeProps);
+        this.props = Object.assign(this.props, props);
 
-        this.boundingShape = new this.props.boundingShapeClass(text, textProps);
+        this.boundingShape = new this.props.boundingShapeClass(this.props.text, this.props.textProps);
     }
 
     // Computes the most distant point of the bounding shape on the ray
@@ -78,11 +79,14 @@ export class GraphNode {
             textsvgs.push(<text idx={`text-${i}`} x={cx} y={startY}>{textLines[i]}</text>)
         }
         return (<g key={`n-${this.props.id}`}>
-            <g dominantBaseline="central">
-                {textsvgs}
+            <g
+                stroke={this.props.stroke}
+                strokeWidth={this.props.strokeWidth}
+                fill={this.props.fill}>
+                {this.boundingShape.renderSVG({x:cx, y:cy})}
             </g>
-            <g stroke={this.props.stroke} strokeWidth={this.props.strokeWidth}>
-                {this.boundingShape.renderSVG({cx, cy})}
+            <g dominantBaseline="central" textAnchor="middle">
+                {textsvgs}
             </g>
         </g>)
     }
@@ -129,21 +133,24 @@ class GraphToSVG {
     renderSVG() {
         const computedNodeCenter = {}
         const visitedNodes = {}
-        const dfs = function findOffsetsByDFS(id) {
+        const dfs = (id) => {
+            console.log(id, this, visitedNodes);
             const node = this.nodes[id];
             visitedNodes[id] = true;
+            
 
             var finalCX = 0;
             var finalCY = 0;
 
             const anchorToX = (e) => {
                 if (e === undefined) return undefined;
-                if (visitedNodes[e.who] === undefined) findOffsetsByDFS(e.who);
+                if (visitedNodes[e.who] === undefined) dfs(e.who);
                 return anchorToOffset(e, this.nodes[e.who], computedNodeCenter[e.who]).x;
             }
             const anchorToY = (e) => {
+                console.log(e);
                 if (e === undefined) return undefined;
-                if (visitedNodes[e.who] === undefined) findOffsetsByDFS(e.who);
+                if (visitedNodes[e.who] === undefined) dfs(e.who);
                 return anchorToOffset(e, this.nodes[e.who], computedNodeCenter[e.who]).y;
             }
 
@@ -179,11 +186,17 @@ class GraphToSVG {
             }
 
             computedNodeCenter[id] = {x:finalCX, y:finalCY};
-        }
+        };
+        
         var i;
         const nodeIDs = Object.keys(this.nodes);
         var renderedNodes = [];
-        var viewbox = {lx: Infinity, ly = Infinity, ux: -Infinity, uy: -Infinity};
+        var viewbox = {lx: Infinity, ly: Infinity, rx: -Infinity, ry: -Infinity};
+        for (i = 0; i < nodeIDs.length; i++) {
+            if (visitedNodes[nodeIDs[i]] === undefined) {
+                dfs(nodeIDs[i]);
+            }
+        }
         for (i = 0; i < nodeIDs.length; i++) {
             var node = this.nodes[nodeIDs[i]];
             const center = computedNodeCenter[node.props.id];
@@ -196,8 +209,11 @@ class GraphToSVG {
         viewbox.ly -= 10;
         viewbox.rx += 10;
         viewbox.ry += 10;
-
-        return (<svg width="640" height="480" viewBox={`${viewbox.lx} ${viewbox.ly} ${viewbox.rx} ${viewbox.ry}`}>
+        
+        const w = Math.min(640, viewbox.rx - viewbox.lx);
+        const h = Math.min(480, viewbox.ry - viewbox.ly);
+        
+        return (<svg width={w} height={h} viewBox={`${viewbox.lx} ${viewbox.ly} ${viewbox.rx - viewbox.lx} ${viewbox.ry - viewbox.ly}`}>
             {renderedNodes}
         </svg>)
     }
