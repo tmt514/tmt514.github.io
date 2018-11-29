@@ -1,0 +1,1 @@
+export const defaultLineHeight = 16;

@@ -12,21 +12,44 @@ export class Rectangle {
         return ctx.measureText(`${s}`).width;
     }
 
-    constructor(text, textProps) {
+    constructor(props) {
+        this.props = props;
+        
+        const text = props.text;
+        const textProps = props.textProps;
+
         this.textLines = text.split("\n").filter((e) => e !== "");
         this.textProps = textProps;
-        this.textWidth = Math.max(this.textLines.map((t) => Rectangle.getTextWidth(t, textProps)));
+        this.textWidth = Math.max(0, ...this.textLines.map((t) => Rectangle.getTextWidth(t, textProps)));
         this.textHeight = this.textLines.length * (textProps.lineHeight || 16);
-        console.log("height=", this.textHeight);
         this.textPadding = textProps.padding || 8;
+        
+        this.estimatedWidth = this.textWidth + this.textPadding*2;
+        this.estimatedHeight = this.textHeight + this.textPadding*2;
+        this.findActualBox();
+    }
+
+    updateShape() {
+        this.findActualBox();
+    }
+
+    getCurrentBoundingRectangle() {
+        return {width: this.actualWidth, height: this.actualHeight}
+    }
+
+    findActualBox() {
+        this.actualWidth = Math.max(this.estimatedWidth, this.props.minWidth||-Infinity)
+        this.actualWidth = Math.min(this.actualWidth, this.props.maxWidth||Infinity)
+        this.actualHeight = Math.max(this.estimatedHeight, this.props.minHeight||-Infinity)
+        this.actualHeight = Math.min(this.actualHeight, this.props.maxHeight||Infinity)
     }
 
     getPeripheralOffsetByAngle(degree) {
         const rad = degree / 180.0 * Math.PI;
         const c = Math.cos(rad);
         const s = Math.sin(rad);
-        var vline = this.textWidth/2 + this.textPadding;
-        var hline = this.textHeight/2 + this.textPadding;
+        var vline = this.actualWidth/2;
+        var hline = this.actualHeight/2;
         vline = (c === 0? Infinity: vline / c);
         hline = (s === 0? Infinity: hline / s);
         const dist = Math.min(Math.abs(vline), Math.abs(hline));
@@ -36,9 +59,8 @@ export class Rectangle {
     renderSVG({x, y}) {
         const cx = x;
         const cy = y;
-        var boxWidth = this.textWidth/2 + this.textPadding;
-        var boxHeight = this.textHeight/2 + this.textPadding;
-        console.log("box=", cx, cy, boxWidth, boxHeight);
+        var boxWidth = this.actualWidth/2;
+        var boxHeight = this.actualHeight/2;
         return (<polyline
             points={`${cx-boxWidth} ${cy-boxHeight}
                     ${cx+boxWidth} ${cy-boxHeight}
@@ -51,8 +73,8 @@ export class Rectangle {
     updateViewBox(viewbox, {x, y}) {
         const cx = x;
         const cy = y;
-        var boxWidth = this.textWidth/2 + this.textPadding;
-        var boxHeight = this.textHeight/2 + this.textPadding;
+        var boxWidth = this.actualWidth/2;
+        var boxHeight = this.actualHeight/2;
         var lx = cx-boxWidth;
         var ly = cy-boxHeight;
         var rx = cx+boxWidth;

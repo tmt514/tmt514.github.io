@@ -21,20 +21,37 @@ class DisplayArray extends Component {
                 newState.data.push("")
             }
             
+            const nodelist = [];
             for (let i = 0; i < newState.data.length; i++) {
-                let nodeProps = {
+                const nodeProps = {
                     id: `my-${i}`,
                     text: `${newState.data[i]}`,
-                }
-                if (i == 0) {
+                };
+                if (i === 0) {
                     nodeProps.cx = 0;
                     nodeProps.cy = 0;
                 } else {
                     nodeProps.leftAnchors = [new AnchorInfo(`my-${i-1}`, 0, 'boundary', 0)]
                     nodeProps.cyAnchor = new AnchorInfo(`my-${i-1}`, 0, 'center', 0);
                 }
-                newState.ui.addNode(nodeProps);
+                const node = newState.ui.addNode(nodeProps);
+                nodelist.push(node);
             }
+
+            var w = -Infinity;
+            var h = -Infinity;
+            nodelist.forEach((node) => {
+                const box = node.boundingShape.getCurrentBoundingRectangle();
+                w = Math.max(w, box.width);
+                h = Math.max(h, box.height);
+            })
+            console.log(w, h);
+            nodelist.forEach((node) => {
+                node.updateProps({
+                    minHeight: h,
+                })
+            })
+            
         }
         return newState;
     }

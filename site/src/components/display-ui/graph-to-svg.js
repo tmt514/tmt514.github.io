@@ -1,5 +1,6 @@
 import React from 'react'
 import { Rectangle } from './shapes'
+import { defaultLineHeight } from './ui-defaults'
 
 const defaultNodeProps = {
     id: "dummyID",
@@ -10,6 +11,12 @@ const defaultNodeProps = {
     textProps: {
         font: "12pt Roboto",
     },
+
+    // Box Size
+    minWidth: undefined,
+    minHeight: undefined,
+    maxWidth: undefined,
+    maxHeight: undefined,
 
     // Describes the surrounding shape.
     boundingShapeClass: Rectangle,
@@ -56,8 +63,13 @@ export class GraphNode {
     constructor(props) {
         this.props = Object.assign({}, defaultNodeProps);
         this.props = Object.assign(this.props, props);
+        this.boundingShape = new this.props.boundingShapeClass(this.props);
+    }
 
-        this.boundingShape = new this.props.boundingShapeClass(this.props.text, this.props.textProps);
+    // Whenever a property changes, the bounding shape needs to be updated.
+    updateProps(newProps) {
+        Object.assign(this.props, newProps);
+        this.boundingShape.updateShape();
     }
 
     // Computes the most distant point of the bounding shape on the ray
@@ -71,12 +83,13 @@ export class GraphNode {
         const cx = x;
         const cy = y;
         const textLines = this.props.text.split("\n").filter((e) => e !== "");
-        const textLineHeight = this.props.textProps.lineHeight || 16;
+        const textLineHeight = this.props.textProps.lineHeight || defaultLineHeight;
         var textsvgs = []
         var i;
         var startY = cy - this.boundingShape.textHeight/2 + textLineHeight/2;
         for (i = 0; i < textLines.length; i++) {
-            textsvgs.push(<text idx={`text-${i}`} x={cx} y={startY}>{textLines[i]}</text>)
+            textsvgs.push(<text key={`text-${i}`} x={cx} y={startY}>{textLines[i]}</text>)
+            startY += textLineHeight;
         }
         return (<g key={`n-${this.props.id}`}>
             <g
@@ -134,7 +147,6 @@ class GraphToSVG {
         const computedNodeCenter = {}
         const visitedNodes = {}
         const dfs = (id) => {
-            console.log(id, this, visitedNodes);
             const node = this.nodes[id];
             visitedNodes[id] = true;
             
@@ -148,7 +160,6 @@ class GraphToSVG {
                 return anchorToOffset(e, this.nodes[e.who], computedNodeCenter[e.who]).x;
             }
             const anchorToY = (e) => {
-                console.log(e);
                 if (e === undefined) return undefined;
                 if (visitedNodes[e.who] === undefined) dfs(e.who);
                 return anchorToOffset(e, this.nodes[e.who], computedNodeCenter[e.who]).y;
@@ -166,9 +177,9 @@ class GraphToSVG {
             } else if (cxa !== undefined) {
                 finalCX = cxa;
             } else if (la.length > 0) {
-                finalCX = Math.max(la) - node.getPeripheralOffsetByAngle(180).x;
+                finalCX = Math.max(...la) - node.getPeripheralOffsetByAngle(180).x;
             } else if (ra.length > 0) {
-                finalCX = Math.min(ra) - node.getPeripheralOffsetByAngle(0).x;
+                finalCX = Math.min(...ra) - node.getPeripheralOffsetByAngle(0).x;
             } else {
                 console.warn(`Missing anchors for node ${node.id}! Treat as zero.`)
             }
@@ -178,9 +189,9 @@ class GraphToSVG {
             } else if (cya !== undefined) {
                 finalCY = cya;
             } else if (da.length > 0) {
-                finalCY = Math.max(da) - node.getPeripheralOffsetByAngle(270).y;
+                finalCY = Math.max(...da) - node.getPeripheralOffsetByAngle(270).y;
             } else if (ua.length > 0) {
-                finalCY = Math.min(ua) - node.getPeripheralOffsetByAngle(90).y;
+                finalCY = Math.min(...ua) - node.getPeripheralOffsetByAngle(90).y;
             } else {
                 console.warn(`Missing anchors for node ${node.id}! Treat as zero.`)
             }
