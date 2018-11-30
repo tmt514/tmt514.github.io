@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import GraphToSVG, { GraphNode } from './display-ui/graph-to-svg';
+import GraphToSVG, { GraphNode, GraphNodeUIHelper } from './display-ui/graph-to-svg';
 import AnchorInfo from './display-ui/anchor-info';
 
 class DisplayArray extends Component {
@@ -11,7 +11,10 @@ class DisplayArray extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const newState = Object.assign({}, prevState);
-        if (prevState.dataString !== nextProps.data) {
+        const uiStore = nextProps.uiStore;
+        
+        // TODO(tmt514): find correct way to detect whether to update.
+        if (true) {
             const data = JSON.parse(nextProps.data);
             newState.data = data || []
             newState.n = (nextProps.n && parseInt(nextProps.n)) || data.length
@@ -24,16 +27,20 @@ class DisplayArray extends Component {
             const nodelist = [];
             for (let i = 0; i < newState.data.length; i++) {
                 const nodeProps = {
-                    id: `my-${i}`,
+                    id: `arr-${i}`,
                     text: `${newState.data[i]}`,
                 };
                 if (i === 0) {
                     nodeProps.cx = 0;
                     nodeProps.cy = 0;
                 } else {
-                    nodeProps.leftAnchors = [new AnchorInfo(`my-${i-1}`, 0, 'boundary', 0)]
-                    nodeProps.cyAnchor = new AnchorInfo(`my-${i-1}`, 0, 'center', 0);
+                    nodeProps.leftAnchors = [new AnchorInfo(`arr-${i-1}`, 0, 'boundary', 0)]
+                    nodeProps.cyAnchor = new AnchorInfo(`arr-${i-1}`, 0, 'center', 0);
                 }
+                
+                // Id corresponds to Index in the array.
+                GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, `${i}`, ['all', 'node'])
+                
                 const node = newState.ui.addNode(nodeProps);
                 nodelist.push(node);
             }
@@ -45,14 +52,20 @@ class DisplayArray extends Component {
                 w = Math.max(w, box.width);
                 h = Math.max(h, box.height);
             })
-            console.log(w, h);
+            
+            const newNodeProps = {
+                minHeight: h,
+            };
+            if (nextProps.fixedwidth !== undefined) {
+                newNodeProps.minWidth = w;
+            }
+            
             nodelist.forEach((node) => {
-                node.updateProps({
-                    minHeight: h,
-                })
+                node.updateProps(newNodeProps)
             })
             
         }
+        
         return newState;
     }
     

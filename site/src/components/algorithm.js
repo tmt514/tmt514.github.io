@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Display from './display';
+import UIController from './display-ui/ui-controller';
 
 const clone = (dictionary) => {
     return JSON.parse(JSON.stringify(dictionary))
@@ -8,7 +9,7 @@ const clone = (dictionary) => {
 class Algorithm extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        
         const findAll = function(name) {
             return props.children.filter((x) => x.type === name);
         }
@@ -30,11 +31,16 @@ class Algorithm extends Component {
 
         // Parse input.
         const input = JSON.parse(inputdata.props.data);
+        
+        // Creates UI environment.
+        const ui = new UIController();
 
-        // Create Generator and history storing all intermediate steps for the
+        // Creates Generator and history storing all intermediate steps for the
         // algorithm.
-        var gen = solver(input);
+        var gen = solver(input, ui);
         var history = [clone(gen.next())];
+        var uiHistory = [ui.getSnapshot()];
+        ui.clearStyleOnce();
 
         // Set States.
         this.state = {
@@ -44,6 +50,8 @@ class Algorithm extends Component {
             generator: gen,
             stepId: 0,
             history: history,
+            ui: ui,
+            uiHistory: uiHistory,
         }
         
     }
@@ -55,6 +63,8 @@ class Algorithm extends Component {
             && newState.history[newState.history.length-1].done === false) {
             const nextIter = newState.generator.next();
             newState.history.push(clone(nextIter));
+            newState.uiHistory.push(newState.ui.getSnapshot());
+            newState.ui.clearStyleOnce();
         }
         newState.stepId = Math.max(0, newState.stepId);
         newState.stepId = Math.min(newState.history.length-1, newState.stepId);
@@ -64,13 +74,23 @@ class Algorithm extends Component {
     render() {
         const stepId = this.state.stepId;
         const snapshot = this.state.history[stepId];
-        const displays = this.state.displays.map((e, idx) => (
-            <Display
-                key={idx}
-                {...e.props}
-                data={JSON.stringify(snapshot.value[e.props.varname])}
-            />
-        ))
+        const uiSnapshot = this.state.uiHistory[stepId];
+        const displays = this.state.displays.map((e, idx) => {
+            const varname = e.props.varname;
+            const uiStore = {
+                styleRules: uiSnapshot.styleRules[varname],
+                styles: uiSnapshot.styles[varname],
+                onceStyles: uiSnapshot.onceStyles[varname],
+                annotations: uiSnapshot.annotations[varname],
+            };
+            return (
+                <Display
+                    key={idx}
+                    {...e.props}
+                    uiStore={uiStore}
+                    data={JSON.stringify(snapshot.value[e.props.varname])}
+                />
+        )})
         return (
             <div>
                 <div className="has-text-centered">

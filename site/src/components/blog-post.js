@@ -67,8 +67,6 @@ class Template extends Component {
     const data = this.props.data;
     const post = data.markdownRemark;
 
-    console.log(post);
-
     const statefulRenderAst = (frontmatter) => {
       class ShowVariable2 extends ShowVariable {
         constructor() {

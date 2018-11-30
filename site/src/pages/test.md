@@ -42,12 +42,13 @@ int main(void) {
 
 <algorithm>
     <generator><pre>
-        function*(input) {
+        function*(input, ui) {
             var n = input.n;
             var i;
             var s = [];
             for (i = 0; i < n; i++) {
                 s.push(i);
+                ui.setStyleOnce('arr', `${i}`, {fill: 'yellow'});
                 yield {arr: s};
             }
             return {arr: s};
@@ -60,6 +61,7 @@ int main(void) {
     <indirectdisplay
         array
         n='10'
+        fixedwidth
         highlightdiff
         varname='arr'
     ></indirectdisplay>
