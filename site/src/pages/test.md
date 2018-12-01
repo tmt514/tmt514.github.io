@@ -76,6 +76,39 @@ int main(void) {
     ></indirectdisplay>
 </algorithm>
 
+```html
+<algorithm>
+    <generator><pre>
+```
+```javascript
+        function*(input, ui) {
+            var n = input.n;
+            var i;
+            var s = [];
+            for (i = 0; i < n; i++) {
+                s.push(i);
+                ui.setStyleOnce('arr', `${i}`, {fill: 'yellow'});
+                yield {arr: s};
+            }
+            return {arr: s};
+        }
+```
+```html
+        </pre>
+    </generator>
+    <inputdata
+        data='{"n": 10}'
+    ></inputdata>
+    <indirectdisplay
+        array
+        n='10'
+        fixedwidth
+        highlightdiff
+        varname='arr'
+    ></indirectdisplay>
+</algorithm>
+```
+
 ### 3. A simple grid.
 
 <display grid
@@ -87,7 +120,6 @@ int main(void) {
     data='["...#.#","..###.","#...#."]'
     ></display>
 ```
-
 
 <display grid
     notext
@@ -132,7 +164,7 @@ int main(void) {
             for (i = 0; i < n; i++) {
                 var t = [];
                 for (j = 0; j < n; j++) {
-                    if (Math.floor(Math.random()*3) !== 0)
+                    if (Math.floor(Math.random()*10) !== 0)
                         t.push('.');
                     else
                         t.push('#');
@@ -187,3 +219,52 @@ int main(void) {
         varname='arr'
     ></indirectdisplay>
 </algorithm>
+
+
+```javascript
+function*(input, ui) {
+            var n = input.n;
+            var s = [];
+            var i, j;
+            var x = Math.floor(Math.random()*n);
+            var y = Math.floor(Math.random()*n);
+            for (i = 0; i < n; i++) {
+                var t = [];
+                for (j = 0; j < n; j++) {
+                    if (Math.floor(Math.random()*10) !== 0)
+                        t.push('.');
+                    else
+                        t.push('#');
+                }
+                s.push(t);
+            }
+            s[x][y] = '*';
+            ui.setStyle('arr', JSON.stringify([x, y]), {fill: '#FFEE33'});
+            ui.setStyleOnce('arr', JSON.stringify([x, y]), {fill: 'blue'});
+            yield { arr: s };
+            //
+            while (true) {
+                var d = Math.floor(Math.random()*4);
+                if (d === 0 && x+1 < n && s[x+1][y] === '.') {
+                    s[x][y] = '.'
+                    s[x+1][y] = '*'
+                    x += 1
+                } else if (d === 1 && x > 0 && s[x-1][y] === '.') {
+                    s[x][y] = '.'
+                    s[x-1][y] = '*'
+                    x -= 1
+                } else if (d === 2 && y+1 < n && s[x][y+1] === '.') {
+                    s[x][y] = '.'
+                    s[x][y+1] = '*'
+                    y += 1
+                } else if (d === 3 && y > 0 && s[x][y-1] === '.') {
+                    s[x][y] = '.'
+                    s[x][y-1] = '*'
+                    y -= 1
+                }
+                ui.setStyle('arr', JSON.stringify([x, y]), {fill: '#FFEE33'});
+                ui.setStyleOnce('arr', JSON.stringify([x, y]), {fill: 'blue'});
+                yield { arr: s };
+            }
+        }
+```
