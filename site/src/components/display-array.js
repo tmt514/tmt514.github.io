@@ -11,7 +11,7 @@ class DisplayArray extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const newState = Object.assign({}, prevState);
-        const uiStore = nextProps.uiStore;
+        const uiStores = [eval(`(` + nextProps.uiStore + `)`), nextProps.uiStoreFromAlgorithm];
         
         // TODO(tmt514): find correct way to detect whether to update.
         if (true) {
@@ -29,6 +29,7 @@ class DisplayArray extends Component {
                 const nodeProps = {
                     id: `arr-${i}`,
                     text: `${newState.data[i]}`,
+                    content: newState.data[i],
                 };
                 if (i === 0) {
                     nodeProps.cx = 0;
@@ -39,7 +40,9 @@ class DisplayArray extends Component {
                 }
                 
                 // Id corresponds to Index in the array.
-                GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, `${i}`, ['all', 'node'])
+                uiStores.forEach((uiStore) => {
+                    GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, `${i}`, ['all', 'node'])
+                });
                 
                 const node = newState.ui.addNode(nodeProps);
                 nodelist.push(node);

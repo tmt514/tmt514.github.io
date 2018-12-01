@@ -2,13 +2,13 @@ import React from 'react';
 
 export class Rectangle {
 
-    static getTextWidth(s, textProps) {
+    static getTextWidth(s, props) {
         if (typeof window === `undefined`) {
             return `${s}`.length*7;
         }
         var canvas = Rectangle.hiddenCanvas || (Rectangle.hiddenCanvas = window.document.createElement("canvas"))
         var ctx = canvas.getContext("2d");
-        ctx.font = textProps.font;
+        ctx.font = props.font;
         return ctx.measureText(`${s}`).width;
     }
 
@@ -16,13 +16,11 @@ export class Rectangle {
         this.props = props;
         
         const text = props.text;
-        const textProps = props.textProps;
 
         this.textLines = text.split("\n").filter((e) => e !== "");
-        this.textProps = textProps;
-        this.textWidth = Math.max(0, ...this.textLines.map((t) => Rectangle.getTextWidth(t, textProps)));
-        this.textHeight = this.textLines.length * (textProps.lineHeight || 16);
-        this.textPadding = textProps.padding || 8;
+        this.textWidth = Math.max(0, ...this.textLines.map((t) => Rectangle.getTextWidth(t, props)));
+        this.textHeight = this.textLines.length * props.lineHeight;
+        this.textPadding = props.textPadding;
         
         this.estimatedWidth = this.textWidth + this.textPadding*2;
         this.estimatedHeight = this.textHeight + this.textPadding*2;

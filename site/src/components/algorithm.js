@@ -83,11 +83,12 @@ class Algorithm extends Component {
                 onceStyles: uiSnapshot.onceStyles[varname],
                 annotations: uiSnapshot.annotations[varname],
             };
+
             return (
                 <Display
                     key={idx}
                     {...e.props}
-                    uiStore={uiStore}
+                    uiStoreFromAlgorithm={uiStore}
                     data={JSON.stringify(snapshot.value[e.props.varname])}
                 />
         )})

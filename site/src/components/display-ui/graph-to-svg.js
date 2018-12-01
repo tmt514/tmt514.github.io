@@ -8,9 +8,10 @@ const defaultNodeProps = {
     // Defines contents.
     text: "",
     label: null,
-    textProps: {
-        font: "12pt Roboto",
-    },
+    font: "12pt Roboto",
+    fontColor: undefined,
+    lineHeight: 16,
+    textPadding: 8,
 
     // Box Size
     minWidth: undefined,
@@ -116,13 +117,17 @@ export class GraphNode {
         const cx = x;
         const cy = y;
         const textLines = this.props.text.split("\n").filter((e) => e !== "");
-        const textLineHeight = this.props.textProps.lineHeight || defaultLineHeight;
+        const textLineHeight = this.props.lineHeight || defaultLineHeight;
         var textsvgs = []
         var i;
         var startY = cy - this.boundingShape.textHeight/2 + textLineHeight/2;
         for (i = 0; i < textLines.length; i++) {
             textsvgs.push(<text key={`text-${i}`} x={cx} y={startY}>{textLines[i]}</text>)
             startY += textLineHeight;
+        }
+        const style = {
+            font: this.props.font,
+            fill: this.props.fontColor,
         }
         return (<g key={`n-${this.props.id}`}>
             <g
@@ -131,7 +136,7 @@ export class GraphNode {
                 fill={this.props.fill}>
                 {this.boundingShape.renderSVG({x:cx, y:cy})}
             </g>
-            <g dominantBaseline="central" textAnchor="middle">
+            <g dominantBaseline="central" textAnchor="middle" style={style}>
                 {textsvgs}
             </g>
         </g>)
@@ -214,7 +219,7 @@ class GraphToSVG {
             } else if (ra.length > 0) {
                 finalCX = Math.min(...ra) - node.getPeripheralOffsetByAngle(0).x;
             } else {
-                console.warn(`Missing anchors for node ${node.id}! Treat as zero.`)
+                console.warn(`Missing X-anchors for node ${node.id}! Treat as zero.`)
             }
 
             if (node.props.cy !== undefined) {
@@ -226,7 +231,7 @@ class GraphToSVG {
             } else if (ua.length > 0) {
                 finalCY = Math.min(...ua) - node.getPeripheralOffsetByAngle(90).y;
             } else {
-                console.warn(`Missing anchors for node ${node.id}! Treat as zero.`)
+                console.warn(`Missing Y-anchors for node ${node.id}! Treat as zero.`)
             }
 
             computedNodeCenter[id] = {x:finalCX, y:finalCY};
