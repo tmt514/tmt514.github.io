@@ -42,7 +42,7 @@ int main(void) {
 <display array
     data='[1, 2, "test123\n456"]'></display>
 
-```jsx
+```html
 <display array
     data='[1, 2, "test123\n456"]'></display>
 ```
@@ -75,3 +75,8 @@ int main(void) {
         varname='arr'
     ></indirectdisplay>
 </algorithm>
+
+### 3. A simple grid.
+
+<display grid
+    ></display>
