@@ -35,10 +35,19 @@ int main(void) {
 }
 ```
 
+## My Algorithm Displayer
+
+### 1. Static Data Display.
 
 <display array
-    data='[1, 2, "tdest123\n456"]'></display>
+    data='[1, 2, "test123\n456"]'></display>
 
+```jsx
+<display array
+    data='[1, 2, "test123\n456"]'></display>
+```
+
+### 2. A simple looping algorithm.
 
 <algorithm>
     <generator><pre>
