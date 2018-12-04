@@ -3,6 +3,32 @@ import GraphToSVG, { GraphNode, GraphNodeUIHelper } from './display-ui/graph-to-
 import AnchorInfo from './display-ui/anchor-info';
 import DataHelper from './data-helper';
 
+
+function combineUIHelpers(props) {
+    const uiStore = {
+        styleRules: {},
+    }
+    const contentToOptions = eval('('+(props["uihelper-content-map"]||"{}")+')')
+    for (var content of Object.keys(contentToOptions)) {
+        uiStore.styleRules[`content-rule-${content}`] = {
+            apply_to: 'node',
+            pure_predicate_fn: `(nodeProps) => {return nodeProps.content === '${content}'}`,
+            options: contentToOptions[content],
+        }
+    }
+
+    
+    if (props["uihelper-node-style"] !== undefined) {
+        const nodeOptions = eval('('+(props["uihelper-node-style"]||"{}")+')')
+        uiStore.styleRules['all-node-style'] = {
+            apply_to: 'node',
+            pure_predicate_fn: `(nodeProps) => true`,
+            options: nodeOptions,
+        }
+    }
+    return uiStore;
+}
+
 class DisplayGrid extends Component {
     constructor() {
         super();
@@ -11,7 +37,10 @@ class DisplayGrid extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const newState = Object.assign({}, prevState);
-        const uiStores = [eval(`(` + nextProps.uistore + `)`), nextProps.uiStoreFromAlgorithm];
+        const uiStores = [
+            combineUIHelpers(nextProps),
+            eval(`(` + nextProps.uistore + `)`),
+            nextProps.uiStoreFromAlgorithm];
 
         const data = DataHelper.getDataFromProps(nextProps);
         newState.data = data || []
@@ -21,7 +50,7 @@ class DisplayGrid extends Component {
         newState.ui = new GraphToSVG;
         while (newState.data.length < newState.n_row) {
             newState.data.push(" ".repeat(newState.n_col))
-        }
+        } 
         
         const nodelist = [];
         for (let i = 0; i < newState.n_row; i++) {
@@ -48,7 +77,7 @@ class DisplayGrid extends Component {
                     nodeProps.leftAnchors = [new AnchorInfo(`grid-${i}-${j-1}`, 0, 'boundary', 0)];
                     nodeProps.cyAnchor = new AnchorInfo(`grid-${i}-${j-1}`, 0, 'center', 0);
                 } else { // i > 0.
-                    nodeProps.upAnchors = [new AnchorInfo(`grid-${i-1}-${j}`, 270, 'boundary', 0)];
+                    nodeProps.downAnchors = [new AnchorInfo(`grid-${i-1}-${j}`, 90, 'boundary', 0)];
                     nodeProps.cxAnchor = new AnchorInfo(`grid-${i-1}-${j}`, 0, 'center', 0);
                 }
                 // Id corresponds to Coordinates in the array.
