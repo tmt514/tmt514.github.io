@@ -2,7 +2,7 @@
 category: "algo complexity"
 path: "/algo/strong-exponential-time-hypothesis"
 date: "2018-12-04"
-title: "強指數時間假說 Strong Exponential Time Hypothesis"
+title: "強指數時間假說 Strong Exponential Time Hypothesis [草稿]"
 ---
 
 關於 P vs NP 這個計算機學界最重要的問題之一，至今仍是懸而未解。1990年代，大量 NP-Complete 的證明興起，也讓研究計算理論領域的人們對於 NP-完備的概念有著比較深刻的理解。對於一個問題，究竟是多項式時間可解、或是它比任何一個 NP-Complete 的問題還要難，往往也有跡可循。
