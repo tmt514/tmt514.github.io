@@ -24,6 +24,12 @@ export default class HTML extends React.Component {
           {this.props.postBodyComponents}
           <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
             window.MathJax = {
+              TeX: {
+                extensions: ["action.js"],
+                Macros: {
+                    set: ["{\\\\left\\\\{#1\\\\right\\\\}}", 1],
+                  }
+                },
               tex2jax: {
                 inlineMath: [ ['$','$'], ['$$','$$'] ],
                 processEscapes: true

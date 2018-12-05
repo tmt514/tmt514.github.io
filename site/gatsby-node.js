@@ -121,14 +121,16 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
   }
 
 
-  /*exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-    if (stage === "build-html") {
+  exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+    //if (stage === "build-html") {
+      console.log("SET WEBPACK CONFIG HERE!!!!!")
       actions.setWebpackConfig({
         context: __dirname,
         node: {
           __dirname: true,
+          __filename: true,
         },
       })
-    }
+    //}
   }
-  */
+  
