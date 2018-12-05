@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Theorem extends Component {
     render() {
         return (
-        <div className="message is-warning">
+        <div className={`message ${this.props.c||"is-warning"}`}>
         <div className="message-header">
         {this.props.title}
         </div>
