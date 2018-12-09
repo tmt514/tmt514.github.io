@@ -13,7 +13,7 @@ import './prism-tomorrow.css';
 import "bulma/css/bulma.css"
 
 import CCBYNCSA from '../images/cc-by-nc-sa.png';
-import Display from './display';
+import Display, {DisplayInner} from './display';
 import Theorem from './theorem';
 import Algorithm from './algorithm';
 
@@ -41,6 +41,10 @@ const MyH3 = ({ children }) => (
 
 const MyCode = ({ className, children }) => {
   return (<code className={className}>{children}</code>)
+}
+const MySVG = ({ width, height, viewbox, children }) => {
+  console.log(this)
+  return (<svg width={width} height={height} viewBox={viewbox}>{children}</svg>)
 }
 
 class ShowVariable extends Component {
@@ -83,6 +87,8 @@ class Template extends Component {
           h3: MyH3,
           code: MyCode,
           display: Display,
+          "display-inner": DisplayInner, 
+          mysvg: MySVG,
           showvariable: ShowVariable2,
           theorem: Theorem,
           algorithm: Algorithm,

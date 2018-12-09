@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DisplayArray from './display-array';
 import DisplayGrid from './display-grid';
+import { Quadrant } from './display-gadgets/rectangle'
 
 class Display extends Component {
     render() {
@@ -17,6 +18,20 @@ class Display extends Component {
             Error: Displayer of this type Not Implemented.
             </span>
         </div>);
+    }
+};
+
+export class DisplayInner extends Component {
+    // This should be rendered inside some SVG tag.
+    render() {
+        if (this.props.quadrant !== undefined) {
+            return (<Quadrant {...this.props}></Quadrant>);
+        }
+        return (
+        <text fill="red" x="0" y="0">
+            Error: Displayer of this type Not Implemented.
+        </text>
+        );
     }
 };
 
