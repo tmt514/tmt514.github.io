@@ -42,8 +42,8 @@ const MyH3 = ({ children }) => (
 const MyCode = ({ className, children }) => {
   return (<code className={className}>{children}</code>)
 }
+
 const MySVG = ({ width, height, viewbox, children }) => {
-  console.log(this)
   return (<svg width={width} height={height} viewBox={viewbox}>{children}</svg>)
 }
 

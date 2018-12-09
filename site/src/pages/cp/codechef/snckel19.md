@@ -18,9 +18,26 @@ link: "https://www.codechef.com/SNCKEL19"
 
 我們可以
 
+<style>
+#outer-rect {
+     stroke-width: 4;
+}
+.blue-quadrant.transparent {
+    fill: rgba(0,0,255,0.3);
+}
+.blue-quadrant.origin {
+    fill: blue;
+}
+</style>
+
 <mysvg width=300 height=200 viewbox="-10 -10 330 230">
-<display-inner quadrant x=90 y=70 angle-start="0" angle-end="90" clip-path="url(#outer-rect)"></display-inner>
-<rect x=0 y=0 width=300 height=200 fill="none" stroke="black" strokeWidth="4" id="outer-rect"></rect>
-<rect x=90 y=70 width=210 height=130 fill="rgba(0,0,255,0.3)" class="corner-rect"></rect>
-<circle cx=90 cy=70 r=5 fill="blue"></circle>
+<rect x=0 y=0 width=300 height=200 fill="none" stroke="black" id="outer-rect"></rect>
+<display-inner
+    quadrant
+    dot-at-origin
+    side-angle-boundaries
+    x=90 y=70 r=600
+    angle-start="0" angle-end="90" 
+    c="blue-quadrant"
+    clip-href="#outer-rect"></display-inner>
 </mysvg>
