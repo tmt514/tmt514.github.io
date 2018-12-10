@@ -22,10 +22,10 @@ link: "https://www.codechef.com/SNCKEL19"
 #outer-rect {
      stroke-width: 4;
 }
-.blue-quadrant.transparent {
+.blue.quadrant.transparent {
     fill: rgba(0,0,255,0.3);
 }
-.blue-quadrant.origin {
+.blue.quadrant.origin {
     fill: blue;
 }
 </style>
@@ -35,9 +35,9 @@ link: "https://www.codechef.com/SNCKEL19"
 <display-inner
     quadrant
     dot-at-origin
-    side-angle-boundaries
+    add-boundaries
     x=90 y=70 r=600
     angle-start="0" angle-end="90" 
-    c="blue-quadrant"
+    c="blue"
     clip-href="#outer-rect"></display-inner>
 </mysvg>
