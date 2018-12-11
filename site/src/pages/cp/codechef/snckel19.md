@@ -99,18 +99,8 @@ link: "https://www.codechef.com/SNCKEL19"
 
 ```cpp
 // by tmt514
-#include <algorithm>
-#include <cmath>
 #include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <iostream>
-#include <string>
-#include <vector>
-#define SZ(x) ((int)(x).size())
-#define FOR(it, c) for(__typeof((c).begin()) it = (c).begin(); it != (c).end(); ++it)
 using namespace std;
-typedef long long LL;
 
 void solve() {
   int K, N;
@@ -150,4 +140,34 @@ int main(void) {
 
 ### 解法
 
-這是一道很漂亮的 DP 題。
+這是一道很漂亮的 DP 題。假設 $f(n)$ 是答案，那麼每個字串的最後 $n-1$ 個字元都會被算入 $f(n-1)$。所以我們可以嘗試扣除掉加了一個字元以後會變成迴文的可能情形。而利用迴文的特性，我們可以證明在「加了一個字以後變成迴文」的當下，所有可能的迴文只能是來自 $f(\lceil n/2\rceil)$。所以，可以從 $f(1)=S$ 開始，依序計算 $f(n) = Sf(n-1) - f(\lceil n/2\rceil)$。
+
+### 參考程式碼
+
+```cpp
+// by tmt514
+#include <iostream>
+#include <vector>
+using namespace std;
+typedef long long LL;
+
+int main(void) {
+  LL N, S, M;
+  cin >> N >> S >> M;
+  vector<LL> dp(N+1);
+  dp[0] = 1;
+  dp[1] = S;
+  for (int i = 2; i <= N; i++) {
+    dp[i] = S*dp[i-1] - dp[(i+1)/2];
+    dp[i] = (dp[i]%M+M)%M;
+  }
+  cout << dp[N] << endl;
+  return 0;
+}
+```
+
+## Adi and the Tree [ADITREE](https://www.codechef.com/SNCKEL19/problems/ADITREE)
+
+<theorem c="is-info">
+在一個有 $N$ 個節點的樹上，進行 $M$ 項操作。一開始所有的節點都是「關燈」的狀態。每一次操作會給你兩個點 $a, b$。然後你把點 $a$ 與點 $b$ 切換其「開/關燈」狀態。接著，每一個操作結束之後，請你幫所有亮著的燈的節點兩兩配成一對，使得配對的節點距離總和最小。每次操作後，都輸出配對後的最小總和。$(1\le N, M\le 250000)$
+</theorem>
