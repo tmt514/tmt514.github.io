@@ -55,7 +55,6 @@ module.exports = {
               ignoreFileExtensions: [],
             }
           },
-          // `gatsby-remark-images`
         ],
       },
     },
