@@ -43,6 +43,8 @@ module.exports = {
               "showvariable",
               "theorem",
               "algorithm",
+              "include-problem",
+              "display-inner",
               ],
             },
           },

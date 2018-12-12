@@ -19,6 +19,7 @@ import Algorithm from './algorithm';
 
 import remark from 'remark'
 import reactRenderer from 'remark-react'
+import IncludeProblem from './include-problem';
 
 const markdown = remark()
   .use(reactRenderer,
@@ -92,6 +93,7 @@ class Template extends Component {
           showvariable: ShowVariable2,
           theorem: Theorem,
           algorithm: Algorithm,
+          "include-problem": IncludeProblem,
         }
       }).Compiler;
     }

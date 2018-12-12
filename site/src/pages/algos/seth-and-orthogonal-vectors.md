@@ -35,7 +35,7 @@ title: "強指數時間假說 Strong Exponential Time Hypothesis [草稿]"
 
 但這些定理所描述的一些 hardness problems 或反例與現實世界中的問題相距甚遠。
 
-2001 年的 Impagliazzo, Paturi & Zane 提出了重要的引理。然後在 2005 年由 William 
+2001 年的 Impagliazzo, Paturi & Zane 提出了重要的引理。然後在 2005 年由 Ryan Williams
 
 ## 參考資料
 
