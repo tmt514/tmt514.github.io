@@ -183,7 +183,7 @@ int main(void) {
 
 要怎麼動態更新節點的奇偶性呢？我們可以利用樹鍊剖分，把一棵樹分成許多路徑，使得任何一個節點到樹根的路上至多只跨越 $O(\log N)$ 條路徑。我們在每一條路徑上面維護一個線段樹，因此總時間複雜度是 $O(N+M\log^2 N)$。
 
-```cpp{numberLines: true}
+```cpp
 // by tmt514
 #include <algorithm>
 #include <cstdio>

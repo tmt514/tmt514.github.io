@@ -55,6 +55,7 @@ export default class IncludeProblem extends Component {
         const code = this.props.code;
         const show_solution = (this.props["show-solution"]!== undefined);
         const title_prefix = (this.props["title-prefix"] || "例題：");
+        const is_inline = (this.props.inline !== undefined);
         
 
         return (<StaticQuery
@@ -91,6 +92,17 @@ export default class IncludeProblem extends Component {
                     : "";
                 const ojlink = meta.link? (<a href={meta.link}>{" "}<i className="fas fa-external-link-alt"></i></a>):"";
                 
+                // inline mode
+                if (is_inline === true) {
+                    return (<>
+                    <p>
+                        <b>{meta.title}</b>
+                        {ojlink}{" "}
+                        {meta.description}
+                    </p>
+                    </>)
+                }
+                // block mode
                 return (<>
                     <h2 className="title is-4">{title_prefix}{meta.title}{ojlink}</h2>
                     <Theorem
