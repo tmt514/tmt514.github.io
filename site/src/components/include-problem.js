@@ -89,12 +89,14 @@ export default class IncludeProblem extends Component {
                 const solution = show_solution === true? 
                     findH2Contents(page.htmlAst, /(題解)|(Solution)/).map((e, idx) => astToReact(e, `T${idx}`))
                     : "";
+                const ojlink = meta.link? (<a href={meta.link}>{" "}<i className="fas fa-external-link-alt"></i></a>):"";
                 
                 return (<>
-                    <h2 className="title is-4">{title_prefix}{meta.title}</h2>
+                    <h2 className="title is-4">{title_prefix}{meta.title}{ojlink}</h2>
                     <Theorem
                         c="is-info"
                     >{meta.description}</Theorem>
+                    <p></p>
                     {solution}
                     </>
                     )

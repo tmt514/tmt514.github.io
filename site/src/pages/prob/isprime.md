@@ -9,6 +9,3 @@ description: |
 
 <showvariable varname='description'></showvariable>
 
-## 題解
-
-我們可以好酷喔，真的超庫的。 $A$
