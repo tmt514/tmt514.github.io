@@ -40,6 +40,10 @@ title: "枚舉法 1：試誤原則 Trial Error"
 
 -----
 
+<include-problem
+    path='/problem/leetcode/326'
+    >
+
 ## 練習題
 
 1. <include-problem path='/problem/ural/1854' inline></include-problem>

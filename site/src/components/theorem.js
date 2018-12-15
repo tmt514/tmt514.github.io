@@ -1,8 +1,23 @@
 import React, {Component} from 'react';
 
+import remark from 'remark'
+import reactRenderer from 'remark-react'
+import math from 'remark-math'
+
+const markdown = remark()
+  .use(math)
+  .use(reactRenderer,
+    {
+      createElement: React.createElement,
+      remarkReactComponents: {
+      },
+    })
+
+
 class Theorem extends Component {
     render() {
-
+        const val = this.props.children;
+        const content = markdown.processSync(val).contents;
         return (
         <div className={`message ${this.props.c||"is-warning"}`}>
         {
@@ -14,7 +29,7 @@ class Theorem extends Component {
             )
         }
         <div className="message-body">
-        {this.props.children}
+        {content}
         </div></div>
         )
         
