@@ -128,6 +128,6 @@ int main(void) {
 ## 練習題
 
 1. <include-problem path='/problem/ural/1854' inline></include-problem>
-2. <include-problem notyet path='/problem/cf/911/C' inline></include-problem>
-3. <include-problem notyet path='/problem/cf/241/C' inline></include-problem>
-4. <include-problem notyet path='/problem/icpc/ecna2018/B' url='https://ecna18.kattis.com/problems/difference' inline></include-problem>
+2. <include-problem path='/problem/cf/911/C' inline></include-problem>
+3. <include-problem path='/problem/cf/241/C' inline></include-problem>
+4. <include-problem path='/problem/icpc/ecna2018/B' inline></include-problem>

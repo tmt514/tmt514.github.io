@@ -3,6 +3,17 @@ import Theorem from './theorem'
 import {StaticQuery, graphql, Link} from 'gatsby'
 import visit from 'unist-util-visit'
 
+import remark from 'remark'
+import reactRenderer from 'remark-react'
+
+const markdown = remark()
+  .use(reactRenderer,
+    {
+      createElement: React.createElement,
+      remarkReactComponents: {
+      },
+    })
+
 const findH2Contents = (node, regex) => {
     const { children } = node;
     const ret = [];
@@ -104,11 +115,12 @@ export default class IncludeProblem extends Component {
                 
                 // inline mode
                 if (is_inline === true) {
+                    const md = markdown.processSync(meta.description).contents;
                     return (<>
                     <p>
                         <b>{meta.title}</b>
                         {ojlink}{sollink}{" "}
-                        {meta.description}
+                        {md}
                     </p>
                     </>)
                 }
