@@ -3,21 +3,27 @@ import React, {Component} from 'react';
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import math from 'remark-math'
+import parse from 'remark-parse'
 
 const markdown = remark()
-  .use(math)
   .use(reactRenderer,
     {
       createElement: React.createElement,
       remarkReactComponents: {
       },
     })
+    
 
 
 class Theorem extends Component {
     render() {
         const val = this.props.children;
-        const content = markdown.processSync(val).contents;
+        // This value could be either a string, or a parsed children array from remark.
+        // We do nothing if it's already parsed.
+        var content = val;
+        if (Array.isArray(content) === false) {
+            content = markdown.processSync(val).contents;
+        }
         return (
         <div className={`message ${this.props.c||"is-warning"}`}>
         {

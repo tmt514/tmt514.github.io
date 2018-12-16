@@ -22,11 +22,41 @@ title: "枚舉法 1：試誤原則 Trial Error"
 
 ### 參考程式碼
 
+```cpp
+bool isprime(int n) {
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0)
+            return false;
+    }
+    return true;
+}
+```
+
 ### 結論
 <theorem c='is-success'>
 本題透過枚舉「至少一個」 $n$ 可能的真因數，進而達到解題的目的。
 </theorem>
 
+-----
+
+
+<include-problem
+    path='/problem/leetcode/326'
+    >
+
+注意到 3 的次方其實數量不多，所以我們可以直接嘗試所有可能的次方數值，並且與 $x$ 進行比對。
+
+### 參考程式碼
+
+```cpp
+bool isPowerOfThree(int n) {
+    for (long long i = 1; i <= n; i *= 3)
+        if (n == i)
+            return true;
+    return false;
+}
+```
+    
 -----
 
 <include-problem
@@ -40,9 +70,6 @@ title: "枚舉法 1：試誤原則 Trial Error"
 
 -----
 
-<include-problem
-    path='/problem/leetcode/326'
-    >
 
 ## 練習題
 
