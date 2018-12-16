@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Theorem from './theorem'
-import {StaticQuery, graphql} from 'gatsby'
+import {StaticQuery, graphql, Link} from 'gatsby'
 import visit from 'unist-util-visit'
 
 const findH2Contents = (node, regex) => {
@@ -57,6 +57,9 @@ export default class IncludeProblem extends Component {
         const title_prefix = (this.props["title-prefix"] || "例題：");
         const is_inline = (this.props.inline !== undefined);
         
+        if (this.props.notyet !== undefined) {
+            return (<p>{this.props.path} 這題還沒準備好</p>)
+        }
 
         return (<StaticQuery
             query={graphql`
@@ -84,20 +87,27 @@ export default class IncludeProblem extends Component {
             }`}
 
             render={(data) => {
+                
                 const e = data.pages.edges.filter((e) => {return e.node.frontmatter.path === path});
+                
+                if (e.length === 0) {
+                    return (<></>);
+                }
+                
                 const page = e[0].node;
                 const meta = page.frontmatter;
                 const solution = show_solution === true? 
                     findH2Contents(page.htmlAst, /(題解)|(Solution)/).map((e, idx) => astToReact(e, `T${idx}`))
                     : "";
                 const ojlink = meta.link? (<a href={meta.link}>{" "}<i className="fas fa-external-link-alt"></i></a>):"";
+                const sollink = (<Link to={meta.path}>{" "}<i className="far fa-lightbulb"></i></Link>);
                 
                 // inline mode
                 if (is_inline === true) {
                     return (<>
                     <p>
                         <b>{meta.title}</b>
-                        {ojlink}{" "}
+                        {ojlink}{sollink}{" "}
                         {meta.description}
                     </p>
                     </>)
