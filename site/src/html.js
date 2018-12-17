@@ -29,6 +29,7 @@ export default class HTML extends React.Component {
                 extensions: ["action.js"],
                 Macros: {
                     set: ["{\\\\left\\\\{#1\\\\right\\\\}}", 1],
+                    dp: "\\\\mathrm{DP}",
                   }
                 },
               tex2jax: {

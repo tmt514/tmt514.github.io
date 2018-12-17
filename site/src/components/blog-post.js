@@ -130,10 +130,11 @@ class Template extends Component {
           <div className="is-flex is-vcentered is-centered">
           <img style={{height:"32px", margin:"10px"}} src={ CCBYNCSA } /> 
           <p style={{maxWidth:"600px"}}>
-          本文由<b>卡恩</b>撰寫。
+          本文由<b>卡恩</b>(tmt514)撰寫。
           本站使用 <a href="https://www.gatsbyjs.org/">GasbyJS</a> 搭配 {}
           <a href="https://bulma.io/">Bulma</a> 製作，其原始碼為 MIT 授權。
-          網站內容如果沒有特別說明，皆為創用 CC-BY-NC-SA 4.0 授權。
+          網站內容除了題源以外，若無特別說明皆為創用 CC-BY-NC-SA 4.0 授權。
+          題源部份若有版權爭議還請與我聯繫，感恩。
           </p>
           </div>
           </div>

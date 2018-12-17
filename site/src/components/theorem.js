@@ -1,19 +1,6 @@
 import React, {Component} from 'react';
 
-import remark from 'remark'
-import reactRenderer from 'remark-react'
-import math from 'remark-math'
-import parse from 'remark-parse'
-
-const markdown = remark()
-  .use(reactRenderer,
-    {
-      createElement: React.createElement,
-      remarkReactComponents: {
-      },
-    })
-    
-
+import markdown from './markdown'
 
 class Theorem extends Component {
     render() {

@@ -33,7 +33,8 @@
     "rehype-react": "^3.0.3",
     "remark": "^10.0.1",
     "remark-html": "^9.0.0",
-    "remark-react": "^4.0.3"
+    "remark-react": "^4.0.3",
+    "remark-rehype": "^4.0.0"
   },
   "keywords": [
     "gatsby"

@@ -3,16 +3,7 @@ import Theorem from './theorem'
 import {StaticQuery, graphql, Link} from 'gatsby'
 import visit from 'unist-util-visit'
 
-import remark from 'remark'
-import reactRenderer from 'remark-react'
-
-const markdown = remark()
-  .use(reactRenderer,
-    {
-      createElement: React.createElement,
-      remarkReactComponents: {
-      },
-    })
+import markdown from './markdown'
 
 const findH2Contents = (node, regex) => {
     const { children } = node;
@@ -69,7 +60,7 @@ export default class IncludeProblem extends Component {
         const is_inline = (this.props.inline !== undefined);
         
         if (this.props.notyet !== undefined) {
-            return (<p>{this.props.path} 這題還沒準備好</p>)
+            return (<span>{this.props.path} 這題還沒準備好</span>)
         }
 
         return (<StaticQuery
@@ -102,7 +93,7 @@ export default class IncludeProblem extends Component {
                 const e = data.pages.edges.filter((e) => {return e.node.frontmatter.path === path});
                 
                 if (e.length === 0) {
-                    return (<></>);
+                    return (<span></span>);
                 }
                 
                 const page = e[0].node;
@@ -110,18 +101,16 @@ export default class IncludeProblem extends Component {
                 const solution = show_solution === true? 
                     findH2Contents(page.htmlAst, /(題解)|(Solution)/).map((e, idx) => astToReact(e, `T${idx}`))
                     : "";
-                const ojlink = meta.link? (<a href={meta.link}>{" "}<i className="fas fa-external-link-alt"></i></a>):"";
-                const sollink = (<Link to={meta.path}>{" "}<i className="far fa-lightbulb"></i></Link>);
+                const ojlink = meta.link? (<a href={meta.link} className="open-op" target="_blank">{" "}<i className="fas fa-external-link-alt"></i></a>):"";
+                const sollink = (<Link to={meta.path} className="open-sol">{" "}<i className="far fa-lightbulb"></i></Link>);
+                const md = markdown.processSync(meta.description).contents;
                 
                 // inline mode
                 if (is_inline === true) {
-                    const md = markdown.processSync(meta.description).contents;
                     return (<>
-                    <p>
                         <b>{meta.title}</b>
                         {ojlink}{sollink}{" "}
                         {md}
-                    </p>
                     </>)
                 }
                 // block mode
