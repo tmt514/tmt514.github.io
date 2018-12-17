@@ -1,0 +1,27 @@
+/*
+a.open-op:after {
+    content: '';
+    position: relative;
+    left: -100px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+a.open-op:hover:after {
+    content: ' 原題頁面 ';
+    left: 0px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+a.open-sol:after {
+    content: '';
+    position: relative;
+    left: -100px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+a.open-sol:hover:after {
+    content: ' 提示與分析 ';
+    left: 0px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}*/
