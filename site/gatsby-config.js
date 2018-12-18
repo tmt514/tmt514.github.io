@@ -60,7 +60,7 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-sass',
-    {
+    /*{
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-68887724-3",
@@ -78,6 +78,6 @@ module.exports = {
         sampleRate: 5,
         siteSpeedSampleRate: 10,
       },
-    },
+    },*/
   ],
 }

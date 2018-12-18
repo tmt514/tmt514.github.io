@@ -14,7 +14,9 @@ title: "強指數時間假說 Strong Exponential Time Hypothesis [草稿]"
 先跟大家介紹一個 NP-Complete 當中的指標性問題：
 
 <theorem title='k-CNF-SAT 問題' c='is-info'>
-給定 $n$ 個變數 $x_1, x_2, \ldots, x_n$ 以及一個 k-CNF $\Phi$。其中 $\Phi = C_1\land C_2\land \cdots \land C_m$，$m=O(n)$。每一個 clause 可以被許多 literals 描述 $C_i = (\ell_{i1}\lor \ell_{i2}\lor \cdots \lor \ell_{ik})$，其中每一個 literal 就是任何一個變數 $x$ 或其 negation $\lnot x$。
+**輸入**：給定 $n$ 個變數 $x_1, x_2, \ldots, x_n$ 以及一個 k-CNF $\Phi$。其中 $\Phi = C_1\land C_2\land \cdots \land C_m$，$m=O(n)$。每一個 clause 可以被許多 literals 描述 $C_i = (\ell_{i1}\lor \ell_{i2}\lor \cdots \lor \ell_{ik})$，其中每一個 literal 就是任何一個變數 $x$ 或其 negation $\lnot x$。
+  
+**問題**：是否存在一個合法的賦值方式，使得 $\Phi$ 為真？
 </theorem>
 
 目前世界上最快的精確演算法（Exact Algorithm），在最壞情形下得跑 $2^{(1-o(1/k))n}$ 時間。也就是說，當 $k$ 真的超大的時候，這些演算法在最壞情形下都得花到扎扎實實 $2^n$ 的時間。於是乎，大家逐漸提出了以下的想法：
@@ -33,9 +35,20 @@ title: "強指數時間假說 Strong Exponential Time Hypothesis [草稿]"
 
 很久很久以前大家就知道洋蔥定理 [Time Hierarchy Theorem](https://en.wikipedia.org/wiki/Time_hierarchy_theorem) 了（我一直很喜歡隨機客老師稱呼這個定理的說法）。簡而言之，洋蔥定理描述的事情是：在所有 P 裡面的問題，不存在常數 $c$ 使得所有的問題都能在 $n^c$ 的時間被解掉。
 
-但這些定理所描述的一些 hardness problems 或反例與現實世界中的問題相距甚遠。
+但這些定理所描述的一些 hardness problems 或反例與現實世界中的問題相距甚遠。2005 年由 Ryan Williams 提出了以下的「正交向量問題」，建立了指數時間演算法與多項式時間演算法之間的關聯。有趣的是，這個正交向量問題能夠轉化(reduce)成更多大家熟知的題目，包含最長共同部分子序列(LCS)等問題。也就是說，這一連串的轉化得到以下結論：如果存在更有效率的某某多項式演算法，就能夠推翻強指數時間假說。
 
-2001 年的 Impagliazzo, Paturi & Zane 提出了重要的引理。然後在 2005 年由 Ryan Williams
+<!--
+2001 年的 Impagliazzo, Paturi & Zane 提出了重要的引理。然後在 
+-->
+
+我們先來看看正交向量問題吧：
+
+<theorem title='正交向量問題 Orthogonal Vector Problem (OV)' c='is-info'>
+**輸入**: 給定 $d$ 維布林空間中的兩個向量集合 $A, B\subset \{0, 1\}^d$，而集合大小 $|A|=|B|=N$。我們不妨假設 $d=\Theta(\log N)$。
+  
+**問題**: 是否存在 $a\in A, b\in B$ 使得 $\langle a, b\rangle = 0$？
+</theorem>
+
 
 ## 參考資料
 

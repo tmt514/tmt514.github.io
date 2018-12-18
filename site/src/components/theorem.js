@@ -11,6 +11,9 @@ class Theorem extends Component {
         if (Array.isArray(content) === false) {
             content = markdown.processSync(val).contents;
         }
+        if (Array.isArray(content) === true && content.length === 1) {
+            content = markdown.processSync(content[0]).contents;
+        }
         return (
         <div className={`message ${this.props.c||"is-warning"}`}>
         {
