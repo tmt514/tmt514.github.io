@@ -19,7 +19,7 @@ class Theorem extends Component {
         {
             this.props.title !== undefined
             && (
-                <div className="message-header">
+                <div className="message-header" style={{justifyContent: 'flex-start'}}>
                 {this.props.title}
                 </div>
             )

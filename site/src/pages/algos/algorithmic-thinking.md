@@ -7,7 +7,7 @@ attachments:
     - "./images/algthinking.png"
 ---
 
-[運算思維](https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%80%9D%E7%BB%B4)（Computational Thinking）在近年來逐漸被關注資訊教育的人們提出來討論。而運算思維包含了**問題解構**（Decomposition）、**模式與規律**（Pattern Recognition）、**模型抽象化**（Abstraction）以及**演算法設計**（Algorithm Design）。
+[運算思維](https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%80%9D%E7%BB%B4)（Computational Thinking）在近年來逐漸被關注資訊教育的人們提出來討論。而運算思維包含了**問題解構**（Decomposition）、[**型樣辨識**](http://terms.naer.edu.tw/detail/1603992/)（Pattern Recognition）、**模型抽象化**（Abstraction）以及**演算法設計**（Algorithm Design）。
 
 對我來說，演算法設計的世界裡面，解題的過程也可以大致分類成以下四種思考方式。而這些思考方式構建了大家在演算法教科書中提及的各種解題方法（又稱為 [Algorithmic Paradigm](https://en.wikipedia.org/wiki/Algorithmic_paradigm)），比方說動態規劃或是分而治之等。大致可以表示成以下的圖片：
 
