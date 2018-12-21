@@ -20,6 +20,7 @@ import Algorithm from './algorithm';
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import IncludeProblem from './include-problem';
+import { roadmapTransformer } from './roadmaps';
 
 const markdown = remark()
   .use(reactRenderer,
@@ -80,22 +81,26 @@ class Template extends Component {
         }
       }
       
-      return new rehypeReact({
-        createElement: React.createElement,
-        components: {
-          h1: MyH1,
-          h2: MyH2,
-          h3: MyH3,
-          code: MyCode,
-          display: Display,
-          "display-inner": DisplayInner, 
-          mysvg: MySVG,
-          showvariable: ShowVariable2,
-          theorem: Theorem,
-          algorithm: Algorithm,
-          "include-problem": IncludeProblem,
-        }
-      }).Compiler;
+      return (ast) => {
+        const modifiedAst = JSON.parse(JSON.stringify(ast));
+        roadmapTransformer({frontmatter: frontmatter})(modifiedAst);
+        return new rehypeReact({
+          createElement: React.createElement,
+          components: {
+            h1: MyH1,
+            h2: MyH2,
+            h3: MyH3,
+            code: MyCode,
+            display: Display,
+            "display-inner": DisplayInner, 
+            mysvg: MySVG,
+            showvariable: ShowVariable2,
+            theorem: Theorem,
+            algorithm: Algorithm,
+            "include-problem": IncludeProblem,
+          }
+        }).Compiler(modifiedAst);
+      }
     }
 
     return (
@@ -154,6 +159,7 @@ export const pageQuery = graphql`
         path
         title
         description
+        roadmap_label_h3
       }
     }
   }
