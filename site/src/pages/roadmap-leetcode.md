@@ -1,6 +1,6 @@
 ---
 category: "roadmap"
-path: "/roadmap/leetcode"
+path: "/leetcode-guide"
 date: "2018-12-21"
 title: "Leetcode 刷題指南 v0.1"
 roadmap_label_h3: "Topic ###: "
@@ -15,7 +15,7 @@ roadmap_label_h3: "Topic ###: "
 
 ### 鏈結串列 Linked Lists
 
-* 文章
+* <mylink to='/leetcode-guide/linked-lists'>鏈結串列的大致分類 Type of Linked Lists</mylink>
 * 練習題
 
 ### 陣列 Arrays

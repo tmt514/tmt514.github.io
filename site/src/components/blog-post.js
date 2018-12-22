@@ -97,6 +97,7 @@ class Template extends Component {
             showvariable: ShowVariable2,
             theorem: Theorem,
             algorithm: Algorithm,
+            mylink: Link,
             "include-problem": IncludeProblem,
           }
         }).Compiler(modifiedAst);

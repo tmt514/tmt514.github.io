@@ -15,7 +15,6 @@ const findFirstDescendantByType = (node, type) => {
 }
 
 export const roadmapTransformer = function(options) {
-    console.log(options.frontmatter);
     if (options.frontmatter !== undefined && options.frontmatter["roadmap_label_h3"] !== null) {
         var my_counter = 0;
         const formatter = options.frontmatter["roadmap_label_h3"]
