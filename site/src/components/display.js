@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import DisplayArray from './display-array';
 import DisplayGrid from './display-grid';
 import { Quadrant } from './display-gadgets/rectangle'
+import DisplayLinkedList from './display-linked-list';
 
 class Display extends Component {
     render() {
@@ -10,6 +11,9 @@ class Display extends Component {
         }
         if (this.props.grid !== undefined) {
             return (<DisplayGrid {...this.props}></DisplayGrid>);
+        }
+        if (this.props["linked-list"] !== undefined) {
+            return (<DisplayLinkedList {...this.props}></DisplayLinkedList>);
         }
         
         

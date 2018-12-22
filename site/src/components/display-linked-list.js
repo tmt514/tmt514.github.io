@@ -4,28 +4,27 @@ import AnchorInfo from './display-ui/anchor-info';
 import DataHelper from './data-helper';
 import { makeUIStores } from './display-ui/ui-helpers';
 
-class DisplayGrid extends Component {
-    constructor() {
-        super();
-        this.state = {};
+class DisplayLinkedList extends Component {
+    
+    constructor(props) {
+        super(props)
+        this.state = {}
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const newState = Object.assign({}, prevState);
         const uiStores = makeUIStores(nextProps);
-
         const data = DataHelper.getDataFromProps(nextProps);
         newState.data = data || []
-        newState.n_row = (nextProps.n_row && parseInt(nextProps.n_row)) || data.length
-        newState.n_col = (nextProps.n_col && parseInt(nextProps.n_col)) || (data[0] && data[0].length) || 0
-        
+        newState.n = data.length;
         newState.ui = new GraphToSVG;
-        while (newState.data.length < newState.n_row) {
-            newState.data.push(" ".repeat(newState.n_col))
-        } 
         
         const nodelist = [];
-        for (let i = 0; i < newState.n_row; i++) {
+        for (let i = 0; i < newState.n; i++) {
+            const nodeProps = {
+                id: `list-${i}`,
+            }
+
             for (let j = 0; j < newState.n_col; j++) {
                 const nodeProps = {
                     id: `grid-${i}-${j}`,
@@ -81,7 +80,7 @@ class DisplayGrid extends Component {
         })        
         return newState;
     }
-
+    
     render() {
         return (
             <div className="has-text-centered">
@@ -91,4 +90,4 @@ class DisplayGrid extends Component {
     }
 }
 
-export default DisplayGrid;
+export default DisplayLinkedList;

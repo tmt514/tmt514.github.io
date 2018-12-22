@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import GraphToSVG, { GraphNode, GraphNodeUIHelper } from './display-ui/graph-to-svg';
 import AnchorInfo from './display-ui/anchor-info';
+import { makeUIStores } from './display-ui/ui-helpers';
 
 class DisplayArray extends Component {
     
@@ -11,7 +12,7 @@ class DisplayArray extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const newState = Object.assign({}, prevState);
-        const uiStores = [eval(`(` + nextProps.uiStore + `)`), nextProps.uiStoreFromAlgorithm];
+        const uiStores = makeUIStores(nextProps);
         
         // TODO(tmt514): find correct way to detect whether to update.
         if (true) {
