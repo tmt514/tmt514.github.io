@@ -1,3 +1,36 @@
+// Helper class of functions on updating ui.
+export class GraphNodeUIHelper {
+    static updateNodePropsByStyleRules(nodeProps, styleRules, classNames) {
+        if (styleRules === undefined) return;
+        const ruleIDs = Object.keys(styleRules);
+        for (let ruleID of ruleIDs) {
+            const rule = styleRules[ruleID];
+            if (classNames.includes(rule.apply_to)) {
+                const z = eval('((' + rule.pure_predicate_fn + ')(nodeProps))');
+                if (z === true) {
+                    Object.assign(nodeProps, rule.options||{});
+                }
+            }
+        }
+    }
+    static updateNodePropsByStyles(nodeProps, styles, id) {
+        if (styles === undefined) return;
+        Object.assign(nodeProps, styles[id]||{});
+    }
+    static updateNodePropsFromUIStore(nodeProps, uiStore, id, classNames) {
+        if (uiStore === undefined) return;
+        
+        // StyleRules
+        GraphNodeUIHelper.updateNodePropsByStyleRules(nodeProps, uiStore.styleRules, classNames);
+        
+        // Styles
+        GraphNodeUIHelper.updateNodePropsByStyles(nodeProps, uiStore.styles, id);
+        
+        // OnceStyles
+        GraphNodeUIHelper.updateNodePropsByStyles(nodeProps, uiStore.onceStyles, id);
+    }
+}
+
 
 export function combineUIHelpers(props) {
     const uiStore = {

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import GraphToSVG, { GraphNode, GraphNodeUIHelper } from './display-ui/graph-to-svg';
+import GraphToSVG from './display-ui/graph-to-svg';
+import { GraphNodeUIHelper } from './display-ui/ui-helpers';
 import AnchorInfo from './display-ui/anchor-info';
 import DataHelper from './data-helper';
 import { makeUIStores } from './display-ui/ui-helpers';
+import { GraphNodeWithHooks } from './display-ui/graph-node';
 
 class DisplayLinkedList extends Component {
     
@@ -22,42 +24,25 @@ class DisplayLinkedList extends Component {
         const nodelist = [];
         for (let i = 0; i < newState.n; i++) {
             const nodeProps = {
-                id: `list-${i}`,
+                id: `linked-list-${i}`,
+                text: `${newState.data[i]}`,
+                content: newState.data[i],
             }
-
-            for (let j = 0; j < newState.n_col; j++) {
-                const nodeProps = {
-                    id: `grid-${i}-${j}`,
-                    text: `${newState.data[i][j]}`,
-                    content: newState.data[i][j],
-                    font: `12pt Courier New`,
-                    textPadding: 4,
-                    lineHeight: 12,
-                };
-
-                if (nextProps.notext !== undefined) {
-                    nodeProps.text = ``;
-                    nodeProps.textPadding = 10;
-                }
-                
-
-                if (i === 0 && j === 0) {
-                    nodeProps.cx = 0;
-                    nodeProps.cy = 0;
-                } else if (j > 0) {
-                    nodeProps.leftAnchors = [new AnchorInfo(`grid-${i}-${j-1}`, 0, 'boundary', 0)];
-                    nodeProps.cyAnchor = new AnchorInfo(`grid-${i}-${j-1}`, 0, 'center', 0);
-                } else { // i > 0.
-                    nodeProps.downAnchors = [new AnchorInfo(`grid-${i-1}-${j}`, 90, 'boundary', 0)];
-                    nodeProps.cxAnchor = new AnchorInfo(`grid-${i-1}-${j}`, 0, 'center', 0);
-                }
-                // Id corresponds to Coordinates in the array.
-                uiStores.forEach((uiStore) => {
-                    GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, JSON.stringify([i, j]), ['all', 'node'])
-                });
-                const node = newState.ui.addNode(nodeProps);
-                nodelist.push(node);
+            
+            if (i == 0) {
+                nodeProps.cx = 0;
+                nodeProps.cy = 0;
+            } else {
+                nodeProps.leftAnchors = [new AnchorInfo(`linked-list-${i-1}`, 0, 'boundary', 50)];
+                nodeProps.cyAnchor = new AnchorInfo(`linked-list-${i-1}`, 0, 'center', 0);
             }
+             
+            // Id corresponds to Coordinates in the array.
+            uiStores.forEach((uiStore) => {
+                GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, JSON.stringify(i), ['all', 'node'])
+            });
+            const node = newState.ui.addNode(nodeProps, GraphNodeWithHooks);
+            nodelist.push(node);
         }
         
         var w = -Infinity;

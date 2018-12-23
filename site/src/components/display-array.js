@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import GraphToSVG, { GraphNode, GraphNodeUIHelper } from './display-ui/graph-to-svg';
+import GraphToSVG from './display-ui/graph-to-svg';
+import { GraphNodeUIHelper } from './display-ui/ui-helpers';
 import AnchorInfo from './display-ui/anchor-info';
 import { makeUIStores } from './display-ui/ui-helpers';
 
