@@ -9,25 +9,6 @@ export class GraphEdge {
     }
 }
 
-// Helper function to compute anchor to offset.
-function anchorToOffset(info, node, center) {
-    var angle = info.angle || 0;
-    var rad = info.angle / 180.0 * Math.PI;
-    var ed = info.extraDistance || 0;
-    
-    var cx = center.x;
-    var cy = center.y;
-    if (info.at === "boundary") {
-        const offset = node.getPeripheralOffsetByAngle(angle);
-        cx += offset.x;
-        cy += offset.y;
-    }
-
-    cx += Math.cos(rad) * ed;
-    cy += Math.sin(rad) * ed;
-    return {x:cx, y:cy}
-}
-
 export default class GraphCollection extends GraphNode {
     static NODES_COUNTER = 0;
     static EDGES_COUNTER = 0;
