@@ -1,13 +1,7 @@
 import React from 'react'
 import GraphNode from './graph-node';
+import GraphEdge from './graph-edge';
 import { Rectangle } from './shapes';
-
-
-export class GraphEdge {
-    constructor(props) {
-        this.props = props;
-    }
-}
 
 export default class GraphCollection extends GraphNode {
     static NODES_COUNTER = 0;
@@ -21,6 +15,14 @@ export default class GraphCollection extends GraphNode {
 
     // Adds a new node to the graph by props, return the node.
     addNode(nodeProps, GraphNodeClass = GraphNode) {
+        // If the input is already a node object, just added it into the dictionary.
+        if (nodeProps instanceof GraphNode) {
+            this.nodes[nodeProps.props.id] = nodeProps;
+            this.hasComputedPositions = false;
+            return nodeProps;
+        }
+        
+        // Otherwise, create a new node.
         const node = new GraphNodeClass(nodeProps);
         if (node.props.id === "dummyID") {
             node.props.id = `n-${GraphCollection.NODES_COUNTER}`;
@@ -54,6 +56,10 @@ export default class GraphCollection extends GraphNode {
         const visitedNodes = {}
         const dfs = (id) => {
             const node = this.nodes[id];
+            if (node === undefined) {
+                console.warn("Node is not found in this collection: ", id);
+                return;
+            }
             visitedNodes[id] = true;
 
             var finalCX = 0;
@@ -62,12 +68,12 @@ export default class GraphCollection extends GraphNode {
             const anchorToX = (e) => {
                 if (e === undefined) return undefined;
                 if (visitedNodes[e.who] === undefined) dfs(e.who);
-                return anchorToOffset(e, this.nodes[e.who], computedNodeCenter[e.who]).x;
+                return this.nodes[e.who].getAnchorPoint(e, computedNodeCenter[e.who]).x;
             }
             const anchorToY = (e) => {
                 if (e === undefined) return undefined;
                 if (visitedNodes[e.who] === undefined) dfs(e.who);
-                return anchorToOffset(e, this.nodes[e.who], computedNodeCenter[e.who]).y;
+                return this.nodes[e.who].getAnchorPoint(e, computedNodeCenter[e.who]).y;
             }
 
             const cxa = anchorToX(node.props.cxAnchor)
@@ -123,9 +129,24 @@ export default class GraphCollection extends GraphNode {
             node.updateViewBox(viewbox, center);
         }        
         this.viewbox = viewbox;
+        
+        // We should shift everything so that the "center" of the entire
+        // collection stays at center.
+        var shiftX = (viewbox.rx + viewbox.lx)/2;
+        var shiftY = (viewbox.ry + viewbox.ly)/2;
+        for (i = 0; i < nodeIDs.length; i++) {
+            const c = computedNodeCenter[nodeIDs[i]];
+            c.x -= shiftX;
+            c.y -= shiftY;
+        }
+        viewbox.lx -= shiftX;
+        viewbox.rx -= shiftX;
+        viewbox.ly -= shiftY;
+        viewbox.ry -= shiftY;
     }
 
     getPeripheralOffsetByAngle(degree) {
+        this.computePositions();
         const width = Math.max(0, this.viewbox.rx - this.viewbox.lx);
         const height = Math.max(0, this.viewbox.ry - this.viewbox.ly);
         const shape = new Rectangle(width, height);

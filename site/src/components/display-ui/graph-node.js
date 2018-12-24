@@ -19,16 +19,16 @@ export default class GraphNode {
     }
     
     // Computes the anchor point by anchor information.
-    getAnchorPoint(anchorInfo) {
+    getAnchorPoint(anchorInfo, center={x: 0, y: 0}) {
         // Helper function to compute anchor to offset.
-        var angle = info.angle || 0;
-        var rad = info.angle / 180.0 * Math.PI;
-        var ed = info.extraDistance || 0;
+        var angle = anchorInfo.angle || 0;
+        var rad = anchorInfo.angle / 180.0 * Math.PI;
+        var ed = anchorInfo.extraDistance || 0;
         
         var cx = center.x;
         var cy = center.y;
-        if (info.at === "boundary") {
-            const offset = node.getPeripheralOffsetByAngle(angle);
+        if (anchorInfo.at === "boundary") {
+            const offset = this.getPeripheralOffsetByAngle(angle);
             cx += offset.x;
             cy += offset.y;
         }
@@ -53,5 +53,19 @@ export default class GraphNode {
     }
     getHeight() {
         return this.getPeripheralOffsetByAngle(90).y - this.getPeripheralOffsetByAngle(270).y
+    }
+    
+    // Helper function that resets anchor functions correctly.
+    resetAnchors() {
+        const positionalProps = ["cx", "cy", "cxAnchor", "cyAnchor"];
+        for (let key of positionalProps) {
+            this.props[key] = undefined;
+        }
+        Object.assign(this.props, {
+            leftAnchors: [],
+            rightAnchors: [],
+            upAnchors: [],
+            downAnchors: [],
+        });
     }
 };

@@ -2,12 +2,13 @@ import React from 'react'
 import GraphNode from './graph-node'
 import { Rectangle } from './shapes'
 import { GraphTextNode } from './graph-text-node';
+import GraphCollection from './graph-collection';
+import AnchorInfo from './anchor-info';
 
 export default class GraphRectangularNode extends GraphNode {
     // props.content should store the "inner" GraphNode.
     constructor(props, updateProps) {
         super(props)
-        console.log("Creating Rectuangular Node: ", props);
         this.innerNode = props.content;
         this.boundingShape = this.getBoundingShape();
     }
@@ -65,5 +66,46 @@ export class GraphRectangularTextNode extends GraphRectangularNode {
             this.innerNode = new GraphTextNode(this.props);
         }
         this.boundingShape = this.getBoundingShape();
+    }
+}
+
+export class GraphArrayNode extends GraphRectangularNode {
+    // props.content will be an array.
+    constructor(props) {
+        const data = props.content;
+        const collection = new GraphCollection();
+        const nodes = []
+        var lastNode = null;
+        var i;
+        for (i = 0; i < data.length; i++) {
+            const nodeOrText = data[i];
+            var node;
+            if ((typeof nodeOrText) !== "object") {
+                node = collection.addNode({...props, id: "dummyID", text: `${nodeOrText}`}, GraphRectangularTextNode);
+            } else {
+                node = collection.addNode(nodeOrText);
+            }
+            // make sure anchors are correct.
+            node.resetAnchors();
+            if (lastNode !== null) {
+                node.updateProps({
+                    leftAnchors: [new AnchorInfo(lastNode.props.id, 0, "boundary", 0)],
+                    cyAnchor: new AnchorInfo(lastNode.props.id, 0, "center", 0),
+                })
+            } else {
+                node.updateProps({
+                    cx: 0,
+                    cy: 0,
+                })
+            }
+            lastNode = node;
+            nodes.push(node);
+        }
+        super({ ...props, content: collection });
+        this.data = data;
+    }
+    
+    updateProps(newProps) {
+        console.log(newProps);
     }
 }

@@ -40,3 +40,19 @@ export const defaultNodeProps = {
     downAnchors: [],
     // TODO(tmt514): rotatedAnchors?
 }
+
+export const defaultEdgeProps = {
+    id: "dummyID",
+    
+    stroke: "black",
+    strokeWidth: "1",
+    strokeLinejoin: undefined,
+    strokeLineCap: undefined,
+    strokeDasharray: undefined,
+    fill: undefined,
+    
+    pathAnchors: [],
+    markerBegin: undefined,
+    markerEnd: undefined,
+    markerMid: undefined,
+}

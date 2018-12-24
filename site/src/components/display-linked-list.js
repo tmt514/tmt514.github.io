@@ -4,7 +4,7 @@ import { GraphNodeUIHelper } from './display-ui/ui-helpers';
 import AnchorInfo from './display-ui/anchor-info';
 import DataHelper from './data-helper';
 import { makeUIStores } from './display-ui/ui-helpers';
-import { GraphRectangularTextNode } from './display-ui/graph-rectanglur-node';
+import { GraphRectangularTextNode, GraphArrayNode } from './display-ui/graph-rectanglur-node';
 
 class DisplayLinkedList extends Component {
     
@@ -26,7 +26,7 @@ class DisplayLinkedList extends Component {
             const nodeProps = {
                 id: `linked-list-${i}`,
                 text: `${newState.data[i]}`,
-                content: newState.data[i],
+                content: [newState.data[i], "123"],
             }
             
             if (i == 0) {
@@ -41,7 +41,7 @@ class DisplayLinkedList extends Component {
             uiStores.forEach((uiStore) => {
                 GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, JSON.stringify(i), ['all', 'node'])
             });
-            const node = newState.ui.addNode(nodeProps, GraphRectangularTextNode);
+            const node = newState.ui.addNode(nodeProps, GraphArrayNode);
             nodelist.push(node);
         }
         
