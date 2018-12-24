@@ -1,7 +1,7 @@
 import React from 'react';
 import { defaultLineHeight, defaultNodeProps } from './ui-defaults'
 
-export class GraphNode {
+export default class GraphNode {
     constructor(props) {
         this.props = Object.assign({}, defaultNodeProps)
         this.props = Object.assign(this.props, props)
@@ -31,5 +31,12 @@ export class GraphNode {
     // Given the transition offsets {x, y}.
     renderSVG(offset) {
         throw "Not Implemented";
+    }
+
+    getWidth() {
+        return this.getPeripheralOffsetByAngle(0).x - this.getPeripheralOffsetByAngle(180).x
+    }
+    getHeight() {
+        return this.getPeripheralOffsetByAngle(90).y - this.getPeripheralOffsetByAngle(270).y
     }
 };

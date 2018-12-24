@@ -4,6 +4,7 @@ import { GraphNodeUIHelper } from './display-ui/ui-helpers';
 import AnchorInfo from './display-ui/anchor-info';
 import DataHelper from './data-helper';
 import { makeUIStores } from './display-ui/ui-helpers';
+import { GraphRectangularTextNode } from './display-ui/graph-rectanglur-node';
 
 class DisplayGrid extends Component {
     constructor() {
@@ -57,7 +58,7 @@ class DisplayGrid extends Component {
                 uiStores.forEach((uiStore) => {
                     GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, JSON.stringify([i, j]), ['all', 'node'])
                 });
-                const node = newState.ui.addNode(nodeProps);
+                const node = newState.ui.addNode(nodeProps, GraphRectangularTextNode);
                 nodelist.push(node);
             }
         }
@@ -65,9 +66,8 @@ class DisplayGrid extends Component {
         var w = -Infinity;
         var h = -Infinity;
         nodelist.forEach((node) => {
-            const box = node.boundingShape.getCurrentBoundingRectangle();
-            w = Math.max(w, box.width);
-            h = Math.max(h, box.height);
+            w = Math.max(w, node.getWidth());
+            h = Math.max(h, node.getHeight());
         })
         
         h = w = Math.max(w, h);

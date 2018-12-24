@@ -1,12 +1,67 @@
+import React from 'react'
+import GraphNode from './graph-node';
 
-export class GraphCollection extends GraphNode {
+
+export class GraphEdge {
+    constructor(props) {
+        this.props = props;
+    }
+}
+
+// Helper function to compute anchor to offset.
+function anchorToOffset(info, node, center) {
+    var angle = info.angle || 0;
+    var rad = info.angle / 180.0 * Math.PI;
+    var ed = info.extraDistance || 0;
+    
+    var cx = center.x;
+    var cy = center.y;
+    if (info.at === "boundary") {
+        const offset = node.getPeripheralOffsetByAngle(angle);
+        cx += offset.x;
+        cy += offset.y;
+    }
+
+    cx += Math.cos(rad) * ed;
+    cy += Math.sin(rad) * ed;
+    return {x:cx, y:cy}
+}
+
+export default class GraphCollection extends GraphNode {
     static NODES_COUNTER = 0;
     static EDGES_COUNTER = 0;
     constructor(props) {
+        super(props);
         this.nodes = {};
         this.edges = {};
         this.hasComputedPositions = false;
     }
+
+    // Adds a new node to the graph by props, return the node.
+    addNode(nodeProps, GraphNodeClass = GraphNode) {
+        const node = new GraphNodeClass(nodeProps);
+        if (node.props.id === "dummyID") {
+            node.props.id = `n-${GraphCollection.NODES_COUNTER}`;
+            GraphCollection.NODES_COUNTER += 1;
+        }
+        this.nodes[node.props.id] = node;
+        this.hasComputedPositions = false;
+        return node;
+    }
+
+    // Adds an edge to two existing nodes, return the edge.
+    addEdge(edgeProps, GraphEdgeClass = GraphEdge) {
+        const edge = new GraphEdgeClass(edgeProps);
+        if (edge.props.id === "dummyID") {
+            edge.props.id = `e-${GraphCollection.EDGES_COUNTER}`;
+            GraphCollection.EDGES_COUNTER += 1;
+        }
+        this.edges[edge.props.id] = edge;
+        this.hasComputedPositions = false;
+        return edge;
+    }
+
+
     
     computePositions() {
         if (this.hasComputedPositions === true) return;
@@ -78,8 +133,34 @@ export class GraphCollection extends GraphNode {
         // Store the computed results.
         this.computedNodeCenter = computedNodeCenter;
     }
+
+    updateViewBox(viewbox, offset) {
+        this.computePositions();
+        
+        var i;
+        const nodeIDs = Object.keys(this.nodes);
+        for (i = 0; i < nodeIDs.length; i++) {
+            var node = this.nodes[nodeIDs[i]];
+            const {x, y} = this.computedNodeCenter[node.props.id];
+            const center = {x: x+offset.x, y: y+offset.y};
+            node.updateViewBox(viewbox, center);
+        }
+    }
     
     
-    renderSVG() {
+    renderSVG(offset) {
+        this.computePositions();
+        
+        var i;
+        const nodeIDs = Object.keys(this.nodes);
+        var renderedNodes = [];
+        for (i = 0; i < nodeIDs.length; i++) {
+            var node = this.nodes[nodeIDs[i]];
+            const {x, y} = this.computedNodeCenter[node.props.id];
+            const center = {x: x+offset.x, y: y+offset.y};
+            renderedNodes.push(node.renderSVG(center));
+        }
+
+        return (<>{renderedNodes}</>)
     }
 };

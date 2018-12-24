@@ -4,7 +4,7 @@ import { GraphNodeUIHelper } from './display-ui/ui-helpers';
 import AnchorInfo from './display-ui/anchor-info';
 import DataHelper from './data-helper';
 import { makeUIStores } from './display-ui/ui-helpers';
-import { GraphNodeWithHooks } from './display-ui/graph-node';
+import { GraphRectangularTextNode } from './display-ui/graph-rectanglur-node';
 
 class DisplayLinkedList extends Component {
     
@@ -41,16 +41,16 @@ class DisplayLinkedList extends Component {
             uiStores.forEach((uiStore) => {
                 GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, JSON.stringify(i), ['all', 'node'])
             });
-            const node = newState.ui.addNode(nodeProps, GraphNodeWithHooks);
+            const node = newState.ui.addNode(nodeProps, GraphRectangularTextNode);
             nodelist.push(node);
         }
         
         var w = -Infinity;
         var h = -Infinity;
         nodelist.forEach((node) => {
-            const box = node.boundingShape.getCurrentBoundingRectangle();
-            w = Math.max(w, box.width);
-            h = Math.max(h, box.height);
+            console.warn(node);
+            w = Math.max(w, node.getWidth());
+            h = Math.max(h, node.getHeight());
         })
         
         h = w = Math.max(w, h);

@@ -3,6 +3,7 @@ import GraphToSVG from './display-ui/graph-to-svg';
 import { GraphNodeUIHelper } from './display-ui/ui-helpers';
 import AnchorInfo from './display-ui/anchor-info';
 import { makeUIStores } from './display-ui/ui-helpers';
+import { GraphRectangularTextNode } from './display-ui/graph-rectanglur-node';
 
 class DisplayArray extends Component {
     
@@ -46,16 +47,15 @@ class DisplayArray extends Component {
                     GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, `${i}`, ['all', 'node'])
                 });
                 
-                const node = newState.ui.addNode(nodeProps);
+                const node = newState.ui.addNode(nodeProps, GraphRectangularTextNode);
                 nodelist.push(node);
             }
 
             var w = -Infinity;
             var h = -Infinity;
             nodelist.forEach((node) => {
-                const box = node.boundingShape.getCurrentBoundingRectangle();
-                w = Math.max(w, box.width);
-                h = Math.max(h, box.height);
+                w = Math.max(w, node.getWidth());
+                h = Math.max(h, node.getHeight());
             })
             
             const newNodeProps = {

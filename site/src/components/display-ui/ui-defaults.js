@@ -11,7 +11,7 @@ export const defaultNodeProps = {
     font: "12pt Roboto",
     fontColor: undefined,
     lineHeight: 16,
-    textPadding: 8,
+    padding: 8,
 
     // Box Size
     minWidth: undefined,
