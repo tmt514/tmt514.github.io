@@ -1,5 +1,6 @@
 import React from 'react'
 import GraphNode from './graph-node';
+import { Rectangle } from './shapes';
 
 
 export class GraphEdge {
@@ -132,19 +133,30 @@ export default class GraphCollection extends GraphNode {
         
         // Store the computed results.
         this.computedNodeCenter = computedNodeCenter;
+
+        // find viewbox
+        var viewbox = {lx: Infinity, ly: Infinity, rx: -Infinity, ry: -Infinity};
+        for (i = 0; i < nodeIDs.length; i++) {
+            var node = this.nodes[nodeIDs[i]];
+            const center = this.computedNodeCenter[node.props.id];
+            node.updateViewBox(viewbox, center);
+        }        
+        this.viewbox = viewbox;
+    }
+
+    getPeripheralOffsetByAngle(degree) {
+        const width = Math.max(0, this.viewbox.rx - this.viewbox.lx);
+        const height = Math.max(0, this.viewbox.ry - this.viewbox.ly);
+        const shape = new Rectangle(width, height);
+        return shape.getPeripheralOffsetByAngle(degree);
     }
 
     updateViewBox(viewbox, offset) {
         this.computePositions();
-        
-        var i;
-        const nodeIDs = Object.keys(this.nodes);
-        for (i = 0; i < nodeIDs.length; i++) {
-            var node = this.nodes[nodeIDs[i]];
-            const {x, y} = this.computedNodeCenter[node.props.id];
-            const center = {x: x+offset.x, y: y+offset.y};
-            node.updateViewBox(viewbox, center);
-        }
+        viewbox.lx = Math.min(viewbox.lx, this.viewbox.lx + offset.x);
+        viewbox.rx = Math.max(viewbox.rx, this.viewbox.rx + offset.x);
+        viewbox.ly = Math.min(viewbox.ly, this.viewbox.ly + offset.y);
+        viewbox.ry = Math.max(viewbox.ry, this.viewbox.ry + offset.y);
     }
     
     

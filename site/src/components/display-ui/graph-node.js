@@ -20,7 +20,22 @@ export default class GraphNode {
     
     // Computes the anchor point by anchor information.
     getAnchorPoint(anchorInfo) {
-        throw "Not Implemented";
+        // Helper function to compute anchor to offset.
+        var angle = info.angle || 0;
+        var rad = info.angle / 180.0 * Math.PI;
+        var ed = info.extraDistance || 0;
+        
+        var cx = center.x;
+        var cy = center.y;
+        if (info.at === "boundary") {
+            const offset = node.getPeripheralOffsetByAngle(angle);
+            cx += offset.x;
+            cy += offset.y;
+        }
+
+        cx += Math.cos(rad) * ed;
+        cy += Math.sin(rad) * ed;
+        return {x:cx, y:cy}
     }
     
     // Visitor pattern...?

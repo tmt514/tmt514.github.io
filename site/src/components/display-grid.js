@@ -34,13 +34,13 @@ class DisplayGrid extends Component {
                     text: `${newState.data[i][j]}`,
                     content: newState.data[i][j],
                     font: `12pt Courier New`,
-                    textPadding: 4,
+                    padding: 4,
                     lineHeight: 12,
                 };
 
                 if (nextProps.notext !== undefined) {
                     nodeProps.text = ``;
-                    nodeProps.textPadding = 10;
+                    nodeProps.padding = 10;
                 }
                 
 
