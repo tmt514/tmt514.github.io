@@ -174,7 +174,17 @@ export default class GraphCollection extends GraphNode {
             const center = {x: x+offset.x, y: y+offset.y};
             renderedNodes.push(node.renderSVG(center));
         }
+        const edgeIDs = Object.keys(this.edges);
+        var renderedEdges = [];
+        for (i = 0; i < edgeIDs.length; i++) {
+            var edge = this.edges[edgeIDs[i]];
+            renderedEdges.push(edge.renderSVG(this));
+        }
+        console.log(renderedEdges);
 
-        return (<>{renderedNodes}</>)
+        return (<>
+            {renderedEdges}
+            {renderedNodes}
+        </>)
     }
 };

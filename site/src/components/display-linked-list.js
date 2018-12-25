@@ -26,7 +26,7 @@ class DisplayLinkedList extends Component {
             const nodeProps = {
                 id: `linked-list-${i}`,
                 text: `${newState.data[i]}`,
-                content: [newState.data[i], "123"],
+                content: [newState.data[i], ""],
             }
             
             if (i == 0) {
@@ -43,6 +43,15 @@ class DisplayLinkedList extends Component {
             });
             const node = newState.ui.addNode(nodeProps, GraphArrayNode);
             nodelist.push(node);
+
+            // create edges.
+            if (i === 0) continue;
+            const edgeProps = {
+                pathAnchors: [new AnchorInfo(`linked-list-${i-1}`, 0, 'entire-node', 0),
+                              new AnchorInfo(`linked-list-${i}`, 0, 'entire-node', 0)],
+                // markers
+            }
+            newState.ui.addEdge(edgeProps);
         }
         
         var w = -Infinity;

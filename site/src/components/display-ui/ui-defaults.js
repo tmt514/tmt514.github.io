@@ -52,6 +52,7 @@ export const defaultEdgeProps = {
     fill: undefined,
     
     pathAnchors: [],
+
     markerBegin: undefined,
     markerEnd: undefined,
     markerMid: undefined,

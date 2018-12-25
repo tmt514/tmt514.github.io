@@ -101,8 +101,13 @@ export class GraphArrayNode extends GraphRectangularNode {
             lastNode = node;
             nodes.push(node);
         }
-        super({ ...props, content: collection });
+        // Adjust min-height
+        const minHeight = Math.max(0, ...nodes.map((node) => node.getHeight()));
+        nodes.forEach((node) => node.updateProps({ minHeight: minHeight }));
+
+        super({ ...props, padding: 0, strokeWidth: "0", content: collection });
         this.data = data;
+        this.dataNodes = nodes;
     }
     
     updateProps(newProps) {
