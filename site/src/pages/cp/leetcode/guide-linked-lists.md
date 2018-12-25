@@ -3,6 +3,7 @@ category: "guide"
 path: "/leetcode-guide/linked-lists"
 date: "2018-12-21"
 title: "鏈結串列 Linked Lists"
+backlink: "/leetcode-guide"
 ---
 
 ## 分門別類
@@ -10,7 +11,7 @@ title: "鏈結串列 Linked Lists"
 ### Singly Linked List
 
 <display linked-list single
-    data='[1, 2, 3, 4, 5]'>
+    data='["test 1", "test 2", "test 3\ntest 4", "test 5", "test 514"]'>
 </display>
 
 ### Doubly Linked List

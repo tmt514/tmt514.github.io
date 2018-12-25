@@ -161,6 +161,23 @@ export default class GraphCollection extends GraphNode {
         viewbox.ry = Math.max(viewbox.ry, this.viewbox.ry + offset.y);
     }
     
+    getAnchorPoint(anchorInfo, center={x:0, y:0}) {
+        if (typeof anchorInfo.at === "string" || anchorInfo.at.length === 1) {
+            // Fallback to default.
+            return GraphNode.prototype.getAnchorPoint.call(this, anchorInfo, center);
+        }
+
+        // Make sure we have position information.
+        this.computePositions();
+
+        // Support indirect anchorInfo: use array.
+        const at = anchorInfo.at;
+        const sub = this.nodes[at[0]];
+        const shifted =
+            {x: center.x + this.computedNodeCenter[at[0]].x,
+            y: center.y + this.computedNodeCenter[at[0]].y};
+        return sub.getAnchorPoint(Object.assign({}, anchorInfo, {at: at.slice(1)}), shifted);
+    }
     
     renderSVG(offset) {
         this.computePositions();

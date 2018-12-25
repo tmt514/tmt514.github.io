@@ -20,6 +20,16 @@ export default class GraphNode {
     
     // Computes the anchor point by anchor information.
     getAnchorPoint(anchorInfo, center={x: 0, y: 0}) {
+
+        // Handle single array wrapper.
+        // This enables indirect access for GraphCollections.
+        var at = anchorInfo.at;
+        if (Array.isArray(at) === true) {
+            at = at[0];
+        }
+
+        console.log(anchorInfo, center);
+
         // Helper function to compute anchor to offset.
         var angle = anchorInfo.angle || 0;
         var rad = anchorInfo.angle / 180.0 * Math.PI;
@@ -27,7 +37,7 @@ export default class GraphNode {
         
         var cx = center.x;
         var cy = center.y;
-        if (anchorInfo.at === "boundary") {
+        if (at === "boundary") {
             const offset = this.getPeripheralOffsetByAngle(angle);
             cx += offset.x;
             cy += offset.y;

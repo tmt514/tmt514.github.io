@@ -106,8 +106,15 @@ export class GraphArrayNode extends GraphRectangularNode {
         nodes.forEach((node) => node.updateProps({ minHeight: minHeight }));
 
         super({ ...props, padding: 0, strokeWidth: "0", content: collection });
+        this.collection = collection;
         this.data = data;
         this.dataNodes = nodes;
+    }
+
+    getAnchorPoint(anchorInfo, center) {
+        if (typeof anchorInfo.at !== "string")
+            return this.collection.getAnchorPoint(anchorInfo, center);
+        return GraphRectangularNode.prototype.getAnchorPoint.call(this, anchorInfo, center);
     }
     
     updateProps(newProps) {

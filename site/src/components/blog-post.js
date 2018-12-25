@@ -111,7 +111,7 @@ class Template extends Component {
           <div className="hero-body">
           <div className="container">
           <span className="is-pulled-right">
-          <Link to="/blog">
+          <Link to={post.frontmatter.backlink || "/blog"}>
           <span className="icon has-text-warning">
             <i className="fas fa-lg fa-home"></i>
             </span> 返回
@@ -161,6 +161,7 @@ export const pageQuery = graphql`
         title
         description
         roadmap_label_h3
+        backlink
       }
     }
   }

@@ -53,6 +53,11 @@ export default class GraphEdge {
             stroke: this.props.stroke,
             strokeWidth: this.props.strokeWidth,
         }
+        console.log(this.props)
+        if (this.props.markerStart !== undefined) style.markerStart = `url(#${this.props.markerStart.props.id})`
+        if (this.props.markerMid !== undefined) style.markerMid = `url(#${this.props.markerMid.props.id})`
+        if (this.props.markerEnd !== undefined) style.markerEnd = `url(#${this.props.markerEnd.props.id})`
+        console.log(style)
         return (<path key={this.props.id} d={s} style={style}></path>);
     }
 }

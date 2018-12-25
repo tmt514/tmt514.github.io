@@ -5,6 +5,7 @@ import AnchorInfo from './display-ui/anchor-info';
 import DataHelper from './data-helper';
 import { makeUIStores } from './display-ui/ui-helpers';
 import { GraphRectangularTextNode, GraphArrayNode } from './display-ui/graph-rectanglur-node';
+import { markerCircle, markerTriangle } from './display-gadgets/markers';
 
 class DisplayLinkedList extends Component {
     
@@ -23,10 +24,11 @@ class DisplayLinkedList extends Component {
         
         const nodelist = [];
         for (let i = 0; i < newState.n; i++) {
+            const ptrSlot = new GraphRectangularTextNode({id: `ptr`, text: "  "});
             const nodeProps = {
                 id: `linked-list-${i}`,
                 text: `${newState.data[i]}`,
-                content: [newState.data[i], ""],
+                content: [newState.data[i], ptrSlot],
             }
             
             if (i == 0) {
@@ -47,9 +49,10 @@ class DisplayLinkedList extends Component {
             // create edges.
             if (i === 0) continue;
             const edgeProps = {
-                pathAnchors: [new AnchorInfo(`linked-list-${i-1}`, 0, 'entire-node', 0),
+                pathAnchors: [new AnchorInfo(`linked-list-${i-1}`, 0, ['ptr', 'center'], 0),
                               new AnchorInfo(`linked-list-${i}`, 0, 'entire-node', 0)],
-                // markers
+                markerStart: markerCircle,
+                markerEnd: markerTriangle,
             }
             newState.ui.addEdge(edgeProps);
         }
