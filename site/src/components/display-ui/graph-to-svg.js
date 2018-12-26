@@ -39,14 +39,14 @@ class GraphToSVG {
         viewbox.rx += 10;
         viewbox.ry += 10;
         
-        const w = Math.min(640, viewbox.rx - viewbox.lx);
-        const h = Math.min(480, viewbox.ry - viewbox.ly);
+        const w = Math.min(900, viewbox.rx - viewbox.lx);
+        const h = Math.min(700, viewbox.ry - viewbox.ly);
         
         // Render all markers.
         const markers = Object.keys(this.markerStore).map((id) => {
             return this.markerStore[id].renderSVG()
         })
-        return (<svg width={w} height={h} viewBox={`${viewbox.lx} ${viewbox.ly} ${viewbox.rx - viewbox.lx} ${viewbox.ry - viewbox.ly}`}>
+        return (<svg width={w} height={h} style={{maxWidth:"100%"}} viewBox={`${viewbox.lx} ${viewbox.ly} ${viewbox.rx - viewbox.lx} ${viewbox.ry - viewbox.ly}`}>
             {markers.length > 0 && (<defs>{markers}</defs>)}
             {this.graph.renderSVG({x: 0, y: 0})}
         </svg>)

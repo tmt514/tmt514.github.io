@@ -25,8 +25,8 @@ export const markerSquare = new Marker({
 
 export const markerCircle = new Marker({
     id: "markerCircle",
-    markerWidth: 8,
-    markerHeight: 8,
+    markerWidth: 12,
+    markerHeight: 12,
     refX: 4,
     refY: 4,
     children: (<circle cx="4" cy="4" r="4" />),

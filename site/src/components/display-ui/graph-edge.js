@@ -21,17 +21,23 @@ export default class GraphEdge {
             const fromNode = nodeSet[fromAnchor.who];
             const toNode = nodeSet[toAnchor.who];
 
-            const fromCenter = computedNodeCenter[fromNode.props.id];
-            const toCenter = computedNodeCenter[toNode.props.id];
+            var fromCenter = (fromAnchor.at === "entire-node"?
+                computedNodeCenter[fromNode.props.id] :
+                fromNode.getAnchorPoint(fromAnchor, computedNodeCenter[fromNode.props.id]))
+
+            var toCenter = (toAnchor.at === "entire-node"?
+                computedNodeCenter[toNode.props.id] :
+                toNode.getAnchorPoint(toAnchor, computedNodeCenter[toNode.props.id]))
+            
             const dir = {x: toCenter.x - fromCenter.x, y: toCenter.y - fromCenter.y};
             const degree = Math.atan2(dir.y, dir.x) * 180 / Math.PI;
-
+            
             if (fromAnchor.at === "entire-node") {
                 fromAnchor.angle = degree;
                 fromAnchor.at = "boundary";
                 d.push(["M", fromNode.getAnchorPoint(fromAnchor, fromCenter)]);
             } else if (i === 0) {
-                d.push(["M", fromNode.getAnchorPoint(fromAnchor, fromCenter)]);
+                d.push(["M", fromCenter]);
             } else {
                 // do nothing when i > 0.
             }
@@ -39,9 +45,11 @@ export default class GraphEdge {
             if (toAnchor.at === "entire-node") {
                 toAnchor.angle = 180+degree;
                 toAnchor.at = "boundary";
+                d.push(["L", toNode.getAnchorPoint(toAnchor, toCenter)]);
+            } else {
+                d.push(["L", toCenter]);
             }
-            d.push(["L", toNode.getAnchorPoint(toAnchor, toCenter)]);
-            console.log(d);
+            
         }
 
         var s = "";
@@ -52,6 +60,7 @@ export default class GraphEdge {
         const style = {
             stroke: this.props.stroke,
             strokeWidth: this.props.strokeWidth,
+            fill: this.props.fill,
         }
         console.log(this.props)
         if (this.props.markerStart !== undefined) style.markerStart = `url(#${this.props.markerStart.props.id})`

@@ -18,17 +18,23 @@ class DisplayLinkedList extends Component {
         const newState = Object.assign({}, prevState);
         const uiStores = makeUIStores(nextProps);
         const data = DataHelper.getDataFromProps(nextProps);
+        const isDoublyLinkedList = nextProps.double !== undefined;
+        const isCircularLinkedList = nextProps.circular !== undefined;
         newState.data = data || []
         newState.n = data.length;
         newState.ui = new GraphToSVG;
         
         const nodelist = [];
         for (let i = 0; i < newState.n; i++) {
-            const ptrSlot = new GraphRectangularTextNode({id: `ptr`, text: "  "});
+            const ptrSlot = new GraphRectangularTextNode({id: `ptr-next`, text: "  "});
+            var contentArray = [newState.data[i], ptrSlot];
+            if (isDoublyLinkedList) {
+                contentArray = [new GraphRectangularTextNode({id: `ptr-prev`, text: "  "}), ...contentArray]
+            }
             const nodeProps = {
                 id: `linked-list-${i}`,
                 text: `${newState.data[i]}`,
-                content: [newState.data[i], ptrSlot],
+                content: contentArray,
             }
             
             if (i == 0) {
@@ -41,18 +47,48 @@ class DisplayLinkedList extends Component {
              
             // Id corresponds to Coordinates in the array.
             uiStores.forEach((uiStore) => {
-                GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, JSON.stringify(i), ['all', 'node'])
+                GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, `${i}`, ['all', 'node'])
             });
             const node = newState.ui.addNode(nodeProps, GraphArrayNode);
             nodelist.push(node);
 
             // create edges.
             if (i === 0) continue;
+            
+            if (isDoublyLinkedList) {
+                const edgeProps = {
+                    pathAnchors: [new AnchorInfo(`linked-list-${i-1}`, 0, ['ptr-next', 'center'], 0, {x: 0, y: 4}),
+                                  new AnchorInfo(`linked-list-${i}`, 0, 'entire-node', 0, {x: 0, y: 4})],
+                    markerStart: markerCircle,
+                    markerEnd: markerTriangle,
+                }
+                newState.ui.addEdge(edgeProps);
+                const backedgeProps = {
+                    pathAnchors: [new AnchorInfo(`linked-list-${i}`, 0, ['ptr-prev', 'center'], 0, {x: 0, y: -4}),
+                              new AnchorInfo(`linked-list-${i-1}`, 0, 'entire-node', 0, {x: 0, y: -4})],
+                    markerStart: markerCircle,
+                    markerEnd: markerTriangle,
+                }
+                newState.ui.addEdge(backedgeProps)
+            } else {
+                const edgeProps = {
+                    pathAnchors: [new AnchorInfo(`linked-list-${i-1}`, 0, ['ptr-next', 'center'], 0),
+                                  new AnchorInfo(`linked-list-${i}`, 0, 'entire-node', 0)],
+                    markerStart: markerCircle,
+                    markerEnd: markerTriangle,
+                }
+                newState.ui.addEdge(edgeProps);
+            }
+        }
+        if (isCircularLinkedList) {
             const edgeProps = {
-                pathAnchors: [new AnchorInfo(`linked-list-${i-1}`, 0, ['ptr', 'center'], 0),
-                              new AnchorInfo(`linked-list-${i}`, 0, 'entire-node', 0)],
+                pathAnchors: [new AnchorInfo(`linked-list-${newState.n-1}`, 0, ['ptr-next', 'center'], 0),
+                              new AnchorInfo(`linked-list-${newState.n-1}`, 0, ['ptr-next', 'center'], 0, {x: 0, y: 30}),
+                              new AnchorInfo(`linked-list-${0}`, 90, 'boundary', 0, {x: 0, y: 15}),
+                              new AnchorInfo(`linked-list-${0}`, 0, 'entire-node', 0)],
                 markerStart: markerCircle,
                 markerEnd: markerTriangle,
+                fill: "none",
             }
             newState.ui.addEdge(edgeProps);
         }

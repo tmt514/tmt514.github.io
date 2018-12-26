@@ -42,6 +42,11 @@ export default class GraphNode {
             cx += offset.x;
             cy += offset.y;
         }
+        
+        if (anchorInfo.offset !== undefined) {
+            cx += anchorInfo.offset.x;
+            cy += anchorInfo.offset.y;
+        }
 
         cx += Math.cos(rad) * ed;
         cy += Math.sin(rad) * ed;
