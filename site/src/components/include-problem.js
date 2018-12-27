@@ -93,7 +93,7 @@ export default class IncludeProblem extends Component {
                 const e = data.pages.edges.filter((e) => {return e.node.frontmatter.path === path});
                 
                 if (e.length === 0) {
-                    return (<span></span>);
+                    return (<span>找不到題目</span>);
                 }
                 
                 const page = e[0].node;
