@@ -13,3 +13,4 @@ backlink: "/icpcblog-weekly-2019"
 
 * [Codeforces 文章連結](https://codeforces.com/blog/entry/63220)
 * [Codefroces Gym 題目連結](https://codeforces.com/gym/102001)
+* [Final Standings](https://competition.binus.ac.id/icpc2018/final.html) (點選上面題號可以看到題目 PDF)

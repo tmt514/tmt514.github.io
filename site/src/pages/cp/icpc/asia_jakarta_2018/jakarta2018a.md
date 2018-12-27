@@ -3,6 +3,7 @@ category: "prob"
 code: "ICPC-JAKARTA-2018-A"
 path: "/problem/icpc/asia_jakarta_2018/A"
 title: "Edit Distance"
+difficulty: 3
 description: |
     對於兩個給定的字串 $S$ 和 $T$，我們定義 $edit(S, T)$ 為從 $S$ 經過若干插入字元、修改字元、刪除字元等操作後得到 $T$ 所需要的最少步數。
     

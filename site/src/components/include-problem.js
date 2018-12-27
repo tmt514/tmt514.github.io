@@ -5,6 +5,36 @@ import visit from 'unist-util-visit'
 
 import markdown from './markdown'
 
+const Difficulty = ({ meta }) => {
+    var difficulty = meta.difficulty===null? "0": meta.difficulty;
+    var bgclass = "";
+    const numToDifficulty = ["Unknown",
+        "Eew",
+        "Easy-Peasy",
+        "Easy",
+        "Medium",
+        "Meaningful",
+        "Medium",
+        "Hard",
+        "Hazzard",
+        "Horrible",
+        "Hercules",
+    ];
+    if (!isNaN(difficulty)) {
+        const d = parseInt(difficulty);
+        difficulty = numToDifficulty[d];
+    }
+    
+    if (difficulty.toLowerCase().startsWith("e")) {
+        bgclass = "is-success"
+    } else if (difficulty.toLowerCase().startsWith("m")) {
+        bgclass = "is-warning"
+    } else if (difficulty.toLowerCase().startsWith("h")) {
+        bgclass = "is-danger"
+    }
+    return (<span className={`tag ${bgclass} is-rounded`}><b>{difficulty}</b></span>);
+}
+
 const findH2Contents = (node, regex) => {
     const { children } = node;
     const ret = [];
@@ -58,6 +88,7 @@ export default class IncludeProblem extends Component {
         const show_solution = (this.props["show-solution"]!== undefined);
         const title_prefix = (this.props["title-prefix"] || "例題：");
         const is_inline = (this.props.inline !== undefined);
+        const is_linkonly = (this.props["linkonly"] !== undefined);
         
         if (this.props.notyet !== undefined) {
             return (<span>{this.props.path} 這題還沒準備好</span>)
@@ -90,7 +121,9 @@ export default class IncludeProblem extends Component {
 
             render={(data) => {
                 
-                const e = data.pages.edges.filter((e) => {return e.node.frontmatter.path === path});
+                const e = data.pages.edges.filter((e) => {return (
+                    e.node.frontmatter.path === path ||
+                    e.node.frontmatter.code === code) });
                 
                 if (e.length === 0) {
                     return (<span>找不到題目</span>);
@@ -105,6 +138,14 @@ export default class IncludeProblem extends Component {
                 const sollink = (<Link to={meta.path} className="open-sol">{" "}<i className="far fa-lightbulb"></i></Link>);
                 const md = markdown.processSync(meta.description).contents;
                 
+                // link mode
+                if (is_linkonly === true) {
+                    return (<>
+                        <Difficulty meta={meta} />{" "}
+                        {title_prefix}{meta.title}
+                        {ojlink}{sollink}{" "}
+                    </>)
+                }
                 // inline mode
                 if (is_inline === true) {
                     return (<>
