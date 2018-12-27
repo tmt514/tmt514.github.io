@@ -17,18 +17,10 @@ import Display, {DisplayInner} from './display';
 import Theorem from './theorem';
 import Algorithm from './algorithm';
 
-import remark from 'remark'
-import reactRenderer from 'remark-react'
 import IncludeProblem from './include-problem';
 import { roadmapTransformer } from './roadmaps';
 
-const markdown = remark()
-  .use(reactRenderer,
-    {
-      createElement: React.createElement,
-      remarkReactComponents: {
-      },
-    })
+import markdown from './markdown';
 
 
 const MyH1 = ({ children }) => (
