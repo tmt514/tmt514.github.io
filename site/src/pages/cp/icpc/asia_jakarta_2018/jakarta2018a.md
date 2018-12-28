@@ -106,11 +106,15 @@ int main() {
 
 ### 備註 1
 
-Edit Distance 好像又被稱為 Levenshtein Distance，是一種衡量兩個字串是否有多接近的指標（metric，不是 pointer，在這個 context 底下稱呼度量好怪XD）。
+Edit Distance 好像又被稱為 [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance)，是一種衡量兩個字串是否有多接近的指標（metric，不是 pointer XD）。
 
 ### 備註 2
 
 Edit Distance 滿足三角不等式：$edit(A, B)+edit(B, C) \ge edit(A, C)$，白話文解釋就是從 $A$ 換到 $C$ 的方法，至少有先從 $A$ 變成 $B$ 再從 $B$ 變成 $C$ 來得好。
+
+<theorem title='演算法豆知識' c='is-primary'>
+在[強指數時間假說](/algo/strong-exponential-time-hypothesis)為真的前提之下，計算兩個長度為 $n$ 字串的 Edit Distance (exact) 至少得花 $\Omega(n^{2-\epsilon})$ 的時間。但是就近似演算法 (Approximation Algorithms) 而言， 2018 年 FOCS 的一篇最佳論文 [_Approximating Edit Distance Within Constant Factor in Truly Sub-Quadratic Time_](https://arxiv.org/abs/1810.03664)，在 $\tilde{O}(n^{12/7})$ 時間內保證得到 $1680$-approxmation 的近似解，是為近期的一個重大突破。（作者們相信稍微用他們的方法再努力一下就可以做到 $(3+\epsilon)$-approximation）
+</theorem>
 
 ### 關於競程日記
 
