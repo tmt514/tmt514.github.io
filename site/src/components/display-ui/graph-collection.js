@@ -197,7 +197,7 @@ export default class GraphCollection extends GraphNode {
             var edge = this.edges[edgeIDs[i]];
             renderedEdges.push(edge.renderSVG(this));
         }
-        console.log(renderedEdges);
+        //console.log(renderedEdges);
 
         return (<>
             {renderedEdges}

@@ -28,8 +28,6 @@ export default class GraphNode {
             at = at[0];
         }
 
-        console.log(anchorInfo, center);
-
         // Helper function to compute anchor to offset.
         var angle = anchorInfo.angle || 0;
         var rad = anchorInfo.angle / 180.0 * Math.PI;
