@@ -196,7 +196,7 @@ using namespace std;
 
 string s;
 int N, M, K;
-int current[100005] = {-1};
+int current[100005];
 int a[10];
 
 string get_string(int len) {
@@ -236,6 +236,13 @@ int main() {
   return 0;
 }
 ```
+
+### 備註
+
+官方題解使用的是第一種解法的不需要 Hash 版，分成兩種情形探討：
+
+1. $M^N\le 2^{40}$。整個 de Bruijn Graph 的邊數 $= 2^{40}$，也就是說所有的邊都可以直接以 $M$-進位轉換成 `long long` 數值。此時可以用 `set<long long>` 直接存走訪過的邊。
+2. $M^N > 2^{40}$。此時使用 _random walk_ 大法，隨機產生長度為 $K+N-1$ 的序列，有很高的機率會產出一個合法的答案。
 
 ### 關於競程日記
 
