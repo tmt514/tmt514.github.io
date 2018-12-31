@@ -35,9 +35,21 @@ export class GraphTextNode extends GraphNode {
 };
 
 export class Text {
+
+    // Measuring Text Width, assuming Roboto From
+    // https://bl.ocks.org/tophtucker/62f93a4658387bb61e4510c37e2e97cf
+    static measureText(string, fontSize = 10) {
+        const widths = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0734375,0.4,0.5,0.9,0.8,0.9,0.9,0.4,0.6,0.5,0.7,0.8,0.4,0.5,0.4,0.6,0.8,0.6609375,0.8,0.7,0.8,0.8,0.8,0.8,0.8,0.7,0.4,0.4,0.7,0.7,0.7,0.7,1.1,0.9,0.8,0.9,0.8,0.8,0.8,0.9,0.9,0.4,0.7,0.9,0.8,1,0.9,0.9,0.8,0.9,0.8,0.8,0.8,0.8,0.9,1.1,0.8,0.8,0.8,0.5,0.7,0.4,0.6,0.7,0.5,0.7,0.8,0.7,0.7,0.7,0.6,0.7,0.7,0.4,0.5,0.8,0.4,1.1,0.7,0.8,0.8,0.7,0.6,0.7,0.5,0.7,0.7,1,0.7,0.7,0.7,0.6,0.4,0.6,0.9]
+        const avg = 0.7098355263157895
+        return string
+          .split('')
+          .map(c => c.charCodeAt(0) < widths.length ? widths[c.charCodeAt(0)] : avg)
+          .reduce((cur, acc) => acc + cur) * fontSize
+    }
+
     static getTextWidth(s, props) {
         if (typeof window === `undefined`) {
-            return `${s}`.length*7;
+            return Text.measureText(s, (props.lineHeight || defaultNodeProps.lineHeight));
         }
         var canvas = Rectangle.hiddenCanvas || (Rectangle.hiddenCanvas = window.document.createElement("canvas"))
         var ctx = canvas.getContext("2d");
