@@ -30,6 +30,9 @@ export default class HTML extends React.Component {
                 Macros: {
                     set: ["{\\\\left\\\\{#1\\\\right\\\\}}", 1],
                     dp: "\\\\mathrm{DP}",
+                    red: ["{\\\\color{red}{#1}}", 1],
+                    blue: ["{\\\\color{blue}{#1}}", 1],
+                    green: ["{\\\\color{green}{#1}}", 1],
                   }
                 },
               tex2jax: {

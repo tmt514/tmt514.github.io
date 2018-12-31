@@ -24,6 +24,7 @@ description: |
     
 link: "https://codeforces.com/gym/102001/problem/C"
 oj: "codeforces-gym"
+backlink: "/icpcblog-weekly-2019"
 ---
 
 ## 題目敘述
