@@ -17,11 +17,11 @@ backlink: "/icpcblog-weekly-2019"
 * 提供競程日記的參考題解：  
 [<span class="tag is-success">A</span>](/problem/icpc/asia_jakarta_2018/A)
 <span class="tag">B</span>
-<span class="tag">C</span>
+[<span class="tag">C</span>](/problem/icpc/asia_jakarta_2018/C)
 <span class="tag">D</span>
 <span class="tag">E</span>
-<span class="tag">F</span>
-<span class="tag">G</span>
+[<span class="tag">F</span>](/problem/icpc/asia_jakarta_2018/F)
+[<span class="tag">G</span>](/problem/icpc/asia_jakarta_2018/G)
 <span class="tag">H</span>
 <span class="tag">I</span>
 <span class="tag">J</span>
