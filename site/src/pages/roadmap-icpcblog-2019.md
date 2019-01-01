@@ -14,11 +14,11 @@ backlink: "/icpcblog-weekly-2019"
 * [Codeforces 文章連結](https://codeforces.com/blog/entry/63220)
 * [Codefroces Gym 題目連結](https://codeforces.com/gym/102001)
 * [Final Standings](https://competition.binus.ac.id/icpc2018/final.html) (點選上面題號可以看到題目 PDF)
-* [測試資料與解答 GitHub](https://github.com/jonathanirvings/icpc-jakarta-2018/)
+* [測試資料與解答 GitHub @jonathanirvings](https://github.com/jonathanirvings/icpc-jakarta-2018/)
 * 提供競程日記的參考題解：  
 [<span class="tag is-success">A</span>](/problem/icpc/asia_jakarta_2018/A)
 <span class="tag">B</span>
-[<span class="tag">C</span>](/problem/icpc/asia_jakarta_2018/C)
+[<span class="tag is-danger">C</span>](/problem/icpc/asia_jakarta_2018/C)
 <span class="tag">D</span>
 <span class="tag">E</span>
 [<span class="tag">F</span>](/problem/icpc/asia_jakarta_2018/F)
