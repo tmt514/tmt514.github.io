@@ -14,6 +14,7 @@ backlink: "/icpcblog-weekly-2019"
 * [Codeforces 文章連結](https://codeforces.com/blog/entry/63220)
 * [Codefroces Gym 題目連結](https://codeforces.com/gym/102001)
 * [Final Standings](https://competition.binus.ac.id/icpc2018/final.html) (點選上面題號可以看到題目 PDF)
+* [測試資料與解答 GitHub](https://github.com/jonathanirvings/icpc-jakarta-2018/)
 * 提供競程日記的參考題解：  
 [<span class="tag is-success">A</span>](/problem/icpc/asia_jakarta_2018/A)
 <span class="tag">B</span>
@@ -22,6 +23,26 @@ backlink: "/icpcblog-weekly-2019"
 <span class="tag">E</span>
 [<span class="tag">F</span>](/problem/icpc/asia_jakarta_2018/F)
 [<span class="tag">G</span>](/problem/icpc/asia_jakarta_2018/G)
+<span class="tag">H</span>
+<span class="tag">I</span>
+<span class="tag">J</span>
+<span class="tag">K</span>
+<span class="tag">L</span>
+
+-----
+
+### (Jan.08 - Jan.14) ICPC 2018 Asia Hanoi Regional
+
+* [ProblemSet On Open Kattis](https://open.kattis.com/problem-sources/The%202018%20ICPC%20Asia%20Hanoi%20Regional%20Contest)
+* [Final Standings](https://hanoi18.kattis.com/standings)
+* 提供競程日記的參考題解：  
+<span class="tag">A</span>
+<span class="tag">B</span>
+<span class="tag">C</span>
+<span class="tag">D</span>
+<span class="tag">E</span>
+<span class="tag">F</span>
+<span class="tag">G</span>
 <span class="tag">H</span>
 <span class="tag">I</span>
 <span class="tag">J</span>
