@@ -131,7 +131,7 @@ backlink: "/icpcblog-weekly-2019"
 如果字串 $S$ 是一個 Lyndon word，那麼把他隨意拆成兩個子字串，左半邊的字典序保證小於右半邊。
 </theorem>
 
-有了這件事情以後，我們可以利用 DFS 一個一個字元決定。還記得 KMP 字串匹配演算法嗎？我們利用 `last[]` 陣列描述對於所有前綴字串，與之匹配的最長前綴子字串。
+有了這件事情以後，我們可以利用 DFS 一個一個字元決定。還記得 [KMP 字串匹配演算法](https://zh.wikipedia.org/wiki/%E5%85%8B%E5%8A%AA%E6%96%AF-%E8%8E%AB%E9%87%8C%E6%96%AF-%E6%99%AE%E6%8B%89%E7%89%B9%E7%AE%97%E6%B3%95)嗎？我們利用 `last[]` 陣列描述對於所有前綴字串，與之匹配的最長前綴子字串。
 
 <algorithm>
     <generator><pre>

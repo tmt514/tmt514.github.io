@@ -16,18 +16,9 @@ backlink: "/icpcblog-weekly-2019"
 * [Final Standings](https://competition.binus.ac.id/icpc2018/final.html) (點選上面題號可以看到題目 PDF)
 * [測試資料與解答 GitHub @jonathanirvings](https://github.com/jonathanirvings/icpc-jakarta-2018/)
 * 提供競程日記的參考題解：  
-[<span class="tag is-success">A</span>](/problem/icpc/asia_jakarta_2018/A)
-<span class="tag">B</span>
-[<span class="tag is-danger">C</span>](/problem/icpc/asia_jakarta_2018/C)
-<span class="tag">D</span>
-<span class="tag">E</span>
-[<span class="tag">F</span>](/problem/icpc/asia_jakarta_2018/F)
-[<span class="tag">G</span>](/problem/icpc/asia_jakarta_2018/G)
-<span class="tag">H</span>
-<span class="tag">I</span>
-<span class="tag">J</span>
-<span class="tag">K</span>
-<span class="tag">L</span>
+<problem-list-as-tags
+    n='12'
+    path-prefix="/problem/icpc/asia_jakarta_2018"></problem-list-as-tags>
 
 -----
 
@@ -36,15 +27,6 @@ backlink: "/icpcblog-weekly-2019"
 * [ProblemSet On Open Kattis](https://open.kattis.com/problem-sources/The%202018%20ICPC%20Asia%20Hanoi%20Regional%20Contest)
 * [Final Standings](https://hanoi18.kattis.com/standings)
 * 提供競程日記的參考題解：  
-<span class="tag">A</span>
-<span class="tag">B</span>
-<span class="tag">C</span>
-<span class="tag">D</span>
-<span class="tag">E</span>
-<span class="tag">F</span>
-<span class="tag">G</span>
-<span class="tag">H</span>
-<span class="tag">I</span>
-<span class="tag">J</span>
-<span class="tag">K</span>
-<span class="tag">L</span>
+<problem-list-as-tags
+    n='12'
+    path-prefix="/problem/icpc/asia_hanoi_2018"></problem-list-as-tags>

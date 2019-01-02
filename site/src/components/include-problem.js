@@ -5,10 +5,7 @@ import visit from 'unist-util-visit'
 
 import markdown from './markdown'
 
-const Difficulty = ({ meta }) => {
-    var difficulty = meta.difficulty===null? "0": meta.difficulty;
-    var bgclass = "";
-    const numToDifficulty = ["Unknown",
+const numToDifficulty = ["Unknown",
         "Eew",
         "Easy-Peasy",
         "Easy",
@@ -20,6 +17,31 @@ const Difficulty = ({ meta }) => {
         "Horrible",
         "Hercules",
     ];
+
+export function getBgclassByDifficulty(difficulty) {
+    if (isNaN(difficulty)) {
+        difficulty = difficulty.toLowerCase();
+        if (difficulty.startsWith("e"))
+            return "is-success"
+        if (difficulty.startsWith("m"))
+            return "is-warning"
+        if (difficulty.startsWith("h"))
+            return "is-danger"
+    } else {
+        const d = parseInt(difficulty);
+        if (d <= 0) return "";
+        if (d <= 3) return "is-success";
+        if (d <= 6) return "is-warning";
+        if (d <= 10) return "is-danger";
+        return "is-dark";
+    }
+    return "";
+}
+
+const Difficulty = ({ meta }) => {
+    var difficulty = meta.difficulty===null? "0": meta.difficulty;
+    var bgclass = "";
+    
     if (!isNaN(difficulty)) {
         const d = parseInt(difficulty);
         difficulty = numToDifficulty[d];

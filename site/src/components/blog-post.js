@@ -18,7 +18,7 @@ import Theorem from './theorem';
 import Algorithm from './algorithm';
 
 import IncludeProblem from './include-problem';
-import { roadmapTransformer } from './roadmaps';
+import { roadmapTransformer, ProblemListAsTags } from './roadmaps';
 import { footnoteTransformer } from './footnote';
 
 import markdown from './markdown';
@@ -93,6 +93,7 @@ class Template extends Component {
             algorithm: Algorithm,
             mylink: Link,
             "include-problem": IncludeProblem,
+            "problem-list-as-tags": ProblemListAsTags,
           }
         }).Compiler(modifiedAst);
       }
