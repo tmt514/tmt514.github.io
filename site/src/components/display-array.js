@@ -4,6 +4,7 @@ import { GraphNodeUIHelper } from './display-ui/ui-helpers';
 import AnchorInfo from './display-ui/anchor-info';
 import { makeUIStores } from './display-ui/ui-helpers';
 import { GraphRectangularTextNode } from './display-ui/graph-rectanglur-node';
+import { defaultNodeProps } from './display-ui/ui-defaults';
 
 class DisplayArray extends Component {
     
@@ -50,25 +51,39 @@ class DisplayArray extends Component {
                 const node = newState.ui.addNode(nodeProps, GraphRectangularTextNode);
                 nodelist.push(node);
             }
-
-            var w = -Infinity;
-            var h = -Infinity;
-            nodelist.forEach((node) => {
-                w = Math.max(w, node.getWidth());
-                h = Math.max(h, node.getHeight());
-            })
             
-            const newNodeProps = {
-                minHeight: h,
-            };
-            if (nextProps.fixedwidth !== undefined) {
-                newNodeProps.minWidth = w;
+            
+            // Fixed width by given ratio.
+            var ratios = Array(newState.n).fill(1);
+            var maxUnitWidth = -Infinity;
+            var h = -Infinity;
+            // width could be overrided by min-width property.
+            var minWidth = nextProps["min-width"];
+            const shouldAdjustWidth = (nextProps.fixedwidth !== undefined
+                || nextProps["fixedwidth-ratios"] !== undefined
+                || minWidth !== undefined);
+            
+            if (nextProps["fixedwidth-ratios"] !== undefined) {
+                ratios = eval(`(${nextProps["fixedwidth-ratios"]})`);
+                while (ratios.length < newState.n) ratios.push(1);
+            }
+            nodelist.forEach((node, idx) => {
+                maxUnitWidth = Math.max(maxUnitWidth, node.getWidth() / ratios[idx]);
+                h = Math.max(h, node.getHeight());
+            });
+            if (minWidth !== undefined) {
+                maxUnitWidth = Math.max(maxUnitWidth, parseFloat(minWidth));
             }
             
-            nodelist.forEach((node) => {
+            nodelist.forEach((node, idx) => {
+                const newNodeProps = {
+                    minHeight: h,
+                }
+                if (shouldAdjustWidth) {
+                    newNodeProps.minWidth = maxUnitWidth * ratios[idx];
+                }
                 node.updateProps(newNodeProps)
-            })
-            
+            });
         }
         
         return newState;
