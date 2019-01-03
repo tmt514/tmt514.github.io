@@ -96,6 +96,8 @@ $$
 
 以上的觀察引導我們使用「堆疊」的解法，去模擬 Ayu 的選擇，把得到的氣球花在 Budi 的哪些題目上頭。我們維護一個堆疊，從堆疊底部到頂部，永遠是「任務編號遞增、所花費時間嚴格遞減」並且紀錄有多少顆氣球花在這題上面。
 
+以下面這個例子而言，假設 Ayu 可以在以下時間 8, 20, 40, 48, 56, 65, 109, 114, 117, 118 分別獲得氣球，那堆疊的改變看起來會像這樣：
+
 
 <algorithm>
     <generator><pre>
@@ -107,6 +109,23 @@ $$
             var show = function(stack) {
                 return stack.map((x) => `B[${x[0]}] = ${B[x[0]]}\n重做=${x[1]}`);
             };
+            var bshow = function(b, s) {
+                var bmsg = [];
+                var i;
+                var v = 0;
+                for (i = 0; i < b.length; i++) {
+                    var msg = '-';
+                    v += b[i];
+                    for (j = 0; j < s.length; j++) {
+                        if (s[j][0] === i) {
+                            msg = `重做 ${s[j][1]} 次`;
+                            v += s[j][1] * b[i];
+                        }
+                    }
+                    bmsg.push(`${b[i]}\n${msg}\n完成時間=${v}`);
+                }
+                return bmsg;
+            };
             var i, j;
             for (i = 0; i < n; i++) {
                 s.push([i, C[i]]);
@@ -116,7 +135,7 @@ $$
                     }
                 ui.setStyleOnce('B', `${i}`, {fill: 'cyan'});
                 ui.setStyleOnce('arr', `${s.length-1}`, {fill: 'cyan'});
-                yield ({B: B, arr: show(s)});
+                yield ({B: bshow(B,s), arr: show(s)});
                 while (s.length >= 2 &&
                     B[s[s.length-1][0]] >=
                     B[s[s.length-2][0]]) {
@@ -129,20 +148,20 @@ $$
                     }
                     ui.setStyleOnce('B', `${i}`, {fill: 'cyan'});
                     ui.setStyleOnce('arr', `${s.length-1}`, {fill: 'cyan'});
-                    yield ({B: B, arr: show(s)});
+                    yield ({B: bshow(B,s), arr: show(s)});
                 }
             }
             for (j = 0; j < s.length; j++) {
                         ui.setStyleOnce('arr', `${j}`, {fill: 'lightyellow'});
                         ui.setStyleOnce('B', `${s[j][0]}`, {fill: 'lightyellow'});
                     }
-            return {B: B, arr: show(s)};
+            return {B: bshow(B,s), arr: show(s)};
         }
         </pre>
     </generator>
     <inputdata
         data='{"B": [8, 10, 5, 3, 1, 9, 6, 7, 4, 2],
-               "C": [1, 1, 2, 1, 0, 1, 0, 0, 1, 2]}'
+               "C": [1, 1, 2, 1, 0, 1, 0, 0, 1, 3]}'
     ></inputdata>
     <indirectdisplay
         array
@@ -160,6 +179,8 @@ $$
         varname='arr'
     ></indirectdisplay>
 </algorithm>
+
+如果總比賽時間 $M=118$，那麼 Ayu 能讓 Budi 在第 118 分鐘的時候還做不出最後一題，因此 Ayu 能夠獲勝。
 
 ### 參考程式碼
 
