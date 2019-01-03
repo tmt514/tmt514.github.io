@@ -144,6 +144,53 @@ int main() {
 
 如果要再快個常數倍的話（大約兩倍），可以把第一步很多不必要的檢查節省起來：事先把所有沒在圖上的邊依照 $\delta_x+\delta_y$ 的值放到某個陣列裡面。在第二步更新的當下，可以順便更新 $(x, z)$ 和 $(y, z)$ 的度數和。
 
+## Open Question
+
+這題如果把 Queue 拿掉，變成以下的 code 會變得更快。不曉得有沒有辦法證明下面的 while loop 只會跑 $O(N)$ 次？
+
+```cpp
+#include <algorithm>
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int a[505][505];
+int deg[505];
+
+int main() {
+  int n, m;
+  cin >> n >> m;
+  
+  auto addedge = [&](int x, int y) {
+    a[x][y] = a[y][x] = 1;
+    deg[x]++;
+    deg[y]++;
+  };
+  for (int i = 0; i < m; i++) {
+    int x, y;
+    cin >> x >> y;
+    addedge(x, y);
+  }
+  int k = 2 * (n - 2);
+  while (m < n * (n - 1) / 2) {
+    int v = 0;
+    for (int x = 1; x <= n; x++)
+      for (int y = x + 1; y <= n; y++)
+        if (!a[x][y])
+            v = max(v, deg[x] + deg[y]);
+    k = min(k, v);
+    for (int x = 1; x <= n; x++)
+      for (int y = x + 1; y <= n; y++)
+        if (!a[x][y] && deg[x] + deg[y] >= k) {
+          m++;
+          addedge(x, y);
+        }
+  }
+  cout << k << endl;
+  return 0;
+}
+```
+
 ### 關於競程日記
 
 🍅 如果您想到更多有趣漂亮簡單乾淨的解法話歡迎留言給競程日記小編群！
