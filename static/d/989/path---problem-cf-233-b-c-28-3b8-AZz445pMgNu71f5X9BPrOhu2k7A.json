@@ -1,0 +1,1 @@
+{"data":{"markdownRemark":{"htmlAst":{"type":"root","children":[],"data":{"quirksMode":false}},"frontmatter":{"date":null,"path":"/problem/cf/233/B","title":"[CF233B] Non-square Equation","description":"對於正整數 $x$，我們定義 $s(x)$ 為其十進制表示法的各位數字和。現在給定 $n$ $(1\\le n\\le 10^{18})$，請你找出滿足下列方程 \\[ x^2+s(x)\\cdot x = n\\] 的最小正整數解 $x$ 或指出解不存在。\n"}}},"pageContext":{}}
