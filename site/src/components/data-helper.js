@@ -6,10 +6,15 @@ class DataHelper {
 
         // The simplest format is a JSON string.
         if (props.data !== undefined) {
-            if (props.data instanceof Array) {
+            if (props.data instanceof Array || props.data instanceof Object) {
                 return props.data;
             }
-            return JSON.parse(props.data);
+            try {
+                data = JSON.parse(props.data);
+            } catch(err) {
+                data = eval(`(${props.data})`);
+            }
+            return data;
         }
     }
 };

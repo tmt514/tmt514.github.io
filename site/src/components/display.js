@@ -3,6 +3,7 @@ import DisplayArray from './display-array';
 import DisplayGrid from './display-grid';
 import { Quadrant } from './display-gadgets/rectangle'
 import DisplayLinkedList from './display-linked-list';
+import DisplayGraph from './display-graph';
 
 class Display extends Component {
     render() {
@@ -14,6 +15,9 @@ class Display extends Component {
         }
         if (this.props["linked-list"] !== undefined) {
             return (<DisplayLinkedList {...this.props}></DisplayLinkedList>);
+        }
+        if (this.props.graph !== undefined) {
+            return (<DisplayGraph {...this.props}></DisplayGraph>);
         }
         
         

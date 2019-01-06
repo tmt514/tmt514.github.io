@@ -97,10 +97,20 @@ tags:
 
 ## 解法
 
+我們不妨假設整個圖 $G$ 是連通的，考慮從 $G$ 上面任何一個點出發，搜索對象是所有邊的 DFS Tree。在這個 DFS 搜索樹上，每一個「節點」其實是邊
+相鄰的兩個「節點」
+
+<display
+  graph
+  undirected
+  unweighted
+  data='{
+    "nodes": [1, 2, 3, 4, 5],
+    "edges": [[1, 2], [1, 4], [2, 4], [2, 3], [3, 4], [2, 5], [3, 5]],
+  }'>
+</display>
 
 ### 參考程式碼
-
-為了實作方便，我們在儲存邊的 ID 的時候
 
 ```cpp
 #include <iostream>
@@ -116,9 +126,11 @@ vector<tuple<int, int, int>> ans;
 
 int neighbor(int eid, int u) { return x[eid] + y[eid] - u; }
 
-// Returns and edge id or -1 indicating that all edges were used up.
+// 如果 dfs 回來以後還有一條邊沒有被配對，那就回傳這條邊，否則回傳 -1。
 int dfs(int u, int from=-1) {
   int at_hand = -1;
+  // 依序考慮過所有的邊，但是因為 dfs 會經過同一個點很多次，
+  // 所以不妨用一個類似 stack 的方式實作，每走過一條邊就把這條邊去掉。
   while (!a[u].empty()) {
     int eid = a[u].back();
     a[u].pop_back();
@@ -156,10 +168,6 @@ int main() {
   return 0;
 }
 ```
-
-### 備註
-
-如果把所有的字串都預處理產生出來以後，用 Bucket Sort (桶子排序法) 把所有的字串全部排序起來。這麼一來就可以省下硬比較兩字串的時間，可以加速到 $O(15\times 2^{15})$。
 
 ### 關於競程日記
 
