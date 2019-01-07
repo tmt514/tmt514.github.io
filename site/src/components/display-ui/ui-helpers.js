@@ -35,6 +35,7 @@ export class GraphNodeUIHelper {
 export function combineUIHelpers(props) {
     const uiStore = {
         styleRules: {},
+        styles: {},
     }
     const contentToOptions = eval('('+(props["uihelper-content-map"]||"{}")+')')
     for (var content of Object.keys(contentToOptions)) {
@@ -45,7 +46,9 @@ export function combineUIHelpers(props) {
         }
     }
 
-    
+    const idToOptions = eval('('+(props["uihelper-id-map"]||"{}")+')')
+    Object.assign(uiStore.styles, idToOptions)
+
     if (props["uihelper-node-style"] !== undefined) {
         const nodeOptions = eval('('+(props["uihelper-node-style"]||"{}")+')')
         uiStore.styleRules['all-node-style'] = {
@@ -54,6 +57,7 @@ export function combineUIHelpers(props) {
             options: nodeOptions,
         }
     }
+
     return uiStore;
 }
 

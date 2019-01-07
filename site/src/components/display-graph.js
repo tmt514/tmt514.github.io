@@ -35,9 +35,15 @@ export default class DisplayGraph extends Component {
                     text: "",
                     content: "",
                 };
+                
+                uiStores.forEach((uiStore) => {
+                    GraphNodeUIHelper.updateNodePropsFromUIStore(nodeProps, uiStore, `${data.nodes[i]}`, ['all', 'node'])
+                });
+
                 const node = newState.ui.addNode(nodeProps, GraphRectangularTextNode);
                 nodelist[nodeProps.id] = node;
             }
+            // TODO: update uiStores here. (maybe by copying a node?)
         }
         for (let i = 0; i < data.edges.length; i++) {
             const e = data.edges[i];
@@ -47,9 +53,15 @@ export default class DisplayGraph extends Component {
                     pathAnchors: [new AnchorInfo(`node-${e[0]}`, 0, 'entire-node', 0),
                                     new AnchorInfo(`node-${e[1]}`, 0, 'entire-node', 0)],
                 }
+
+                uiStores.forEach((uiStore) => {
+                    GraphNodeUIHelper.updateNodePropsFromUIStore(edgeProps, uiStore, `[${e[0]},${e[1]}]`, ['all', 'edge'])
+                });
+
                 const edge = newState.ui.addEdge(edgeProps);
                 edgelist[edgeProps.id] = edge;
             }
+            // TODO: need to reset UI properties.
         }
         const nodeids = Object.keys(nodelist);
         for (let _ = 0; _ < 100; _++) {
@@ -60,6 +72,21 @@ export default class DisplayGraph extends Component {
                 const currentX = node.props.cx;
                 const currentY = node.props.cy;
                 
+                const getDist = (thereX, thereY) => {
+                    return Math.sqrt((currentX - thereX) * (currentX - thereX)
+                    + (currentY - thereY) * (currentY - thereY));
+                }
+                for (let j = 0; j < nodeids.length; j++) {
+                    const there = nodelist[nodeids[j]];
+                    if (there.props.id === node_id) continue;
+                    const thereX = there.props.cx;
+                    const thereY = there.props.cy;
+                    const dist = getDist(thereX, thereY);
+                    if (dist < 75) {
+                        dir_adjust.push([ (thereX - currentX) * (dist-75)/dist,
+                                        (thereY - currentY) * (dist-75)/dist]);
+                    }
+                }
                 
                 for (let j = 0; j < data.edges.length; j++) {
                     const e = data.edges[j];
@@ -75,8 +102,7 @@ export default class DisplayGraph extends Component {
                     } else {
                         continue;
                     }
-                    var dist = Math.sqrt((currentX - thereX) * (currentX - thereX)
-                            + (currentY - thereY) * (currentY - thereY))
+                    const dist = getDist(thereX, thereY);
                     if (dist < 95 || dist >= 105) {
                         dir_adjust.push([ (thereX - currentX) * (dist-100)/dist,
                                             (thereY - currentY) * (dist-100)/dist]);
