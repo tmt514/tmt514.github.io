@@ -80,8 +80,6 @@ tags:
 首先，我們可以注意到由於輸入模版的 `*` 不超過 15 個，因此全部把他們枚舉出來數量大概不會太多。
 考慮一個字串集合 $\mathcal{S}$，我們想要知道有多少字串，使得至少有一個子字串出現在 $\mathcal{S}$ 中，這是一個『試著不要重複計數』的技術問題。
 
-這個不要重複計數的部分，可以用 **一對一函數**(bijection) 的方式處理：對於每一種答案字串 $X$，我們考慮集合 $\mathcal{S}$ 內的字串第一次出現在 $X$ 的位置，並且把他
-
 定義 $\dp(i, \mathit{suffix})$ 表示長度為 $i$ 的字串、其後綴字串為 $\mathit{suffix}$、而且 $\mathit{suffix}$ 是所有該字串後綴字串之中，出現在 $\mathrm{prefix}(\mathcal{S})$ 集合裡面**最長**的那一個。其中 $\mathrm{prefix}(\mathcal{S})$ 是所有 $\mathcal{S}$ 前綴字串所形成的集合。於是，對於每一個 $\dp(i, \mathit{suffix})$ 我們可以考慮把該狀態**推**(push)到下一個狀態去<footnote goto="1" show="備註1"></footnote>：
 
 $\dp(i+1, \delta(\mathit{suffix} + \texttt{"0"})) {\texttt{ += }} \dp(i, \mathit{suffix})$  

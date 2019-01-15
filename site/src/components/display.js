@@ -4,6 +4,7 @@ import DisplayGrid from './display-grid';
 import { Quadrant } from './display-gadgets/rectangle'
 import DisplayLinkedList from './display-linked-list';
 import DisplayGraph from './display-graph';
+import DisplayBinaryTree from './display-binary-tree';
 
 class Display extends Component {
     render() {
@@ -18,6 +19,9 @@ class Display extends Component {
         }
         if (this.props.graph !== undefined) {
             return (<DisplayGraph {...this.props}></DisplayGraph>);
+        }
+        if (this.props["binary-tree"] !== undefined) {
+            return (<DisplayBinaryTree {...this.props}></DisplayBinaryTree>);
         }
         
         
