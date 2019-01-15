@@ -96,7 +96,6 @@ class DisplayLinkedList extends Component {
         var w = -Infinity;
         var h = -Infinity;
         nodelist.forEach((node) => {
-            console.warn(node);
             w = Math.max(w, node.getWidth());
             h = Math.max(h, node.getHeight());
         })

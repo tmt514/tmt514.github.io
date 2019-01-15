@@ -94,22 +94,28 @@ tags:
 
 ## 解法
 
-我們可以先做出以下觀察：如果存在至少一組交錯的子序列 A, B, A, B，那麼可以選取接連出現的某兩個 A、以及接連出現的某兩個 B，他們仍然是一個交錯出現的子序列。
+我們可以先做出以下觀察：如果存在至少一組交錯的子序列 A, B, A, B，那麼 A 總可以是序列中第一次出現的那個 A、而 B 總可以挑選序列中最後一次出現的 B。
 
-於是，對於每個數字 X 我們可以把所有 X 出現的位置表達成許多區間。這個題目便轉化為找字典順序最小的兩個相交的區間。
+於是，對於每一個 A，我們想知道 A 的右邊的第一個 B、還有跟 A 左邊出現最靠近的 B，滿足這個條件的 B 的最小值。對於一個特定數字 X，那麼我們可以把整個序列，依據所有 X 出現過的位置，切成許多區間。
+利用「掃描線」的概念，從右到左，維護目前跨過這條掃描線的區間們。
+假設現在掃描線所在的位置是一個 A 數字，那麼所有橫跨過這個區間、並且左界落在「第一個 A 的右邊」的那些區間編號最小者，就會是一個可能的答案。
 
-我們可以利用「掃描線」的概念，從右到左，維護目前跨過這條掃描線的區間們。如果現在有一個區間緊貼著掃描線，如下圖黑色部份：
+如下圖黑色部份，是我們想查詢的區間。打圈代表我們想知道的左界的確落在範圍內。而打叉代表左界落在範圍外：
 
 <mysvg width="400" height="200" viewbox="0 0 400 200">
 <line x1="200" x2="200" y1="0" y2="200" stroke="black" stroke-dasharray="3"></line>
 <text x="200" y="16">A</text>
+<text x="140" y="16">A</text>
 <text x="100" y="16">A</text>
 <line x1="200" x2="100" y1="20" y2="20" stroke-width="4pt"  stroke="black"></line>
+<text x="110" y="46" fill="red">B</text>
+<text x="70" y="46" fill="red">B</text>
 <text x="150" y="46" fill="red">B</text>
 <text x="230" y="46" fill="red">B</text>
 <line x1="150" x2="230" y1="50" y2="50" stroke-width="4pt"  stroke="red"></line>
 <circle cy="50" cx="350" r="10" fill="none" stroke-width="4pt"  stroke="red"></circle>
 <text x="170" y="76" fill="gold">C</text>
+<text x="80" y="76" fill="gold">C</text>
 <text x="260" y="76" fill="gold">C</text>
 <line x1="170" x2="260" y1="80" y2="80" stroke-width="4pt"  stroke="gold"></line>
 <circle cy="80" cx="350" r="10" fill="none" stroke-width="4pt"  stroke="gold"></circle>
@@ -191,7 +197,7 @@ int main() {
     positions[A].pop_back();
     Remove(i);
     if (!positions[A].empty()) {
-      int B = Query(positions[A].back());
+      int B = Query(positions[A][0]);
       if (B > 0) UpdateSolution(A, B);
       Insert(positions[A].back(), A);
     }
@@ -200,6 +206,10 @@ int main() {
   return 0;
 }
 ```
+
+### 夢月說
+
+花一分鐘想不出來，花三分鐘就想到了！
 
 ### 關於競程日記
 

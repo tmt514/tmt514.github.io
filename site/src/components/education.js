@@ -15,7 +15,6 @@ class Education extends Component {
             </span>
         </div>))
 
-        console.log(this.props);
         return (
             <section className="section">
             <h2 className="title is-size-4">Education</h2>

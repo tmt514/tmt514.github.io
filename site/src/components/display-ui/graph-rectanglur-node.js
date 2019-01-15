@@ -118,6 +118,6 @@ export class GraphArrayNode extends GraphRectangularNode {
     }
     
     updateProps(newProps) {
-        console.log(newProps);
+        console.warn("Not Changed Yet.", newProps);
     }
 }

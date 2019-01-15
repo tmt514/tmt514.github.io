@@ -22,7 +22,6 @@ class Publication extends Component {
             </div>
         ));
 
-        console.log(this.props);
         
         return (
             <section className="section">
