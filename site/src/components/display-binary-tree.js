@@ -37,9 +37,13 @@ class DisplayBinaryTree extends Component {
                 structure.push([l, r])
                 value.push(`${i+1}`);
             }
-            newState.data = {
+            Object.assign(newState.data, {
                 structure: structure,
-                value: value,
+            })
+            if (nextProps.numbered !== undefined) {
+                Object.assign(newState.data, {
+                    value: value
+                })
             }
         }
         

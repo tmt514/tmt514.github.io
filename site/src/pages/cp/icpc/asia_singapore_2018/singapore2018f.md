@@ -88,21 +88,42 @@ tags:
 
 * [Open Kattis - Wi Know](https://open.kattis.com/problems/wiknow)
 
-**題目出處**：ICPC 2018 Asia Hanoi Regional
+**題目出處**：ICPC 2018 Asia Singapore Regional
 
 ---
 
 ## 解法
 
-<display
-    binary-tree
-    complete
-    numbered
-    depth='5'
-    data='{
-        structure: [[1, 2], [3, 4], [5, 6], [-1, -1], [-1, -1], [-1, -1], [-1, -1]],
-        value: ["0", "1", "2", "3", "4", "5", "6"],
-    }'></display>
+我們可以先做出以下觀察：如果存在至少一組交錯的子序列 A, B, A, B，那麼可以選取接連出現的某兩個 A、以及接連出現的某兩個 B，他們仍然是一個交錯出現的子序列。
+
+於是，對於每個數字 X 我們可以把所有 X 出現的位置表達成許多區間。這個題目便轉化為找字典順序最小的兩個相交的區間。
+
+我們可以利用「掃描線」的概念，從右到左，維護目前跨過這條掃描線的區間們。如果現在有一個區間緊貼著掃描線，如下圖黑色部份：
+
+<mysvg width="400" height="200" viewbox="0 0 400 200">
+<line x1="200" x2="200" y1="0" y2="200" stroke="black" stroke-dasharray="3"></line>
+<text x="200" y="16">A</text>
+<text x="100" y="16">A</text>
+<line x1="200" x2="100" y1="20" y2="20" stroke-width="4pt"  stroke="black"></line>
+<text x="150" y="46" fill="red">B</text>
+<text x="230" y="46" fill="red">B</text>
+<line x1="150" x2="230" y1="50" y2="50" stroke-width="4pt"  stroke="red"></line>
+<circle cy="50" cx="350" r="10" fill="none" stroke-width="4pt"  stroke="red"></circle>
+<text x="170" y="76" fill="gold">C</text>
+<text x="260" y="76" fill="gold">C</text>
+<line x1="170" x2="260" y1="80" y2="80" stroke-width="4pt"  stroke="gold"></line>
+<circle cy="80" cx="350" r="10" fill="none" stroke-width="4pt"  stroke="gold"></circle>
+<text x="270" y="106" fill="green">D</text>
+<text x="60" y="106" fill="green">D</text>
+<line x1="270" x2="60" y1="110" y2="110" stroke-width="4pt"  stroke="green"></line>
+<path d="M 340,100 L 360,120 M 340,120 L 360,100" stroke-width="4pt"  stroke="green"></path>
+<text x="120" y="136" fill="blue">E</text>
+<text x="240" y="136" fill="blue">E</text>
+<line x1="120" x2="240" y1="140" y2="140" stroke-width="4pt"  stroke="blue"></line>
+<circle cy="140" cx="350" r="10" fill="none" stroke-width="4pt"  stroke="blue"></circle>
+</mysvg>
+
+那麼我們只要找出與黑色區間相交的「最小編號」區間就可以了！實作上我們維護一個區間樹，當掃描線從右掃到左的時候，先將「離開的區間」刪掉，然後再依據當前區間 $[\ell, r]$，查詢現在「左界 $>\ell$」的區間編號最小值。然後再將當前區間左界加入區間樹。
 
 ### 參考程式碼
 
