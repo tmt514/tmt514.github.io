@@ -45,8 +45,9 @@ backlink: "/icpcblog-weekly-2019"
 
 -----
 
-### (TBD) ICPC 2018 Asia Seoul Regional
+### (Jan.22 - Jan.28) ICPC 2018 Asia Seoul Regional
 
+* [Codefroces Gym 題目連結](https://codeforces.com/gym/102070)
 * [Local Contest Page](http://icpckorea.org/archives/1774)
 * [Problem Set (PDF)](http://icpckorea.org/2018/regional/problemset-2018.pdf)
 * [TestData.zip](http://icpckorea.org/2018/regional/2018_seoul_testdata.zip)
