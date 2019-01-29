@@ -59,9 +59,13 @@ backlink: "/icpcblog-weekly-2019"
 
 -----
 
-### (TBD) ICPC 2018 Asia Nakhon Pathom Regional
+### (Jan.29 - Feb.4) ICPC 2018 Asia Nakhon Pathom Regional
 
 * [Local Contest Page](https://www.ict.mahidol.ac.th/acmicpc/2018/)
+* 提供競程日記的參考題解：  
+<problem-list-as-tags
+    n='12'
+    path-prefix="/problem/icpc/asia_nakhon_pathom_2018"></problem-list-as-tags>
 
 -----
 

@@ -5,6 +5,7 @@ import { Quadrant } from './display-gadgets/rectangle'
 import DisplayLinkedList from './display-linked-list';
 import DisplayGraph from './display-graph';
 import DisplayBinaryTree from './display-binary-tree';
+import DisplayInputFormat from './display-input-format';
 
 class Display extends Component {
     render() {
@@ -22,6 +23,9 @@ class Display extends Component {
         }
         if (this.props["binary-tree"] !== undefined) {
             return (<DisplayBinaryTree {...this.props}></DisplayBinaryTree>);
+        }
+        if (this.props["input-format"] !== undefined) {
+            return (<DisplayInputFormat {...this.props}></DisplayInputFormat>);
         }
         
         
