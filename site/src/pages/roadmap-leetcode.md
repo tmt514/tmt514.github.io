@@ -15,7 +15,8 @@ roadmap_label_h3: "Topic ###: "
 
 ### 鏈結串列 Linked Lists
 
-* <mylink to='/leetcode-guide/linked-lists'>鏈結串列的大致分類 Type of Linked Lists</mylink>
+* [關於資料結構 Data Structures](/leetcode-guide/what-is-data-structure)
+* [鏈結串列的大致分類 Type of Linked Lists](/leetcode-guide/linked-lists)
 * 練習題
 
 ### 陣列 Arrays

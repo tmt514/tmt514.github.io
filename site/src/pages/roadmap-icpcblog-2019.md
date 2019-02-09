@@ -59,9 +59,10 @@ backlink: "/icpcblog-weekly-2019"
 
 -----
 
-### (Jan.29 - Feb.4) ICPC 2018 Asia Nakhon Pathom Regional
+### (TBD) ICPC 2018 Asia Nakhon Pathom Regional
 
 * [Local Contest Page](https://www.ict.mahidol.ac.th/acmicpc/2018/)
+* [Codeforces Gym 題目連結](https://codeforces.com/gym/102091/)
 * 提供競程日記的參考題解：  
 <problem-list-as-tags
     n='12'
@@ -87,4 +88,7 @@ backlink: "/icpcblog-weekly-2019"
 
 ### (TBD) ICPC 2018 Taipei Regional
 
-台北站到目前為止還沒有釋出題本。
+* [Local Contest Page](http://icpc2018.ntu.edu.tw/)
+* [Problem Set (PDF)](http://icpc2018.ntu.edu.tw/problems.pdf)
+* [Standings](https://icpc2018score.ntu.edu.tw/)
+
