@@ -14,7 +14,7 @@ import "bulma/css/bulma.css"
 
 import CCBYNCSA from '../images/cc-by-nc-sa.png';
 import Display, {DisplayInner} from './display';
-import Theorem from './theorem';
+import Theorem, {Note} from './theorem';
 import Algorithm from './algorithm';
 
 import IncludeProblem from './include-problem';
@@ -90,6 +90,7 @@ class Template extends Component {
             mysvg: MySVG,
             showvariable: ShowVariable2,
             theorem: Theorem,
+            note: Note,
             algorithm: Algorithm,
             mylink: Link,
             "include-problem": IncludeProblem,

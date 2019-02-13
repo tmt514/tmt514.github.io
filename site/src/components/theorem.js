@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 
 import markdown from './markdown'
 
+export const Note = (props) =>
+(<Theorem {...props} c="is-info"></Theorem>);
+
 class Theorem extends Component {
     render() {
         const val = this.props.children;
