@@ -11,7 +11,7 @@ title: "圖論演算法 0 - 介紹"
 
 ## §0.2 參考書籍
 
-我想要紀錄一些《Algorithmic Graph Theory and Perfect Graphs》書籍的閱讀筆記。這本書是由 Martin Charles Golumbic 撰寫。第一版是 1980 年出版，而第二版則是在 2004 年出版。
+我想要紀錄一些《Algorithmic Graph Theory and Perfect Graphs》書籍的閱讀筆記。這本書是由 Martin Charles Golumbic 撰寫。第一版是 1980 年出版，而第二版則是在 2004 年出版。中文的參考資料（尤其是名詞翻譯）則推薦大家閱讀張鎮華教授撰寫的《演算法觀點的圖論》。
 
 ## §0.3 探討的方向
 
