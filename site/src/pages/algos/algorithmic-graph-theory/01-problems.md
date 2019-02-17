@@ -2,7 +2,7 @@
 category: "algo"
 path: "/algo/algorithmic-graph-theory/computational-problem"
 date: "2019-02-10"
-title: "演算法觀點下的圖論 1 - 計算理論"
+title: "圖論演算法 1 - 計算理論"
 ---
 
 ## §1.1 計算模型

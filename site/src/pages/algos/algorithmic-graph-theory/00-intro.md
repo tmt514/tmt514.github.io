@@ -2,7 +2,7 @@
 category: "algo"
 path: "/algo/algorithmic-graph-theory/intro"
 date: "2019-02-09"
-title: "演算法觀點下的圖論 0 - 介紹"
+title: "圖論演算法 0 - 介紹"
 ---
 
 ## §0.1 引言

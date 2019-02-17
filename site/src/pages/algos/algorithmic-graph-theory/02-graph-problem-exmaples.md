@@ -2,7 +2,7 @@
 category: "algo"
 path: "/algo/algorithmic-graph-theory/graph-problem-examples"
 date: "2019-02-12"
-title: "演算法觀點下的圖論 2 - 圖論上的計算問題"
+title: "圖論演算法 2 - 圖論上的計算問題"
 ---
 
 ### 圖論上的計算問題舉例
