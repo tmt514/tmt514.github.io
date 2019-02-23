@@ -33,8 +33,8 @@ class DisplayInputFormat extends Component {
                 const idx_begin = (idx === undefined? 1 : idx)
                 const idx_second = (isNaN(idx_begin)? idx_begin + "+1" : idx_begin+1)
                 const idx_end = (idx === 0? size + (-1) : size)
-                if (size instanceof String || size >= 10) {
-                    return ` $${props.id}_{${idx_begin}}, ${props.id}_{${idx_second}}, \\ldots + ${props.id}_{${idx_end}}$`
+                if ((typeof(size) === "string") || size >= 10) {
+                    return ` $${props.id}_{${idx_begin}}, ${props.id}_{${idx_second}}, \\ldots, ${props.id}_{${idx_end}}$`
                 } else {
                     var ret = ` $${props.id}_{${idx_begin}}`
                     for (var i = idx_begin+1; i <= idx_end; i++) {
