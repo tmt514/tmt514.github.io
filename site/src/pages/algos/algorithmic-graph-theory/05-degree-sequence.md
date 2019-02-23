@@ -93,7 +93,7 @@ $$
 任何滿足 $\delta(G) \ge n/2$ 的圖，上面都有一個漢米頓圈。
 </theorem>
 
-## 相關習題
+## 習題
 
 0. <span class='tag is-dark'>證明題</span> 試證明：對於任意一個簡單圖，至少有兩個點度數一樣。
 1. <span class='tag is-dark'>證明題</span> 試證明：對於任意圖 $G$，上面的 $k$ 個點的子圖數量至多為 $O(m^{k/2})$ 個。
