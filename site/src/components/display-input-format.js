@@ -17,13 +17,18 @@ class DisplayInputFormat extends Component {
                 return ` ${lineno} `
             }
         }
+        const parsetypename = (type) => {
+            var ret = "";
+            if (type === 'int') ret += "整數"
+            return ret;
+        }
         const parsetype = (type, many=1) => {
             var ret = "";
             if (many === 1) ret = "一個"
             else if (many === 2) ret = "兩個"
             else ret = ` $${many}$ 個`
 
-            if (type === 'int') ret += "整數"
+            ret += parsetypename(type);
             return ret;
         }
         const parsenames = (props) => {
@@ -65,8 +70,21 @@ class DisplayInputFormat extends Component {
             return "";
         }
         var ret = "輸入的";
-        const walk = (children, lineno) => {
+        const walk = (children, lineno, sameLine) => {
             if (children === undefined) return;
+
+            if (sameLine === true) {
+                const varlist = [];
+                for (let child of children) {
+                    if (child instanceof Object) {
+                        if (child.type === "variable") {
+                            varlist.push(child);
+                        }
+                    }
+                }
+                return;
+            }
+
             for (let child of children) {
                 if (child instanceof Object) {
                     if (child.type === "variable") {
@@ -85,6 +103,8 @@ class DisplayInputFormat extends Component {
                             ret += `對於每一組測試資料：`
                         }
                         walk(child.props.children, 0);
+                    } else if (child.type === "singleline") {
+                        walk(child.props.children, lineno, true)
                     }
                 }
             }
