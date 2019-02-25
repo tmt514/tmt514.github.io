@@ -1,5 +1,5 @@
 ---
-category: "cp"
+category: "cp_disabled"
 path: "/problem/icpc/asia_jakarta_2018"
 date: "2018-12-26"
 title: "ICPC 2018 Asia Jakarta Regional"

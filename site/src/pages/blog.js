@@ -100,6 +100,9 @@ const Blog = ({ data }) => (
                 <p>
                 蒐集一些競賽程式題目題解的地方～
                 </p>
+                <p>
+                    <a href="/icpcblog-weekly-2019">競程日記 2019 計畫</a>
+                </p>
                 <BlogPostList list={data.cpBlog} />
             </div>
             </div>
