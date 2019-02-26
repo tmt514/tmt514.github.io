@@ -32,8 +32,18 @@ export default class GraphEdge {
             const dir = {x: toCenter.x - fromCenter.x, y: toCenter.y - fromCenter.y};
             const degree = Math.atan2(dir.y, dir.x) * 180 / Math.PI;
             
+            // bending angle
+            var bang = 0;
+            if (this.props.modifiers && this.props.modifiers.bendleft !== undefined) bang=15;
+            if (this.props.modifiers && this.props.modifiers.bendright !== undefined) bang=-15;
+            if (this.props.modifiers && this.props.modifiers.bend !== undefined) bang=this.props.modifiers.bend;
+            
+            const mid = {x: (toCenter.x + fromCenter.x)/2, y: (toCenter.y + fromCenter.y)/2 };
+            const stretch = Math.sin(bang/180*Math.PI);
+            const midshift = {x: dir.y*stretch, y: -dir.x*stretch};
+            
             if (fromAnchor.at === "entire-node") {
-                fromAnchor.angle = degree;
+                fromAnchor.angle = degree - 2*bang;
                 fromAnchor.at = "boundary";
                 d.push(["M", fromNode.getAnchorPoint(fromAnchor, fromCenter)]);
             } else if (i === 0) {
@@ -42,12 +52,22 @@ export default class GraphEdge {
                 // do nothing when i > 0.
             }
 
+            var toNodePosition = toCenter;
+            
             if (toAnchor.at === "entire-node") {
-                toAnchor.angle = 180+degree;
+                toAnchor.angle = 180 + degree + bang*2;
                 toAnchor.at = "boundary";
-                d.push(["L", toNode.getAnchorPoint(toAnchor, toCenter)]);
+                toNodePosition = toNode.getAnchorPoint(toAnchor, toCenter)
+            }
+            
+            if (this.props.modifiers &&
+            (this.props.modifiers.bendleft !== undefined ||
+             this.props.modifiers.bendright !== undefined ||
+             this.props.modifiers.bend !== undefined)) {
+                d.push(["Q", { x: mid.x + midshift.x, y: mid.y + midshift.y }])
+                d.push(["", toNodePosition])
             } else {
-                d.push(["L", toCenter]);
+                d.push(["L", toNodePosition]);
             }
             
         }
@@ -60,7 +80,7 @@ export default class GraphEdge {
         const style = {
             stroke: this.props.stroke,
             strokeWidth: this.props.strokeWidth,
-            fill: this.props.fill,
+            fill: this.props.fill||"none",
         }
         if (this.props.markerStart !== undefined) style.markerStart = `url(#${this.props.markerStart.props.id})`
         if (this.props.markerMid !== undefined) style.markerMid = `url(#${this.props.markerMid.props.id})`

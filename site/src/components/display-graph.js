@@ -47,11 +47,13 @@ export default class DisplayGraph extends Component {
         }
         for (let i = 0; i < data.edges.length; i++) {
             const e = data.edges[i];
+            const modifiers = e[2];
             if (edgelist[`edge-${i}-${e[0]}-${e[1]}`] === undefined) {
                 const edgeProps = {
                     id: `edge-${i}-${e[0]}-${e[1]}`,
                     pathAnchors: [new AnchorInfo(`node-${e[0]}`, 0, 'entire-node', 0),
                                     new AnchorInfo(`node-${e[1]}`, 0, 'entire-node', 0)],
+                    modifiers,
                 }
 
                 uiStores.forEach((uiStore) => {
