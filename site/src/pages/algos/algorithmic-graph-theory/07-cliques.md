@@ -40,9 +40,9 @@ $$
 
 | 演算法 | 複雜度 | 備註 |
 |-------|-------|------|
-| Bron-Kerbosch [1973] | $O(3^{n/3})$ | 由 Tomita et al. 證明 |
-| Tomita et al. [2010] | $O(3^{n/3})$ | |
-| Eppstein at al. [2006] | $O(dn3^{d/3})$ | $d$ 是 degeneracy |
+| Bron-Kerbosch [1973] |  |  |
+| Tomita et al. [2006] | $O(3^{n/3})$ | Bron-Kerbosch with pivot |
+| Eppstein at al. [2010] | $O(dn3^{d/3})$ | $d$ 是 degeneracy |
 | Tsukiyama [1977] | $O(nm\mu)$ | $\mu$ 是輸出的 maximal clique 數量。 |
 | Chiba and Nishizeki [1985] | $O(a(G)m\mu)$ | $a(G)$ 是 arboricity of $G$。 |
 | Makino and Uno [2004] | $O(\Delta^4\mu)$ | $\Delta=\Delta(G)$。 |
@@ -51,6 +51,24 @@ $$
 ## §7.2 Bron–Kerbosch 演算法
 
 基本上就是個 DFS，只是在搜索過程中，我們維護三個點集合：$P, R, X$，代表我們目前欲探索的極大完全子圖，必須包含 $R$ 當中的所有點、可能包含 $P$ 當中的某些點、以及**不能**包含 $X$ 中的任何一點。
+
+
+
+### Bron-Kerbosch with Pivot
+
+<theorem title='時間複雜度分析 [Tomita et al. 2006, Eppstein et al. 2010]'>
+使用 Pivot 的 B-K 演算法滿足遞迴式 $$
+T(n) = \max_k\set{ kT(n-k) } + O(n^2), $$
+其中 $n=|P|$。
+</theorem>
+
+#### 證明
+
+令 $k=|P\setminus \Gamma(u)|$。
+如果挑選的 $u = \arg\max_{v\in P\cup X} |P\cap \Gamma(v)|$，那麼每一次遞迴呼叫保證有 $|P\cap \Gamma(v)|\le n-k$。因此最壞情況下遞迴所需要的時間是 $\max_k\set{kT(n-k)}$。找出 Pivot 可以在 $O(n^2)$ 時間內完成。
+
+上面這個遞迴式解得 $T(n) = O(3^{n/3})$，剛好等於一個圖中可能的極大完全子圖的數量，非常湊巧。
+
 
 ## §7.3 找出一個最大完全子圖
 
