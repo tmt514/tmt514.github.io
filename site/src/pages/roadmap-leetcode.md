@@ -17,7 +17,8 @@ roadmap_label_h3: "Topic ###: "
 
 * [關於資料結構 Data Structures](/leetcode-guide/what-is-data-structure)
 * [鏈結串列的大致分類 Type of Linked Lists](/leetcode-guide/linked-lists)
-* 練習題
+* <tag-easy></tag-easy><include-problem notyet inline path='/problem/leetcode/206' link='https://leetcode.com/problems/reverse-linked-list/'></include-problem>
+* <tag-medium></tag-medium><include-problem inline path='/problem/leetcode/19'></include-problem>
 
 ### 陣列 Arrays
 

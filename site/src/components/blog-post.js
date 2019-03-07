@@ -20,6 +20,7 @@ import Algorithm from './algorithm';
 import IncludeProblem from './include-problem';
 import { roadmapTransformer, ProblemListAsTags } from './roadmaps';
 import { footnoteTransformer } from './footnote';
+import { tagTransformer } from './tag';
 
 import markdown from './markdown';
 
@@ -78,6 +79,7 @@ class Template extends Component {
         const modifiedAst = JSON.parse(JSON.stringify(ast));
         roadmapTransformer({frontmatter: frontmatter})(modifiedAst);
         footnoteTransformer({frontmatter: frontmatter})(modifiedAst);
+        tagTransformer({frontmatter: frontmatter})(modifiedAst);
         return new rehypeReact({
           createElement: React.createElement,
           components: {

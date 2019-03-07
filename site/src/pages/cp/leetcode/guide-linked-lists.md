@@ -37,6 +37,10 @@ typedef struct Node {
 
 每一個 `struct` 在記憶體中會是連續的一塊空間。一般來說，我們會額外儲存一個指標 `head` 指向這個鏈結串列的開頭（不然就沒辦法存取了）。進行大部分的操作都是從這個 `head` 開始。
 
+<theorem c='is-link'>
+除此之外還有**環狀鏈結串列**（Circular Linked Lists）等資料結構。
+</theorem>
+
 ## 常見的鏈結串列操作
 
 ### 就地插入 Insertion
@@ -50,6 +54,4 @@ typedef struct Node {
 ### 搜尋 Search
 
 給定開頭指標 `head` 以及目標資料 `target`，判斷資料是否出現在任何節點上面。
-
-## 合法的鏈結串列
 
