@@ -40,7 +40,7 @@ $$
 
 | 演算法 | 複雜度 | 備註 |
 |-------|-------|------|
-| Bron-Kerbosch [1973] |  |  |
+| Bron-Kerbosch [1973] | 很糟 | 會找到很多非極大完全子圖。 |
 | Tomita et al. [2006] | $O(3^{n/3})$ | Bron-Kerbosch with pivot |
 | Eppstein at al. [2010] | $O(dn3^{d/3})$ | $d$ 是 degeneracy |
 | Tsukiyama [1977] | $O(n(n^2-m)\mu)$ | $\mu$ 是輸出的 maximal clique 數量。 |
