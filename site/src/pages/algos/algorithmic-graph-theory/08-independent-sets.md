@@ -9,13 +9,16 @@ title: "圖論演算法 8 - 獨立集 Independent Sets"
 
 透過直接的觀察可以得知，$S$ 在 $G$ 上是一個獨立集，等價於 $\overline{G}[S]$ 是一個完全子圖，其中 $\overline{G}$ 是 $G$ 的**補圖**（Complement Graph）。從這個觀察也可以知道，如果我們要列舉出所有極大獨立集（Maximal Independent Set, MIS），那麼所有適用於前一節找 Maximal Clique 的演算法也通通都適用於此。
 
-相對應地，我們令 $\alpha(G)$ 表示為圖 $G$ 上最大獨立集的大小。
+相對應地，我們令 $\alpha(G)$ 表示為圖 $G$ 上最大獨立集的大小。關於這個獨立集的大小，
 
 ## §8.1 關於 $\alpha(G)$ 的估計
 
 <theorem title='哼哼'>
+對於所有的圖 $G=(V, E)$，都有：
+$$ \alpha(G) \ge \sum_{v\in V} \frac{1}{\deg(v) + 1} $$
 </theorem>
 
+這個定理有個利用隨機演算法輕鬆證明的結論，它在平行與分散式計算上面找極大獨立集有非常顯著的應用，大家可以參考 [CMU 的 Luby演算法講義](http://www.cs.cmu.edu/afs/cs/academic/class/15750-s19/OldScribeNotes/lecture32.pdf)。
 
 -----
 
@@ -57,11 +60,23 @@ $c^3 + 1 < c^4$
 當子問題的所有的點度數夠小的時候，可以用動態規劃紀錄下答案。可以證明此情形下**所有的**誘導子圖總數量不多。
 </note>
 
-<theorem title='Robson [1985]'>
-對於一個度數不超過 8 的圖 $G$，其連通誘導子圖的數量不超過 $\text{poly}(n)(7^76^{-6})^n$ 個。
+<theorem title='Fuss-Catalan Numbers [Robson 1985; Concrete Math]'>
+對於一個度數不超過 8 的圖 $G$，其包含 $\delta n$ 個點的連通誘導子圖的數量不超過 $\text{poly}(n)(7^76^{-6})^{\delta n}$ 個。
 </theorem>
 
-## 習題
+#### 證明
+
+固定一個圖 $G$ 的**連通**誘導子圖，我們可以從任意一個點出發，畫出一棵 BFS 樹。顯然不同的誘導子圖（點集合不同）會造出不同的 BFS 樹。所以誘導子圖 $\leftrightarrow$ BFS 樹是一個一對多（1-to-many）的關係。只要我們給出所有這樣的 BFS 樹的數量上界，就能夠說明誘導子圖數量的上界。
+
+根據題目條件，每個點度數不超過 8。因此除了根節點以外，其他的點的子節點數量都不超過 7。根據 Fuss-Catalan 公式，這樣子的樹會有 $\text{poly}(n){7n\choose n}$ 左右。（註：可參考 OEIS http://oeis.org/A002296）
+
+-----
+
+上面這個定理要怎麼用來加速呢？如果我們只紀錄「點的總數不超過 $\delta n$、並且該連通誘導子圖上所有點度數都不超過 8」的圖，那麼這樣的誘導子圖的總數不會超過 $\text{poly}(n){{7\delta n} \choose {\delta n}}\approx \text{poly}(n)(7^76^{-6})^{\delta n}$。當 [$\delta \le  1/7$ 的時候](https://www.wolframalpha.com/input/?i=((7%5E7%2F(6%5E6))%5Ex)*(x%5Ex)*((1-x)%5E(1-x))+%3D+1)，用這個方法會比第一種技巧需要的狀態總數來得少。
+
+存在度數超過 8 的點的時候怎麼辦？這時候只要用老樣子遞迴就行啦～$$ T(n) = T(n-1) + T(n-9) + \text{poly}(n)$$ 解出來大概是 $(1.2132)^n$，只要我們選擇的 $\delta$ 不要太小，就可以讓 $(7^76^{-6})^{\delta n}$ 這項大過這個時間複雜度。
+
+## §8.3  習題
 
 1. <span class='tag is-dark'>證明題</span> 利用「度數為 2 的點可以忽略不計」這個觀察，證明上述演算法的另一種分析方式：
 $$
@@ -71,3 +86,4 @@ T(n-1)+T(n-5) + \text{poly}(n)\\
 \end{cases}
 $$
 而得出 $T(n) = O(1.3247^n)$ 的結論。
+2. <span class='tag is-dark'>思考題</span> 解釋為什麼上述 DFS 方法找出最大獨立集的方法，沒辦法（在同樣時間複雜度情形下）「列舉」所有的極大獨立集。
