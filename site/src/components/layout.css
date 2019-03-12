@@ -25,3 +25,7 @@ a.open-sol:hover:after {
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
 }*/
+@import url('https://fonts.googleapis.com/css?family=Barlow');
+.research {
+    font-family: 'Barlow', sans-serif;
+}

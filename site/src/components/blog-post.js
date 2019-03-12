@@ -105,7 +105,7 @@ class Template extends Component {
     return (
       <div>
           <Helmet title={`CodeStack - ${post.frontmatter.title}`} />
-          <section className="hero is-dark">
+          <section className={`hero ${post.frontmatter.css_title_theme || "is-dark"}`}>
           <div className="hero-body">
           <div className="container">
           <span className="is-pulled-right">
@@ -122,7 +122,7 @@ class Template extends Component {
           </div>
           </div>
           </section>
-          <section className="section">
+          <section className={`section ${post.frontmatter.css_content_theme || ""}`}>
           <div className="container">
           <div className="content">
           { statefulRenderAst(post.frontmatter)(post.htmlAst) }
@@ -160,6 +160,8 @@ export const pageQuery = graphql`
         description
         roadmap_label_h3
         backlink
+        css_title_theme
+        css_content_theme
       }
     }
   }
