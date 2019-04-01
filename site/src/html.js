@@ -14,15 +14,6 @@ export default class HTML extends React.Component {
           />
           {this.props.headComponents}
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"></link>
-        </head>
-        <body {...this.props.bodyAttributes}>
-          {this.props.preBodyComponents}
-          <div
-            key={`body`}
-            id="___gatsby"
-            dangerouslySetInnerHTML={{ __html: this.props.body }}
-          />
-          {this.props.postBodyComponents}
           <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
             window.MathJax = {
               TeX: {
@@ -38,9 +29,18 @@ export default class HTML extends React.Component {
               tex2jax: {
                 inlineMath: [ ['$','$'], ['$$','$$'] ],
                 processEscapes: true
-              }
+              },
             };
             `}} />
+        </head>
+        <body {...this.props.bodyAttributes}>
+          {this.props.preBodyComponents}
+          <div
+            key={`body`}
+            id="___gatsby"
+            dangerouslySetInnerHTML={{ __html: this.props.body }}
+          />
+          {this.props.postBodyComponents}
           <script type="text/javascript" 
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_SVG">
           </script>

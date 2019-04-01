@@ -104,7 +104,21 @@ class Template extends Component {
 
     return (
       <div>
-          <Helmet title={`CodeStack - ${post.frontmatter.title}`} />
+          <Helmet title={`tmt's blog - ${post.frontmatter.title}`}>{post.frontmatter.math_font && (<script>
+            {`
+              if (window.MathJax.Hub !== undefined) {
+                window.MathJax.Hub.Config({
+                  SVG: {
+                    font: '${post.frontmatter.math_font}'
+                  }});
+              } else {
+                window.MathJax.SVG = {
+                  font: '${post.frontmatter.math_font}'
+                };
+              }
+            `}
+          </script>)}
+          </Helmet>
           <section className={`hero ${post.frontmatter.css_title_theme || "is-dark"}`}>
           <div className="hero-body">
           <div className="container">
@@ -162,6 +176,7 @@ export const pageQuery = graphql`
         backlink
         css_title_theme
         css_content_theme
+        math_font
       }
     }
   }
