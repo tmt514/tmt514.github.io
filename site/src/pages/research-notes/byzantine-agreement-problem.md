@@ -23,16 +23,21 @@ The protocol is required to have the following properties:
 * **Validity**: the output bit must occur as some _good_ processors's input bit.
 * **Termination**: all _good_ processors halts after some a priori known round number $r$.
 
+### 1.1 Terminology
+
+* **Resilience**: we say that a protocol is $t$-resilient if consensus can be made if at most $t$ processors becomes bad.
+* **Failure**: there are two types of failure: the **Fail-Stop** type failure or the **Byzantine** type failure. We consider Byzantine type failure.
+
 ## 2 The FLP Impossibility Result
 
-> Fischer, Lynch and Paterson. [_Impossibility of Distributed Consensus with One Faulty Process_](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf), 1985.
+> 📑Fischer, Lynch and Paterson. [_Impossibility of Distributed Consensus with One Faulty Process_](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf), 1985.
 
 
 ## 3 Common Abstractions to the Asynchronous Model
 
 ### 3.1 Bracha's Reliable Broadcast
 
-> Gabriel Bracha. [_Asynchronous Byzantine Agreement Protocols_](https://core.ac.uk/download/pdf/82523202.pdf), 1987.
+> 📑Gabriel Bracha. [_Asynchronous Byzantine Agreement Protocols_](https://core.ac.uk/download/pdf/82523202.pdf), 1987.
 
 The first abstraction of this model is the _reliable broadcast_. Let $t$ be the number of bad processors. When $t < n/3$, they have the following properties:
 
@@ -55,12 +60,27 @@ The first abstraction of this model is the _reliable broadcast_. Let $t$ be the 
 
 ## 4 Upper Bounds
 
-| Algorithm | $t$ | communication time | local running time |
+| Algorithm | Resilience | communication time | local running time |
 |---|---|---|---|
-| Ben-Or 1983 | $t < n/2$ | Exponential |   |
+| Ben-Or 1983 | $t < n/5$ | Exponential |   |
 | Bracha 1987 | $t < n/3$ | Exponential |   |
+| King and Saia 2016 | $t < 1.15\times 10^{-9}n$ | $O(n^3)$ | Polynomial Time |
+| King and Saia 2016 | $t < n/400$ | $O(n^{2.5}\sqrt{\log n})$ | Exponential Time |
+| Li and Duan 2018 | $t = \Theta(n)$ | $O(n)$ | Exponential Time |
 
 ## 5 Lower Bounds
 
-> James Aspnes. [_Randomized Protocols for Asynchronous Consensus_](http://disi.unitn.it/~montreso/ds/syllabus/papers/randomized-consensus-survey.pdf), Distributed Computing 2003.
-> Hagit Attiya and Keren Censor. [_Lower bounds for randomized consensus under a weak adversary_](https://dspace.mit.edu/openaccess-disseminate/1721.1/64943), PODC 2008.
+> 📑James Aspnes. [_Randomized Protocols for Asynchronous Consensus_](http://disi.unitn.it/~montreso/ds/syllabus/papers/randomized-consensus-survey.pdf), Distributed Computing 2003.
+>
+> 📑Hagit Attiya and Keren Censor. [_Lower bounds for randomized consensus under a weak adversary_](https://dspace.mit.edu/openaccess-disseminate/1721.1/64943), PODC 2008.
+
+[Attiya and Censor 2008] The probability that a randomized consensus algorithm does not terminate after $k(n-t)$ **steps** is at least $1/c^k$ for some constant $c$, even for a weak adversary.
+
+
+## Other Models and Assumptions
+
+### Fail-Stop Failure
+
+> 📑Marcos K. Arguilera and Sam Toueg. [The correctness proof of Ben-Or’s randomized consensus algorithm](https://link.springer.com/article/10.1007/s00446-012-0162-z), Distributed Computing 2012.
+
+Gives the proof to Ben-Or's consensus protocol when $t < n/2$ assuming Fail-Stop type failure.
