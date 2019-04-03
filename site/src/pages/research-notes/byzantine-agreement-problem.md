@@ -41,8 +41,8 @@ The protocol is required to have the following properties:
 
 The first abstraction of this model is the _reliable broadcast_. Let $t$ be the number of bad processors. When $t < n/3$, they have the following properties:
 
-* If a good processor sends a message $m$, then every good processor eventually _receives_ $m$.
-* If a bad processor sends a message, then every good processor _receives_ the same message $m$ or they do not _receive_ any message at all.
+* If a good processor sends a message $m$, then every good processor eventually _accepts_ $m$.
+* If a bad processor sends a message, then every good processor _accepts_ the same message $m$ or they do not _accept_ any message at all.
 * They terminated in $O(1)$ rounds.
 
 
@@ -67,6 +67,21 @@ The first abstraction of this model is the _reliable broadcast_. Let $t$ be the 
 | King and Saia 2016 | $t < 1.15\times 10^{-9}n$ | $O(n^3)$ | Polynomial Time |
 | King and Saia 2016 | $t < n/400$ | $O(n^{2.5}\sqrt{\log n})$ | Exponential Time |
 | Li and Duan 2018 | $t = \Theta(n)$ | $O(n)$ | Exponential Time |
+
+### 4.1 Simplified Bracha
+
+1. Reliably broadcast $v_p$.
+2. Wait until accept $n-t$ messages.  
+  $v_p\gets $ majority of these messages.  
+  Reliably broadcast $v_p$.
+3. Wait until accept $n-t$ messages.  
+    * If $ >n/2$ messages have value same $v$:  
+      Reliably broadcast "I see $v$".
+    * else  
+      Reliably broadcast "I don't see majority".
+4. Wait until accept $n-t$ messages.  
+  Let $x$ be the number of messages of the form "I see $v$"
+
 
 ## 5 Lower Bounds
 
