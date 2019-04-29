@@ -1,0 +1,1 @@
+{"data":{"markdownRemark":{"htmlAst":{"type":"root","children":[],"data":{"quirksMode":false}},"frontmatter":{"date":null,"path":"/problem/leetcode/326","title":"[LC326] Power of Three","description":"給定一個整數 $x$，若這個整數是 3 的次方則回傳 `true`，否則回傳 `false`。\n","roadmap_label_h3":null,"backlink":null,"css_title_theme":null,"css_content_theme":null,"math_font":null}}},"pageContext":{}}
