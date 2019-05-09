@@ -8,9 +8,10 @@ title: "Martingales 筆記"
 <note>
 學習歷程:
 
-1. 理解 Martingale 的定義
+1. 理解 Martingale (鞅) 的定義
 2. 理解 Stopping Time 的定義
 3. 理解 Optional Stopping Theorem
+4. 應用：Gambling Problem
 
 </note>
 
@@ -104,8 +105,33 @@ $n\land \tau$ is defined to be $\min(n, \tau)$.
 $$ \lim_{n\to\infty} \overline{X}_n = X_\tau. $$
 
 
+## 應用
 
+### 醉漢走路問題：公正硬幣
 
+<theorem c='is-success'>
+每一次丟一枚公正硬幣，移動位置 $+1$ 或 $-1$。
+給定兩個結束位置 $a < 0 < b$，踩到 $a$ (停損) 或 $b$ (獲利) 就停止。
+</theorem>
+
+#### 目標 1: 計算獲勝機率
+
+#### 目標 2: 計算停止期望步數
+
+Let $Y_i = S_i^2 - i$, then $\{Y_i\}$ is martingale.
+
+### 不公正的硬幣
+
+<theorem c='is-success'>
+移動位置 $\Pr(\xi_i=+1) = p$, $\Pr(\xi_i = -1) = 1-p = q$。
+給定兩個結束位置 $a < 0 < b$，踩到 $a$ (停損) 或 $b$ (獲利) 就停止。
+</theorem>
+
+定義 $S_n = \xi_1+\cdots+\xi_n$、以及 $\phi(x) = \left(\frac{1-p}{p}\right)^x$。則 $\phi(S_n)$ 是一個 martingale。
+
+### Doob's 萬用 martingale 構造法
+
+Let $F$ be any finite random variable, and $\{X_i\}$ is a random process. Then $Z_i = \mathbf{E}[F\ |\ X_0, X_1, \ldots, X_i]$ is a martingale.
 
 
 ## 參考資料
@@ -113,3 +139,5 @@ $$ \lim_{n\to\infty} \overline{X}_n = X_\tau. $$
 * Coursera https://www.coursera.org/lecture/financial-engineering-2/introduction-to-martingales-k18A8 
 * MIT 6.262 Lecture 24 https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-262-discrete-stochastic-processes-spring-2011/video-lectures/lecture-24-martingales-stopping-and-converging/
 * Berkeley CS271 Lecture 23 https://people.eecs.berkeley.edu/~sinclair/cs271/n23.pdf
+* The Martingale Stopping Theorem https://www.math.dartmouth.edu/~pw/math100w13/lalonde.pdf
+* ASU APM504: Lecture 28 https://math.la.asu.edu/~jtaylor/teaching/Spring2011/APM504/lectures/lecture28/lecture28.pdf 

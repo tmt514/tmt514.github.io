@@ -20,7 +20,6 @@ roadmap_label_h3: "Topic ###: "
 * <tag-easy></tag-easy><include-problem inline path='/problem/leetcode/206' link='https://leetcode.com/problems/reverse-linked-list/'></include-problem>
 * <tag-medium></tag-medium><include-problem inline path='/problem/leetcode/19'></include-problem>
 * [找出鏈結串列的循環節](/leetcode-guide/find-linked-list-cycle)
-* [鏈結串列的應用舉例](/leetcode-guide/linked-list-applications)
 
 ### 陣列 Arrays
 
