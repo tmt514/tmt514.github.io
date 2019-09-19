@@ -143,7 +143,7 @@ int main() {
 
 ### 備註 2
 
-有空來介紹 [100種你所不知道的 TSP](https://brage.bibsys.no/xmlui/bitstream/handle/11250/164224/Halskau_2000.pdf?sequence=1) 好了XD~
+有空來介紹 [100種你所不知道的 TSP](https://openaccess.nhh.no/nhh-xmlui/bitstream/handle/11250/164224/Halskau_2000.pdf?sequence=1&isAllowed=y) 好了XD~
 
 ### 關於競程日記
 
