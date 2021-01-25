@@ -52,7 +52,6 @@ export class ContentCollection extends Component {
                                 category
                                 path
                                 date
-                                _PARENT
                                 description
                                 link
                                 code

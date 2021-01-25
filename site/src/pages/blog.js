@@ -32,7 +32,6 @@ const Blog = ({ data }) => (
                   title
                   path
                   date(formatString:"YYYY-MM-DD")
-                  _PARENT
                 }
             } 
           }
@@ -46,7 +45,6 @@ const Blog = ({ data }) => (
                   title
                   path
                   date(formatString:"YYYY-MM-DD")
-                  _PARENT
                 }
             } 
           }
@@ -60,7 +58,6 @@ const Blog = ({ data }) => (
                   title
                   path
                   date(formatString:"YYYY-MM-DD")
-                  _PARENT
                 }
             } 
           }

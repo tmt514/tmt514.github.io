@@ -3,7 +3,7 @@ import Cite from 'citation-js'
 
 class Publication extends Component {
     
-    componentDiDMount() {
+    componentDidMount() {
         if (window !== undefined && window.MathJax !== undefined) {
             window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub]);
         }
@@ -18,10 +18,7 @@ class Publication extends Component {
     render() {
         const c = Cite(this.props.contents)
         const make_author_list = (arr) => {
-            var authors = arr[0].literal
-            var tokens = []
-            authors = authors.split(/\s*\n\s*/).join(" ").split(" and ")
-
+            var authors = arr.map(({ given, family, literal }) => [given, family, literal].filter(Boolean).join(' '))
             authors = authors.slice(0, -1).join(", ") + ' and ' + authors.slice(-1)
             return (<span>{authors}</span>)
         }

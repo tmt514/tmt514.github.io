@@ -30,7 +30,6 @@ const ResearchNotes = ({ data }) => (
                   title
                   path
                   date(formatString:"YYYY-MM-DD")
-                  _PARENT
                 }
             } 
           }

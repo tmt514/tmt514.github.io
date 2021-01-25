@@ -127,7 +127,6 @@ export default class IncludeProblem extends Component {
                                 category
                                 path
                                 date
-                                _PARENT
                                 description
                                 link
                                 code

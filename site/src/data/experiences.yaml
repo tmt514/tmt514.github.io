@@ -1,6 +1,24 @@
 - type: "teaching"
   content: |
     **_Graduate Student Instructor (TA)_**
+    to Prof. Euiwoong Lee:  
+    Graduate Algorithms. (EECS 586)
+  year: "2021 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Seth Pettie:  
+    Introduction to Algorithms. (EECS 477)
+  year: "2020 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Quentin Stout:  
+    Graduate Algorithms. (EECS 586)
+  year: "2020 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
     to Prof. Seth Pettie:  
     Introduction to Algorithms. (EECS 477)
   year: "2019 Fall"
