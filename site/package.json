@@ -32,7 +32,7 @@
     "react-helmet": "^5.2.0",
     "rehype-react": "^3.0.3",
     "remark": "^10.0.1",
-    "remark-html": "^9.0.0",
+    "remark-html": "^13.0.2",
     "remark-react": "^4.0.3",
     "remark-rehype": "^4.0.0"
   },
