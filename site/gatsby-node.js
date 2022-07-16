@@ -10,33 +10,33 @@ const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 
-function updatePublications(createNode, path) {
-    var callback = (err, contents) => {
-        createNode({
-            id: `${path} id`,
-            contents: contents,
-            internal: {
-                type: `Publications`,
-                mediaType: `text/plain`,
-                contentDigest:
-                    crypto.createHash(`md5`)
-                    .update(JSON.stringify(contents))
-                    .digest(`hex`),
-            }  
-        })
-    }
-    fs.readFile(path, 'utf8', callback)
-}
+// function updatePublications(createNode, path) {
+//     var callback = (err, contents) => {
+//         createNode({
+//             id: `${path} id`,
+//             contents: contents,
+//             internal: {
+//                 type: `Publications`,
+//                 mediaType: `text/plain`,
+//                 contentDigest:
+//                     crypto.createHash(`md5`)
+//                     .update(JSON.stringify(contents))
+//                     .digest(`hex`),
+//             }  
+//         })
+//     }
+//     fs.readFile(path, 'utf8', callback)
+// }
 
 // You can delete this file if you're not using it
-exports.onCreateNode = ({ node, getNode, actions }) => {
-    const { createNode, createNodeField } = actions
-    console.log(`node internal type; =${node.internal.type}`)
-    if (node.internal.type === "File" &&
-        node.absolutePath.endsWith(".bibtex")) {
-            updatePublications(createNode, node.absolutePath);
-        }
-}
+// exports.onCreateNode = ({ node, getNode, actions }) => {
+//     const { createNode, createNodeField } = actions
+//     console.log(`node internal type; =${node.internal.type}`)
+//     if (node.internal.type === "File" &&
+//         node.absolutePath.endsWith(".bibtex")) {
+//             updatePublications(createNode, node.absolutePath);
+//         }
+// }
 
     
 exports.onCreateBabelConfig = ({ actions }) => {
@@ -45,38 +45,38 @@ exports.onCreateBabelConfig = ({ actions }) => {
     })
 }
 
-exports.createPagesStatefully = ({ graphql, actions }) => {
-    const { createNode, createNodeField } = actions
-    return new Promise((resolve, reject) => {
-        graphql(`
-        {
-            allFile(filter: {absolutePath: {regex: "/.*.bibtex$/"}}) {
-              edges {
-                node {
-                  absolutePath
-                  internal {
-                    contentDigest
-                    type
-                    mediaType
-                    description
-                    owner
-                  }
-                }
-              }
-            }
-          }          
-        `).then(result => {
-            const plist = result.data.allFile.edges;
-            for (var item of plist) {
-                const path = item.node.absolutePath;
-                updatePublications(createNode, path)
-            }
-        //console.log(JSON.stringify(result, null, 4));
-        resolve()
-        })
-    })
+// exports.createPagesStatefully = ({ graphql, actions }) => {
+//     const { createNode, createNodeField } = actions
+//     return new Promise((resolve, reject) => {
+//         graphql(`
+//         {
+//             allFile(filter: {absolutePath: {regex: "/.*.bibtex$/"}}) {
+//               edges {
+//                 node {
+//                   absolutePath
+//                   internal {
+//                     contentDigest
+//                     type
+//                     mediaType
+//                     description
+//                     owner
+//                   }
+//                 }
+//               }
+//             }
+//           }          
+//         `).then(result => {
+//             const plist = result.data.allFile.edges;
+//             for (var item of plist) {
+//                 const path = item.node.absolutePath;
+//                 updatePublications(createNode, path)
+//             }
+//         //console.log(JSON.stringify(result, null, 4));
+//         resolve()
+//         })
+//     })
 
-}
+// }
 
 
 

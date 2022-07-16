@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import unified from 'unified'
 import parse from 'remark-parse'
-import math from 'remark-math'
+import mathxx from 'remark-math'
 import rehype from 'remark-rehype'
 import reactRenderer from 'rehype-react'
 import visit from 'unist-util-visit'
@@ -34,7 +34,7 @@ const addDollarSignToMath = (options) => {
 
 const markdown = unified()
 .use(parse)
-.use(math, {
+.use(mathxx, {
     inlineMathDouble: true,
 })
 .use(rehype)
