@@ -1,0 +1,62 @@
+- title: |
+    Fully Dynamic Connectivity in $O(\log n(\log\log n)^2)$
+    Amortized Expected Time
+  author:
+    - "Shang-En Huang"
+    - "Dawei Huang"
+    - "Tsvi Kopelowitz"
+    - "Seth Pettie"
+  url: "https://doi.org/10.1137/1.9781611974782.32"
+  booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
+  year: "2017"
+  arxiv: "https://arxiv.org/abs/1609.05867"
+- title: |
+    Lower Bounds on Sparse Spanners, Emulators, and Diameter-reducing
+    shortcuts
+  author:
+    - "Shang-En Huang"
+    - "Seth Pettie"
+  booktitle: "Scandinavian Symposium and Workshops on Algorithm Theory (SWAT)"
+  url: "https://doi.org/10.4230/LIPIcs.SWAT.2018.26"
+  year: "2018"
+  arxiv: "https://arxiv.org/abs/1802.06271"
+  journal: "SIAM Journal on Discrete Mathematics (SIDMA), Volume 35(3), 2021"
+- title: |
+    Thorup-Zwick emulators are universally optimal hopsets
+  booktitle: "Information Processing Letters (IPL)"
+  author:
+    - "Shang-En Huang"
+    - "Seth Pettie"
+  url: "https://doi.org/10.1016/j.ipl.2018.10.001"
+  year: "February 2019"
+  arxiv: "https://arxiv.org/abs/1705.00327"
+- title: |
+    Byzantine Agreement in Polynomial Time with Near-Optimal Resilience
+  author:
+    - "Shang-En Huang"
+    - "Seth Pettie"
+    - "Leqi Zhu"
+  url: "https://dl.acm.org/doi/10.1145/3519935.3520015"
+  booktitle: "ACM SIGACT Symposium on Theory of Computing (STOC)"
+  year: "2022"
+  arxiv: "https://arxiv.org/abs/2202.13452"
+- title: |
+    Vertex Sparsifiers for Hyperedge Connectivity
+  author:
+    - "Han Jiang"
+    - "Shang-En Huang"
+    - "Thatchaphol Saranurak"
+    - "Tian Zhang"
+  booktitle: "European Symposium on Algorithms (ESA)"
+  year: "2022"
+  arxiv: "https://arxiv.org/abs/2207.04115"
+  url: ""
+- title: |
+    Byzantine Agreement with Optimal Resilience via Statistical Fraud Detection
+  author:
+    - "Shang-En Huang"
+    - "Seth Pettie"
+    - "Leqi Zhu"
+  year: "2023"
+  booktitle: "In Submission"
+  arxiv: "https://arxiv.org/abs/2206.15335"

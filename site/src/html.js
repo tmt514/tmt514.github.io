@@ -13,7 +13,7 @@ export default class HTML extends React.Component {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           {this.props.headComponents}
-          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"></link>
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossOrigin="anonymous"></link>
           <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
             window.MathJax = {
               TeX: {
@@ -44,7 +44,7 @@ export default class HTML extends React.Component {
           <script type="text/javascript" 
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_SVG">
           </script>
-          <script async='true' src="https://www.googletagmanager.com/gtag/js?id=UA-68887724-3"></script>
+          <script async={true} src="https://www.googletagmanager.com/gtag/js?id=UA-68887724-3"></script>
           <script type="text/javascript" dangerouslySetInnerHTML={{ __html: `
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}

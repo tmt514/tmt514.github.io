@@ -81,8 +81,8 @@ exports.createPagesStatefully = ({ graphql, actions }) => {
 
 
 /* copied from https://medium.freecodecamp.org/how-to-build-a-react-and-gatsby-powered-blog-in-about-10-minutes-625c35c06481 */
-exports.createPages = ({ boundActionCreators, graphql }) => {
-    const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+    const { createPage } = actions;
   const blogPostTemplate = path.resolve(`src/components/blog-post.js`);
   return graphql(`{
       allMarkdownRemark(

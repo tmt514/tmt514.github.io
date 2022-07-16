@@ -1,8 +1,20 @@
 - type: "teaching"
   content: |
     **_Graduate Student Instructor (TA)_**
+    to Prof. Thatchaphol Saranurak:  
+    Design and Analysis of Algorithms. (EECS 586) [GSI Honorable Mentions Award](https://cse.engin.umich.edu/stories/awards-for-outstanding-graduate-student-instructors-and-instructional-aides-of-2021-22)
+  year: "2022 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Quentin Stout:  
+    Parallel Computing. (EECS 587)
+  year: "2021 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
     to Prof. Euiwoong Lee:  
-    Graduate Algorithms. (EECS 586)
+    Design and Analysis of Algorithms. (EECS 586)
   year: "2021 Winter"
 - type: "teaching"
   content: |
@@ -14,7 +26,7 @@
   content: |
     **_Graduate Student Instructor (TA)_**
     to Prof. Quentin Stout:  
-    Graduate Algorithms. (EECS 586)
+    Design and Analysis of Algorithms. (EECS 586)
   year: "2020 Winter"
 - type: "teaching"
   content: |
