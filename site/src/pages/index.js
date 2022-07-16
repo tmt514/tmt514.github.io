@@ -7,6 +7,7 @@ import Publication from '../components/publication'
 
 import {remark} from 'remark'
 import reactRenderer from 'remark-react'
+import emailImage from '../images/email.png'
 
 const markdown = remark()
   .use(reactRenderer,
@@ -59,7 +60,7 @@ class IndexPage extends Component {
                 <div className="content">
                   <h1 className="title is-size-3">Shang-En Huang</h1>
                   <div className="subtitle">
-                  <a href="http://safemail.justlikeed.net/" target="_blank">📨</a> <img style={{ marginTop: '0.5em' }} src="http://safemail.justlikeed.net/e/b5f60190b0912d562e688ae10377a14a.png" border="0" align="center" title="Email image created with safemail.justlikeed.net" />
+                  📨 <img style={{ marginTop: '0.5em' }} src={emailImage} border="0" align="center" title="Email image created with www.generateit.net/email-to-image/" />
                   </div>
                   <div className="content">{
                     markdown.processSync(
