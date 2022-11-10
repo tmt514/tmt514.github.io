@@ -81,27 +81,27 @@
 對於這樣的樹來說，我們總可以從「葉子」的部份以 Greedy 的方法每次抓相連的兩條 sibling 邊（他們都是從同一個節點出發找到的），然後把它變成迴力標，然後把兩條邊拔掉。
 不難發現，這種拔法可以保證 (1) 拔完之後整個圖還是連通的、以及 (2) 剩下的圖用「數學歸納法」，保證可以拔出最大迴力標的數量。</p>
 <p>因此，根據以上的演算法，我們也在過程中證明了最大的迴力標數量總是 $\lfloor |E|/2\rfloor$ 組。而實作上也可以達到線性複雜度，很小品吧 😃</p>
-<p><div class="has-text-centered"><svg width="183" height="136" style="max-width:100%" viewBox="-91.5 -68 183 136"><path d="M -11.50588739316544 26.90836489684031 L -18.94680681160446 -41.04928127136215 " style="stroke:blue;stroke-width:5;fill:none"></path><path d="M -2.6299395241033494 28.131713002710285 L 64.73461656622885 -28.931555325636978 " style="stroke:blue;stroke-width:5;fill:none"></path><path d="M -11.822754680666549 -47.89617384215411 L 64.73461656622885 -36.86131464897504 " style="stroke:green;stroke-width:5;fill:none"></path><path d="M -15.059031706731908 -41.04928127136215 L 34.17461325826082 41.631672653761285 " style="stroke:green;stroke-width:5;fill:none"></path><path d="M 42.10649446106748 41.631672653761285 L 69.56645833735685 -27.708207219767004 " style="stroke:red;stroke-width:5;fill:none"></path><path d="M -24.475718630837108 -41.04928127136215 L -68.26814464931952 34.24453400417147 " style="stroke:black;stroke-width:1;fill:none"></path><path d="M 30.938336232195468 49.10335687957126 L -64.92110859949008 42.7728497783615 " style="stroke:red;stroke-width:5;fill:none"></path><g><g stroke="black" stroke-width="1" fill="none"><polyline points="-18.62993952410335 26.90836489684031
-                    -2.6299395241033494 26.90836489684031
-                    -2.6299395241033494 42.90836489684031
-                    -18.62993952410335 42.90836489684031
-                    -18.62993952410335 26.90836489684031"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g><g><g stroke="black" stroke-width="1" fill="none"><polyline points="-27.82275468066655 -57.04928127136215
-                    -11.822754680666549 -57.04928127136215
-                    -11.822754680666549 -41.04928127136215
-                    -27.82275468066655 -41.04928127136215
-                    -27.82275468066655 -57.04928127136215"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g><g><g stroke="black" stroke-width="1" fill="none"><polyline points="30.938336232195468 41.631672653761285
-                    46.93833623219547 41.631672653761285
-                    46.93833623219547 57.631672653761285
-                    30.938336232195468 57.631672653761285
-                    30.938336232195468 41.631672653761285"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g><g><g stroke="black" stroke-width="1" fill="none"><polyline points="64.73461656622885 -43.708207219767004
-                    80.73461656622885 -43.708207219767004
-                    80.73461656622885 -27.708207219767004
-                    64.73461656622885 -27.708207219767004
-                    64.73461656622885 -43.708207219767004"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g><g><g stroke="black" stroke-width="1" fill="none"><polyline points="-80.92110859949008 34.24453400417147
-                    -64.92110859949008 34.24453400417147
-                    -64.92110859949008 50.24453400417147
-                    -80.92110859949008 50.24453400417147
-                    -80.92110859949008 34.24453400417147"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g></svg></div></p>
+<p><div class="has-text-centered"><svg width="152" height="203" style="max-width:100%" viewBox="-76 -101.5 152 203"><path d="M -15.000099238874839 -21.07370559287891 L 49.23399843628283 0.9964933858002993 " style="stroke:blue;stroke-width:5;fill:none"></path><path d="M -20.903193317735603 -15.8224262602468 L 2.870170893144064 74.87640374911774 " style="stroke:blue;stroke-width:5;fill:none"></path><path d="M 51.94992050718025 11.745214053168183 L 10.251154743385882 74.87640374911774 " style="stroke:green;stroke-width:5;fill:none"></path><path d="M 49.23399843628283 4.523324783469375 L -49.305089327143605 14.107614976321024 " style="stroke:green;stroke-width:5;fill:none"></path><path d="M -49.977947673694516 22.885725706622225 L -2.360064839165786 74.87640374911774 " style="stroke:red;stroke-width:5;fill:none"></path><path d="M 51.705141245603045 -4.2547859468318165 L 2.777372372658305 -75.05099888635101 " style="stroke:black;stroke-width:1;fill:none"></path><path d="M -52.84885661273761 6.885725706622225 L -7.207717532427468 -75.05099888635101 " style="stroke:red;stroke-width:5;fill:none"></path><g><g stroke="black" stroke-width="1" fill="none"><polyline points="-31.00009923887484 -31.8224262602468
+                    -15.000099238874839 -31.8224262602468
+                    -15.000099238874839 -15.8224262602468
+                    -31.00009923887484 -15.8224262602468
+                    -31.00009923887484 -31.8224262602468"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g><g><g stroke="black" stroke-width="1" fill="none"><polyline points="49.23399843628283 -4.2547859468318165
+                    65.23399843628283 -4.2547859468318165
+                    65.23399843628283 11.745214053168183
+                    49.23399843628283 11.745214053168183
+                    49.23399843628283 -4.2547859468318165"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g><g><g stroke="black" stroke-width="1" fill="none"><polyline points="-65.3050893271436 6.885725706622225
+                    -49.305089327143605 6.885725706622225
+                    -49.305089327143605 22.885725706622225
+                    -65.3050893271436 22.885725706622225
+                    -65.3050893271436 6.885725706622225"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g><g><g stroke="black" stroke-width="1" fill="none"><polyline points="-3.0329231857166974 74.87640374911774
+                    12.967076814283303 74.87640374911774
+                    12.967076814283303 90.87640374911774
+                    -3.0329231857166974 90.87640374911774
+                    -3.0329231857166974 74.87640374911774"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g><g><g stroke="black" stroke-width="1" fill="none"><polyline points="-10.751484818021481 -91.05099888635101
+                    5.248515181978519 -91.05099888635101
+                    5.248515181978519 -75.05099888635101
+                    -10.751484818021481 -75.05099888635101
+                    -10.751484818021481 -91.05099888635101"></polyline></g><g dominant-baseline="central" text-anchor="middle"></g></g></svg></div></p>
 <h3 class="title is-5">參考程式碼</h3>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
 #include &lt;tuple&gt;
