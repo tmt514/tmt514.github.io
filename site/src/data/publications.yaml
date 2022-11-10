@@ -50,7 +50,7 @@
   booktitle: "European Symposium on Algorithms (ESA)"
   year: "2022"
   arxiv: "https://arxiv.org/abs/2207.04115"
-  url: ""
+  url: "https://drops.dagstuhl.de/opus/volltexte/2022/17008/"
 - title: |
     Byzantine Agreement with Optimal Resilience via Statistical Fraud Detection
   author:
@@ -58,5 +58,5 @@
     - "Seth Pettie"
     - "Leqi Zhu"
   year: "2023"
-  booktitle: "In Submission"
+  booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
   arxiv: "https://arxiv.org/abs/2206.15335"
