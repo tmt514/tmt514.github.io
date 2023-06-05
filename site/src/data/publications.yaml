@@ -1,45 +1,46 @@
 - title: |
-    Fully Dynamic Connectivity in $O(\log n(\log\log n)^2)$
-    Amortized Expected Time
+    Fully Dynamic Connectivity in $O(\log n(\log\log n)^2)$ Amortized Expected Time
   author:
     - "Shang-En Huang"
     - "Dawei Huang"
     - "Tsvi Kopelowitz"
     - "Seth Pettie"
-  url: "https://doi.org/10.1137/1.9781611974782.32"
-  booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
-  year: "2017"
-  arxiv: "https://arxiv.org/abs/1609.05867"
+    - "Mikkel Thorup"
+  year: "2023"
+  url: "https://theoretics.episciences.org/10791"
+  booktitle: "TheoretiCS, Volume 2"
+  arxiv: "https://arxiv.org/abs/1609.05867v4"
+  journal: true
 - title: |
-    Lower Bounds on Sparse Spanners, Emulators, and Diameter-reducing
-    shortcuts
+    $(1-\epsilon)$-Approximate Maximum Weighted Matching in $\text{poly}(1/\epsilon, \log n)$ Time in the Distributed and Parallel Settings
   author:
     - "Shang-En Huang"
-    - "Seth Pettie"
-  booktitle: "Scandinavian Symposium and Workshops on Algorithm Theory (SWAT)"
-  url: "https://doi.org/10.4230/LIPIcs.SWAT.2018.26"
-  year: "2018"
-  arxiv: "https://arxiv.org/abs/1802.06271"
-  journal: "SIAM Journal on Discrete Mathematics (SIDMA), Volume 35(3), 2021"
+    - "Hsin-Hao Su"
+  year: "2023"
+  booktitle: "ACM Symposium on Principles of Distributed Computing (PODC)"
+  arxiv: "https://arxiv.org/abs/2212.14425"
+  conference: true
 - title: |
-    Thorup-Zwick emulators are universally optimal hopsets
-  booktitle: "Information Processing Letters (IPL)"
+    Nearly Optimal Parallel Algorithms for Longest Increasing Subsequence
   author:
+    - "Nairen Cao"
     - "Shang-En Huang"
-    - "Seth Pettie"
-  url: "https://doi.org/10.1016/j.ipl.2018.10.001"
-  year: "February 2019"
-  arxiv: "https://arxiv.org/abs/1705.00327"
+    - "Hsin-Hao Su"
+  year: "2023"
+  url: "https://dl.acm.org/doi/10.1145/3558481.3591078"
+  booktitle: "ACM Symposium on Parallelism in Algorithms and Architectures (SPAA)"
+  conference: true
 - title: |
-    Byzantine Agreement in Polynomial Time with Near-Optimal Resilience
+    Byzantine Agreement with Optimal Resilience via Statistical Fraud Detection
   author:
     - "Shang-En Huang"
     - "Seth Pettie"
     - "Leqi Zhu"
-  url: "https://dl.acm.org/doi/10.1145/3519935.3520015"
-  booktitle: "ACM SIGACT Symposium on Theory of Computing (STOC)"
-  year: "2022"
-  arxiv: "https://arxiv.org/abs/2202.13452"
+  year: "2023"
+  url: "https://epubs.siam.org/doi/abs/10.1137/1.9781611977554.ch165"
+  booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
+  arxiv: "https://arxiv.org/abs/2206.15335"
+  conference: true
 - title: |
     Vertex Sparsifiers for Hyperedge Connectivity
   author:
@@ -51,12 +52,60 @@
   year: "2022"
   arxiv: "https://arxiv.org/abs/2207.04115"
   url: "https://drops.dagstuhl.de/opus/volltexte/2022/17008/"
+  conference: true
 - title: |
-    Byzantine Agreement with Optimal Resilience via Statistical Fraud Detection
+    Byzantine Agreement in Polynomial Time with Near-Optimal Resilience
   author:
     - "Shang-En Huang"
     - "Seth Pettie"
     - "Leqi Zhu"
-  year: "2023"
+  url: "https://dl.acm.org/doi/10.1145/3519935.3520015"
+  booktitle: "ACM SIGACT Symposium on Theory of Computing (STOC)"
+  year: "2022"
+  arxiv: "https://arxiv.org/abs/2202.13452"
+  conference: true
+- title: |
+    Lower Bounds on Sparse Spanners, Emulators, and Diameter-reducing
+    shortcuts
+  author:
+    - "Shang-En Huang"
+    - "Seth Pettie"
+  booktitle: "SIAM Journal on Discrete Mathematics (SIDMA), Volume 35(3)"
+  url: "https://epubs.siam.org/doi/abs/10.1137/19M1306154"
+  year: "2021"
+  arxiv: "https://arxiv.org/abs/1802.06271"
+  journal: true
+- title: |
+    Thorup-Zwick emulators are universally optimal hopsets
+  booktitle: "Information Processing Letters (IPL)"
+  author:
+    - "Shang-En Huang"
+    - "Seth Pettie"
+  url: "https://doi.org/10.1016/j.ipl.2018.10.001"
+  year: "February 2019"
+  arxiv: "https://arxiv.org/abs/1705.00327"
+  journal: true
+- title: |
+    Lower Bounds on Sparse Spanners, Emulators, and Diameter-reducing
+    shortcuts
+  author:
+    - "Shang-En Huang"
+    - "Seth Pettie"
+  booktitle: "Scandinavian Symposium and Workshops on Algorithm Theory (SWAT)"
+  url: "https://doi.org/10.4230/LIPIcs.SWAT.2018.26"
+  year: "2018"
+  arxiv: "https://arxiv.org/abs/1802.06271"
+  conference: true
+- title: |
+    Fully Dynamic Connectivity in $O(\log n(\log\log n)^2)$
+    Amortized Expected Time
+  author:
+    - "Shang-En Huang"
+    - "Dawei Huang"
+    - "Tsvi Kopelowitz"
+    - "Seth Pettie"
+  url: "https://doi.org/10.1137/1.9781611974782.32"
   booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
-  arxiv: "https://arxiv.org/abs/2206.15335"
+  year: "2017"
+  arxiv: "https://arxiv.org/abs/1609.05867"
+  conference: true
