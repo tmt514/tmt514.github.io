@@ -1,4 +1,32 @@
 - title: |
+    Breaking 3-Factor Approximation for Correlation Clustering in Polylogarithmic Rounds
+  author:
+    - "Nairen Cao"
+    - "Shang-En Huang"
+    - "Hsin-Hao Su"
+  year: "2024"
+  booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
+  arxiv: "https://arxiv.org/abs/2307.06723"
+  conference: true
+- title: |
+    	Cactus Representations in Polylogarithmic Max-flow via Maximal Isolating Mincuts
+  author:
+    - "Zhongtian He"
+    - "Shang-En Huang"
+    - "Thatchaphol Saranurak"
+  year: "2024"
+  booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
+  conference: true
+- title: |
+    	Cactus Representation of Minimum Cuts: Derandomize and Speed up
+  author:
+    - "Zhongtian He"
+    - "Shang-En Huang"
+    - "Thatchaphol Saranurak"
+  year: "2024"
+  booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
+  conference: true
+- title: |
     Fully Dynamic Connectivity in $O(\log n(\log\log n)^2)$ Amortized Expected Time
   author:
     - "Shang-En Huang"
@@ -17,6 +45,7 @@
     - "Shang-En Huang"
     - "Hsin-Hao Su"
   year: "2023"
+  url: "https://dl.acm.org/doi/abs/10.1145/3583668.3594570"
   booktitle: "ACM Symposium on Principles of Distributed Computing (PODC)"
   arxiv: "https://arxiv.org/abs/2212.14425"
   conference: true
