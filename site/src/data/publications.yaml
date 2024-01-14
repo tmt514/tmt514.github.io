@@ -1,4 +1,14 @@
 - title: |
+    Byzantine Agreement with Optimal Resilience via Statistical Fraud Detection
+  author:
+    - "Shang-En Huang"
+    - "Seth Pettie"
+    - "Leqi Zhu"
+  year: "2024"
+  url: "https://dl.acm.org/doi/10.1145/3639454"
+  booktitle: "Journal of the ACM"
+  journal: true
+- title: |
     Breaking 3-Factor Approximation for Correlation Clustering in Polylogarithmic Rounds
   author:
     - "Nairen Cao"
@@ -6,6 +16,7 @@
     - "Hsin-Hao Su"
   year: "2024"
   booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
+  url: "https://epubs.siam.org/doi/10.1137/1.9781611977912.143"
   arxiv: "https://arxiv.org/abs/2307.06723"
   conference: true
 - title: |
@@ -16,6 +27,8 @@
     - "Thatchaphol Saranurak"
   year: "2024"
   booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
+  url: "https://epubs.siam.org/doi/10.1137/1.9781611977912.60"
+  arxiv: "https://arxiv.org/abs/2311.10706"
   conference: true
 - title: |
     	Cactus Representation of Minimum Cuts: Derandomize and Speed up
@@ -25,6 +38,7 @@
     - "Thatchaphol Saranurak"
   year: "2024"
   booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
+  url: "https://epubs.siam.org/doi/10.1137/1.9781611977912.61"
   conference: true
 - title: |
     Fully Dynamic Connectivity in $O(\log n(\log\log n)^2)$ Amortized Expected Time
