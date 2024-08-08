@@ -111,7 +111,7 @@ exports.createPages = ({ graphql, actions }) => {
           .forEach(({ node }) => {
             if (node.frontmatter.path) {
               createPage({
-                path: node.frontmatter.path,
+                path: `${node.frontmatter.path}`,
                 component: blogPostTemplate,
                 context: {} // additional data can be passed via context
               });

@@ -1,0 +1,95 @@
+- type: "teaching"
+  content: |
+    **_Instructor_** at Boston College  
+    Randomness and Computation (CSCI 2244)
+  year: "2023 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Thatchaphol Saranurak:  
+    Design and Analysis of Algorithms. (EECS 586) [GSI Honorable Mentions Award](https://cse.engin.umich.edu/stories/awards-for-outstanding-graduate-student-instructors-and-instructional-aides-of-2021-22)
+  year: "2022 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Quentin Stout:  
+    Parallel Computing. (EECS 587)
+  year: "2021 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Euiwoong Lee:  
+    Design and Analysis of Algorithms. (EECS 586)
+  year: "2021 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Seth Pettie:  
+    Introduction to Algorithms. (EECS 477)
+  year: "2020 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Quentin Stout:  
+    Design and Analysis of Algorithms. (EECS 586)
+  year: "2020 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Seth Pettie:  
+    Introduction to Algorithms. (EECS 477)
+  year: "2019 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Seth Pettie:  
+    Introduction to Algorithms. (EECS 477)
+  year: "2018 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Kevin Compton:  
+    Introduction to Cryptography. (EECS 475)
+  year: "2018 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Seth Pettie:  
+      Introduction to Algorithms. (EECS 477)
+  year: "2017 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Grant Schoenebeck and Prof. Kevin Compton:  
+    Foundations of Computer Science. (EECS 376)
+  year: "2017 Winter"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Yaoyun Shi:  
+    Introduction to Algorithms. (EECS 477)
+  year: "2016 Fall"
+- type: "teaching"
+  content: |
+    **_Graduate Student Instructor (TA)_**
+    to Prof. Seth Pettie:  
+    Introduction to Algorithms. (EECS 586)
+  year: "2016 Winter"
+- type: "teaching"
+  content: |
+    **_Teaching Assistant_**
+    to Prof. Pang-Feng Liu:  
+    Advanced Computer Programming.
+  year: "2011 Spring"
+- type: "teaching"
+  content: |
+    **_Teaching Assistant_**
+    to Prof. Pu-Jen Cheng:  
+    Programming Techniques.
+  year: "2010 Fall"
+- type: "teaching"
+  content: |
+    **_Teaching Assistant_**
+    to Prof. Pu-Jen Cheng:  
+    Programming Techniques.
+  year: "2009 Fall"

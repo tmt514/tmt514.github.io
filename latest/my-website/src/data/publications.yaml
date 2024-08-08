@@ -31,7 +31,7 @@
   arxiv: "https://arxiv.org/abs/2307.06723"
   conference: true
 - title: |
-    	Cactus Representations in Polylogarithmic Max-flow via Maximal Isolating Mincuts
+    Cactus Representations in Polylogarithmic Max-flow via Maximal Isolating Mincuts
   author:
     - "Zhongtian He"
     - "Shang-En Huang"
@@ -42,7 +42,7 @@
   arxiv: "https://arxiv.org/abs/2311.10706"
   conference: true
 - title: |
-    	Cactus Representation of Minimum Cuts: Derandomize and Speed up
+    Cactus Representation of Minimum Cuts: Derandomize and Speed up
   author:
     - "Zhongtian He"
     - "Shang-En Huang"

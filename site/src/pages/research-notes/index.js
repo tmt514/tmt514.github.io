@@ -20,20 +20,21 @@ const ResearchNoteTiles = ({ notes }) => (
 const ResearchNotes = ({ data }) => (
     <StaticQuery
     query={graphql`
-    query researchquery{
-        notes: allMarkdownRemark(filter:
-            {frontmatter: { category: { regex: "/\\bresearch\\b/"}}},
-            sort: {fields: [frontmatter___title ], order:ASC}){
-          edges {
-            node {
-                frontmatter {
-                  title
-                  path
-                  date(formatString:"YYYY-MM-DD")
-                }
-            } 
+    query researchquery {
+      notes: allMarkdownRemark(
+        filter: {frontmatter: {category: {regex: "/\\bresearch\\b/"}}}
+        sort: {frontmatter: {title: ASC}}
+      ) {
+        edges {
+          node {
+            frontmatter {
+              title
+              path
+              date(formatString: "YYYY-MM-DD")
+            }
           }
         }
+      }
     }`}
     render={data=>(
         <div>

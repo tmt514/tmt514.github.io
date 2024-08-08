@@ -29,3 +29,12 @@ a.open-sol:hover:after {
 .research {
     font-family: 'Barlow', sans-serif;
 }
+
+.publication-entry .author {
+  font-size: 100%;
+  line-height: 1.2;
+}
+.publication-entry .booktitle {
+  font-size: 100%;
+  line-height: 1.2;
+}

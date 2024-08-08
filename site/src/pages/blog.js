@@ -22,48 +22,50 @@ const BlogPostList = ({ list }) => (
 const Blog = ({ data }) => (
     <StaticQuery
     query={graphql`
-    query blogquery{
-        algoBlog: allMarkdownRemark(filter:
-            {frontmatter: { category: { regex: "/\\balgo\\b/"}}},
-            sort: {fields: [frontmatter___date ], order:DESC}){
-          edges {
-            node {
-                frontmatter {
-                  title
-                  path
-                  date(formatString:"YYYY-MM-DD")
-                }
-            } 
+    query blogquery {
+      algoBlog: allMarkdownRemark(
+        filter: {frontmatter: {category: {regex: "/\\balgo\\b/"}}}
+        sort: {frontmatter: {date: DESC}}
+      ) {
+        edges {
+          node {
+            frontmatter {
+              title
+              path
+              date(formatString: "YYYY-MM-DD")
+            }
           }
         }
-        cpBlog: allMarkdownRemark(filter:
-            {frontmatter: { category: { regex: "/\\bcp\\b/"}}},
-            sort: {fields: [frontmatter___date ], order:DESC}){
-          edges {
-            node {
-                frontmatter {
-                  title
-                  path
-                  date(formatString:"YYYY-MM-DD")
-                }
-            } 
-          }
-        }
-        myProblemBlog: allMarkdownRemark(filter:
-            {frontmatter: { category: { regex: "/\\bmy-problem\\b/"}}},
-            sort: {fields: [frontmatter___date ], order:DESC}){
-          edges {
-            node {
-                frontmatter {
-                  title
-                  path
-                  date(formatString:"YYYY-MM-DD")
-                }
-            } 
-          }
-        }
-        
       }
+      cpBlog: allMarkdownRemark(
+        filter: {frontmatter: {category: {regex: "/\\bcp\\b/"}}}
+        sort: {frontmatter: {date: DESC}}
+      ) {
+        edges {
+          node {
+            frontmatter {
+              title
+              path
+              date(formatString: "YYYY-MM-DD")
+            }
+          }
+        }
+      }
+      myProblemBlog: allMarkdownRemark(
+        filter: {frontmatter: {category: {regex: "/\\bmy-problem\\b/"}}}
+        sort: {frontmatter: {date: DESC}}
+      ) {
+        edges {
+          node {
+            frontmatter {
+              title
+              path
+              date(formatString: "YYYY-MM-DD")
+            }
+          }
+        }
+      }
+    }
       
     `}
     render={data=>(
