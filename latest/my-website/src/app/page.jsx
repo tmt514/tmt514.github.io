@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from "next/image";
 import { remark } from 'remark';
 import html from 'remark-html';
 import education from '../data/education.yaml';
@@ -52,9 +51,9 @@ export default async function Home() {
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
   .use(html)
-  .process(`I am currently an assitant professor in [CSIE, National Taiwan University](https://www.csie.ntu.edu.tw/).
-Previously, I was a Postdoc in [Boston College](https://www.bc.edu/content/bc-web/schools/mcas/departments/computer-science.html) advised by [Hsin-Hao Su](https://sites.google.com/site/distributedhsinhao/).
-I had the honor of being advised by [Seth Pettie](http://web.eecs.umich.edu/~pettie/) while pursuing my Ph.D. at the [University of Michigan](https://cse.umich.edu).
+  .process(`I am currently an assistant professor in the [Department of Computer Science and Information Engineering (CSIE), National Taiwan University](https://www.csie.ntu.edu.tw/).
+Previously, I was a Postdoc at [Boston College](https://www.bc.edu/content/bc-web/schools/mcas/departments/computer-science.html) advised by [Hsin-Hao Su](https://sites.google.com/site/distributedhsinhao/).
+I had the honor of being advised by [Seth Pettie](http://web.eecs.umich.edu/~pettie/) when pursuing my PhD at [University of Michigan](https://cse.umich.edu).
 I am interested in any cool analysis techniques of an algorithm, as well as any cool stuff related to graphs.
 I also love [competitive programming](https://cphof.org/profile/topcoder:tmt514).
 
@@ -121,15 +120,15 @@ Lower bound graphs for sparse distance preservers.`);
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 lg:w-256 mx-auto">
+    <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-12 lg:p-24 lg:w-256 mx-auto">
 
-      <div className="flex flex-row ">
+      <div className="flex flex-col lg:flex-row md:flex-col">
       <div>
-        <h1 className="mb-4 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Shang-En Huang</h1>
-        <p><Image className="dark:invert" src="/email.png" alt="my email" width={388*3/4} height={30} priority/></p>
-        <div dangerouslySetInnerHTML={{__html: introHtml}} />
+        <h1 className="mb-4 text-3xl font-bold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">Shang-En Huang</h1>
+        <p><img className="dark:invert" src="/email.png" alt="my email" width={388*3/4} height={30} /></p>
+        <div className="text-justify" dangerouslySetInnerHTML={{__html: introHtml}} />
       </div>
-      <div className="pl-4 py-8"><Image src={photo_v4} width={640*1.5} height={853} alt="Shang-En Huang"  className="rounded-lg" /></div>
+      <div className="pl-4 py-8 max-w-48"><img src={photo_v4} width={640*1.5} height={853} alt="Shang-En Huang"  className="rounded-lg" /></div>
       </div>
       <div className="w-full">
         <h2 className="mb-4 text-left text-2xl md:text-3xl lg:text-4xl dark:text-white">Education</h2>
@@ -156,13 +155,12 @@ Lower bound graphs for sparse distance preservers.`);
             target="_blank"
             rel="noopener noreferrer"
           >
-            This site is built using <a href="https://nextjs.org/"><Image
+            This site is built using <a href="https://nextjs.org/"><img
           className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
           src="/next.svg"
           alt="Next.js Logo"
           width={180*12/37}
           height={12}
-          priority
         /></a>
           </span>
         </div>
