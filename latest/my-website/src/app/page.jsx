@@ -47,6 +47,8 @@ const processor = unified()
 
 const photo_v4 = "https://lh3.googleusercontent.com/pw/AP1GczONaGyM1UjmoKfpT7MnHwpHKiZuocdJlV88KykqYujEiFkyyuCJHHE8Pw2tiz8-fEb2JFtcFYSuwx68r4hIhJxIqX-gzcb0wRLmcwrkriRd0ErrCdvdjNvzPzQomnFzAaQ0zveqjWWupGbDkEFRzn-RYQ=w1308-h1744-s-no-gm"
 
+const photo_v5 = "https://lh3.googleusercontent.com/pw/AP1GczO2KPlMACH466kyvA_yli4jzqiiBpS-FdTFACu4AgpfeqtFOqxIaA058ReV2GR-RF373l4HsRY7K1692sLEqSlakCBpnCVt7ExowYvSQZqlWDaxpcOOuvYKuwwsGR2KXJt-gY-eRIjvc33xSAGDoecVMg=w1440-h1337-s-no-gm"
+
 export default async function Home() {
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
@@ -57,7 +59,7 @@ I had the honor of being advised by [Seth Pettie](http://web.eecs.umich.edu/~pet
 I am interested in any cool analysis techniques of an algorithm, as well as any cool stuff related to graphs.
 I also love [competitive programming](https://cphof.org/profile/topcoder:tmt514).
 
-**Research Interest [[CV]](https://drive.google.com/file/d/1cl1hOs15vXQZPaM1pCCZwpUdfk9158Jm/view)**:
+**Research Interest [[CV]](https://drive.google.com/file/d/1qi5Xe2K_HNFz3mcrpJxqhyYDwF55BaGJ/view)**:
 Dynamic Graph Data Structures and Algorithms.
 Asynchronous Distributed Algorithms.
 Distributed Graph Algorithms.
@@ -128,7 +130,7 @@ Lower bound graphs for sparse distance preservers.`);
         <p><img className="dark:invert" src="/email.png" alt="my email" width={388*3/4} height={30} /></p>
         <div className="text-justify" dangerouslySetInnerHTML={{__html: introHtml}} />
       </div>
-      <div className="pl-4 py-8 max-w-48"><img src={photo_v4} width={640*1.5} height={853} alt="Shang-En Huang"  className="rounded-lg" /></div>
+      <div className="pl-4 py-8 max-w-48"><img src={photo_v5} width={640*1.5} height={853} alt="Shang-En Huang"  className="rounded-lg" /></div>
       </div>
       <div className="w-full">
         <h2 className="mb-4 text-left text-2xl md:text-3xl lg:text-4xl dark:text-white">Education</h2>

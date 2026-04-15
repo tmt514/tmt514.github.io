@@ -1,4 +1,28 @@
 - title: |
+    Disjoint Paths in Expanders in Deterministic Almost-Linear Time via Hypergraph Perfect Matching
+  author:
+    - "Matija Bucic"
+    - "Zhongtian He"
+    - "Shang-En Huang"
+    - "Thatchaphol Saranurak"
+  year: "2026"
+  url: "https://epubs.siam.org/doi/10.1137/1.9781611978971.83"
+  arxiv: "https://arxiv.org/abs/2511.02214"
+  booktitle: "ACM-SIAM Symposium on Discrete Algorithms (SODA)"
+  conference: true
+- title: |
+    Hardness and Approximation Algorithms for Balanced Districting Problems
+  author:
+    - "Prathamesh Dharangutte"
+    - "Jie Gao"
+    - "Shang-En Huang"
+    - "Fang-Yi Yu"
+  year: "2025"
+  url: "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.FORC.2025.4"
+  arxiv: "https://arxiv.org/abs/2501.17277"
+  booktitle: "6th Symposium on Foundations of Responsible Computing (FORC)"
+  conference: true
+- title: |
     Deterministic Expander Routing: Faster and More Versatile
   author:
     - "Yi-Jun Chang"

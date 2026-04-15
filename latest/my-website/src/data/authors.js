@@ -9,7 +9,11 @@ const author_urls = {
   "Zhongtian He": "https://sites.google.com/view/zhongtianhe",
   "Tsvi Kopelowitz": "https://cs.biu.ac.il/node/113",
   "Tian Zhang": "https://www.seas.upenn.edu/~tianzh/",
-  "Han Jiang": "https://www.linkedin.com/in/han-jiang-9033bb189/"
+  "Han Jiang": "https://www.linkedin.com/in/han-jiang-9033bb189/",
+  "Prathamesh Dharangutte": "https://prathameshd.com/",
+  "Jie Gao": "https://sites.rutgers.edu/jie-gao/about/",
+  "Fang-Yi Yu": "https://people.cs.gmu.edu/~fangyiyu/",
+  "Matija Bucic": "https://sites.google.com/princeton.edu/matija-bucic",
 }
 
 export default author_urls;
